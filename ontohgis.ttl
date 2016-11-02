@@ -7,15 +7,23 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ontohgis: <http://ontohgis.pl/ontohgis.owl#> .
 @base <http://onto.kul.pl/ontohgis.owl> .
 
 <http://onto.kul.pl/ontohgis.owl> rdf:type owl:Ontology ;
                                    owl:imports obo:bfo/2.0/bfo.owl ;
-                                   owl:versionInfo 0.4 .
+                                   owl:versionInfo 0.7 .
 
 #################################################################
 #    Annotation properties
 #################################################################
+
+###  http://onto.kul.pl/ontohgis.owl#hasOntologyDevelopmentComment
+:hasOntologyDevelopmentComment rdf:type owl:AnnotationProperty ;
+                               rdfs:label "has comment from ontology development team"@en ,
+                                          "ma komentarz od zespołu tworzącego ontologię"@pl ;
+                               rdfs:subPropertyOf rdfs:comment .
+
 
 ###  http://onto.kul.pl/ontohgis.owl#has_abbreviation
 :has_abbreviation rdf:type owl:AnnotationProperty ;
@@ -55,14 +63,27 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#hasBoundary
 :hasBoundary rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :hasPart ;
              owl:inverseOf :isBoundaryOf ;
+             rdf:type owl:IrreflexiveProperty ;
              rdfs:range obo:BFO_0000140 ;
              rdfs:label "has boundary"@en ,
                         "ma granicę"@pl .
 
 
+###  http://onto.kul.pl/ontohgis.owl#hasPart
+:hasPart rdf:type owl:ObjectProperty ;
+         owl:inverseOf :isPartOf ;
+         rdfs:domain obo:BFO_0000002 ;
+         rdfs:range obo:BFO_0000002 ;
+         rdfs:label "has part"@en ,
+                    "ma część"@pl .
+
+
 ###  http://onto.kul.pl/ontohgis.owl#isBoundaryOf
 :isBoundaryOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :isPartOf ;
+              rdf:type owl:IrreflexiveProperty ;
               rdfs:domain obo:BFO_0000140 ;
               rdfs:label "is boundary of"@en ,
                          "jest granicą"@pl .
@@ -76,13 +97,80 @@
                          "jest funkcją"@pl .
 
 
+###  http://onto.kul.pl/ontohgis.owl#isPartOf
+:isPartOf rdf:type owl:ObjectProperty ;
+          rdfs:label "is part of"@en ,
+                     "jest częścią"@pl .
+
+
 #################################################################
 #    Classes
 #################################################################
 
+###  http://onto.kul.pl/ontohgis.owl#object_1
+:object_1 rdf:type owl:Class ;
+          rdfs:subClassOf obo:BFO_0000030 ;
+          rdfs:label "budynek"@pl ,
+                     "building"@en .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_2
+:object_2 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit215 ;
+          rdfs:label "Kirche"@de ,
+                     "church"@en ,
+                     "kościół"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_3
+:object_3 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit215 ;
+          rdfs:label "Kloster"@de ,
+                     "klasztor"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_4
+:object_4 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ;
+          rdfs:label "zamek"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_5
+:object_5 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit215 ,
+                          :settlement_unit28 ;
+          rdfs:label "Eisenbahnstation"@de ,
+                     "stacja kolejowa"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_6
+:object_6 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit28 ;
+          rdfs:label "schronisko górskie"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_7
+:object_7 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit28 ;
+          rdfs:label "kaplica"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#object_8
+:object_8 rdf:type owl:Class ;
+          rdfs:subClassOf :object_1 ,
+                          :settlement_unit28 ;
+          rdfs:label "Wirtshaus"@de ,
+                     "karczma"@pl .
+
+
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit1
 :settlement_unit1 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1000 ;
+                  rdfs:subClassOf :settlement_unit3001 ;
                   :has_indexed_name "?"^^xsd:string ;
                   :has_source_name "Adliche und Mediat Staedte"^^xsd:string ;
                   :is_mentioned_in_source :Source_16 ;
@@ -91,7 +179,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit10
 :settlement_unit10 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_abbreviation "df"^^xsd:string ;
                    :has_indexed_name "Wieś"^^xsd:string ;
                    :has_source_name "Dorf"^^xsd:string ;
@@ -110,7 +198,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit100
 :settlement_unit100 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto krajowe i miasteczko"^^xsd:string ;
                     :has_source_name "Landstadt und Flecken"^^xsd:string ;
                     :is_mentioned_in_source :Source_47 ;
@@ -119,29 +207,39 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit1000
 :settlement_unit1000 rdf:type owl:Class ;
-                     rdfs:subClassOf obo:BFO_0000030 ,
+                     rdfs:subClassOf obo:BFO_0000027 ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty :hasBoundary ;
                                        owl:someValuesFrom :settlement_unit2001
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasBoundary ;
+                                       owl:allValuesFrom :settlement_unit2001
                                      ] ;
+                     owl:disjointWith :settlement_unit1001 ;
                      :has_source_name "Miejscowość"@pl ;
-                     rdfs:label "settlement"@en .
+                     rdfs:label "human settlement"@en .
 
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit1001
 :settlement_unit1001 rdf:type owl:Class ;
-                     rdfs:subClassOf obo:BFO_0000030 ,
+                     rdfs:subClassOf obo:BFO_0000027 ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty :hasBoundary ;
                                        owl:someValuesFrom :settlement_unit2000
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasBoundary ;
+                                       owl:allValuesFrom :settlement_unit2000
                                      ] ;
                      :has_source_name "Podział administracyjny"@pl ;
-                     rdfs:label "administrative unit"@en .
+                     rdfs:label "administrative unit"@en ,
+                                "jednostka podziału administracyjnego"@pl .
 
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit101
 :settlement_unit101 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3004 ;
                     :has_indexed_name "Letnisko"^^xsd:string ;
                     :has_source_name "Letnisko"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ,
@@ -151,7 +249,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit102
 :settlement_unit102 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3002 ;
                     :has_indexed_name "Targi"^^xsd:string ;
                     :has_source_name "Markte"^^xsd:string ;
                     :is_mentioned_in_source :Source_25 ;
@@ -160,7 +258,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit103
 :settlement_unit103 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3002 ;
+                    owl:disjointWith :settlement_unit104 ;
                     :has_indexed_name "Targowice 10 000 - 50 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Markte: uber 10 000 bis 50 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -169,7 +268,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit104
 :settlement_unit104 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3002 ;
                     :has_indexed_name "Targowice 2000 - 10 000 mieszkańców, dawny krój pisma dla fortów, zamków, baterii, fortyfikacji i umocnień"^^xsd:string ;
                     :has_source_name "Markte: uber 2000 bis 10 000 Einwohner, erstere Schrift fur Forts, Sperren, Betterien, Kastelle und Feldbefestigungen"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -178,7 +277,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit105
 :settlement_unit105 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3002 ;
                     :has_indexed_name "Targowice mniejsze niż 2000 mieszkańców"^^xsd:string ;
                     :has_source_name "Markte: weniger als 2000 Einwohnern, letztere Schrift fur Kollektivnamen, welche nicht mit einem Ortsnamen gleich lautzen, Bahnhofe, besonders benannte Eisenbahnen, Chausseen und Landstrassen"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -187,7 +286,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit106
 :settlement_unit106 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta targowe"^^xsd:string ,
                                       "Miasteczka"^^xsd:string ,
                                       "Miasto handlowe"^^xsd:string ,
@@ -204,7 +303,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit107
 :settlement_unit107 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta targowe poniżej 5 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Marktflecken unter 5 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_54 ,
@@ -215,7 +314,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit108
 :settlement_unit108 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3002 ;
                     :has_indexed_name "Targi, większe miasta bez prawia miejskiego, większe wsie"^^xsd:string ;
                     :has_source_name "Marktflecken, auch grossere Ortschaften ohne Stadtrecht, grosse Dorfer"^^xsd:string ;
                     :is_mentioned_in_source :Source_46 ;
@@ -224,7 +323,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit109
 :settlement_unit109 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta"^^xsd:string ;
                     :has_source_name "Miasta"^^xsd:string ;
                     :is_mentioned_in_source :Source_39 ,
@@ -234,7 +333,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit11
 :settlement_unit11 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wieś z folwarkiem"^^xsd:string ;
                    :has_source_name "Dorf mit Gut"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -243,7 +342,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit110
 :settlement_unit110 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 25 000 – 75 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta 25 000 – 75 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -258,7 +357,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit111
 :settlement_unit111 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 5 000 – 25 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta 5 000 – 25 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -268,7 +367,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit112
 :settlement_unit112 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 75 000 – 200 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta 75 000 – 200 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ,
@@ -281,7 +380,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit113
 :settlement_unit113 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka 2 000 – 5 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta i miasteczka 2 000 – 5 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ,
@@ -294,7 +393,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit114
 :settlement_unit114 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka 5 000 – 25 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta i miasteczka 5 000 – 25 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ,
@@ -307,7 +406,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit115
 :settlement_unit115 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka do 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta i miasteczka do 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -319,7 +418,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit116
 :settlement_unit116 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka od 2000 do 5000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta i miasteczka od 2000 do 5000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -331,7 +430,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit117
 :settlement_unit117 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka od 5 000 do 25 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta i miasteczka od 5 000 do 25 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -343,7 +442,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit118
 :settlement_unit118 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka pon. 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta i miasteczka pon. 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ;
@@ -352,7 +451,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit119
 :settlement_unit119 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
+                    owl:disjointWith :settlement_unit135 ;
                     :has_indexed_name "Miasta i miasteczka poniej 2 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta i miasteczka poniej 2 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -364,7 +464,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit12
 :settlement_unit12 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3009 ;
+                   owl:disjointWith :settlement_unit13 ;
                    :has_indexed_name "Wieś z kościołem"^^xsd:string ;
                    :has_source_name "Dorf mit kirche"^^xsd:string ;
                    :is_mentioned_in_source :Source_10 ,
@@ -374,7 +475,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit120
 :settlement_unit120 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta niżej 5000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta niżej 5000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ;
@@ -383,7 +484,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit121
 :settlement_unit121 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta obwodowe lub powiatowe"^^xsd:string ;
                     :has_source_name "Miasta obwodowe lub powiatowe"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -392,7 +493,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit122
 :settlement_unit122 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta od 25 000 do 75 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta od 25 000 do 75 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ,
@@ -405,7 +506,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit123
 :settlement_unit123 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta od 5 000 do 25 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta od 5 000 do 25 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -414,7 +515,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit124
 :settlement_unit124 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta od 75 000 do 200 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta od 75 000 do 200 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ,
@@ -427,7 +528,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit125
 :settlement_unit125 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta ponad 200 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta ponad 200 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ,
@@ -440,7 +541,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit126
 :settlement_unit126 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta ponad 75 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta ponad 75 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -450,7 +551,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit127
 :settlement_unit127 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta poniej 2 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Miasta poniej 2 000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -459,7 +560,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit128
 :settlement_unit128 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta poniżej 5000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta poniżej 5000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -468,7 +569,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit129
 :settlement_unit129 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta pow. 200 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasta pow. 200 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ,
@@ -481,7 +582,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit13
 :settlement_unit13 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
                    :has_indexed_name "Wieś bez kościoła"^^xsd:string ;
                    :has_source_name "Dorf ohne Kirche"^^xsd:string ;
                    :is_mentioned_in_source :Source_16 ,
@@ -491,7 +592,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit130
 :settlement_unit130 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta większe"^^xsd:string ;
                     :has_source_name "Miasta większe"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -500,7 +601,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit131
 :settlement_unit131 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka"^^xsd:string ;
                     :has_source_name "Miasteczka"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -509,7 +610,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit132
 :settlement_unit132 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka i osady"^^xsd:string ;
                     :has_source_name "Miasteczka i osady"^^xsd:string ;
                     :is_mentioned_in_source :Source_39 ,
@@ -519,7 +620,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit133
 :settlement_unit133 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka i osady niżej 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasteczka i osady niżej 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ;
@@ -528,7 +629,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit134
 :settlement_unit134 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka i osady ponad 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasteczka i osady ponad 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ;
@@ -537,7 +638,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit135
 :settlement_unit135 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka ponad 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasteczka ponad 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -546,7 +647,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit136
 :settlement_unit136 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczka poniżej 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasteczka poniżej 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -555,7 +656,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit137
 :settlement_unit137 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczko"^^xsd:string ;
                     :has_source_name "Miasteczko"^^xsd:string ;
                     :is_mentioned_in_source :Source_19 ,
@@ -565,7 +666,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit138
 :settlement_unit138 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasteczko i małe miasto"^^xsd:string ;
                     :has_source_name "Miasteczko i małe miasto"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -574,7 +675,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit139
 :settlement_unit139 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto"^^xsd:string ;
                     :has_source_name "Miasto"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ,
@@ -585,7 +686,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit14
 :settlement_unit14 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
+                   owl:disjointWith :settlement_unit15 ;
                    :has_indexed_name "Wieś powyżej 100 mieszkańców bez kościoła"^^xsd:string ;
                    :has_source_name "Dorf uber 100 Einwohner ohne Kirche"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -594,7 +696,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit140
 :settlement_unit140 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto 30 000 - 100 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasto 30 000 - 100 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -605,7 +707,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit141
 :settlement_unit141 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto 5 000 - 30 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasto 5 000 - 30 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -616,7 +718,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit142
 :settlement_unit142 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto gubernialne"^^xsd:string ;
                     :has_source_name "Miasto gubernialne"^^xsd:string ;
                     :is_mentioned_in_source :Source_19 ;
@@ -625,7 +727,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit143
 :settlement_unit143 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto inne i Miasteczka"^^xsd:string ;
                     :has_source_name "Miasto inne i Miasteczka"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -634,7 +736,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit144
 :settlement_unit144 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto mniejsze lub miasteczko"^^xsd:string ;
                     :has_source_name "Miasto mniejsze lub miasteczko"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -643,7 +745,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit145
 :settlement_unit145 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto obwodowe"^^xsd:string ;
                     :has_source_name "Miasto obwodowe"^^xsd:string ;
                     :is_mentioned_in_source :Source_19 ;
@@ -652,7 +754,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit146
 :settlement_unit146 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto ponad 100 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasto ponad 100 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -663,7 +765,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit147
 :settlement_unit147 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto poniżej 5 000 mieszk."^^xsd:string ;
                     :has_source_name "Miasto poniżej 5 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -674,7 +776,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit148
 :settlement_unit148 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto większe"^^xsd:string ;
                     :has_source_name "Miasto większe"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -683,7 +785,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit149
 :settlement_unit149 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta z murami"^^xsd:string ;
                     :has_source_name "Mit mauern umgebene Staedte"^^xsd:string ;
                     :is_mentioned_in_source :Source_16 ;
@@ -692,7 +794,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit15
 :settlement_unit15 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
                    :has_indexed_name "Wieś poniżej 100 mieszkańców bez kościoła"^^xsd:string ;
                    :has_source_name "Dorf unter 100 Einwohner ohne Kirche"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -701,7 +803,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit150
 :settlement_unit150 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Średnie miasto 30 000 - 100 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Mittelstadt 30 000 - 100 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_54 ,
@@ -748,7 +850,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit155
 :settlement_unit155 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3003 ;
                     :has_indexed_name "Obozowisko nomadów"^^xsd:string ;
                     :has_source_name "Nomadenlager"^^xsd:string ;
                     :is_mentioned_in_source :Source_54 ,
@@ -759,7 +861,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit156
 :settlement_unit156 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3003 ,
+                                    :settlement_unit3007 ;
                     :has_indexed_name "Odosobnione gospodarstwa"^^xsd:string ;
                     :has_source_name "Odosobnione gospodarstwa"^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ;
@@ -777,7 +880,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit158
 :settlement_unit158 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3004 ;
                     :has_abbreviation "Os,"^^xsd:string ,
                                       "Os."^^xsd:string ;
                     :has_indexed_name "Osada"^^xsd:string ;
@@ -790,7 +893,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit159
 :settlement_unit159 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3004 ;
                     :has_indexed_name "Osada, okolica"^^xsd:string ;
                     :has_source_name "Osada, okolica"^^xsd:string ;
                     :is_mentioned_in_source :Source_34 ;
@@ -799,7 +902,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit16
 :settlement_unit16 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie"^^xsd:string ;
                    :has_source_name "Dorfer"^^xsd:string ;
                    :is_mentioned_in_source :Source_7 ;
@@ -826,7 +929,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit162
 :settlement_unit162 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie kościelne (parafialne)"^^xsd:string ;
                     :has_source_name "Pfarrkirchdorfer"^^xsd:string ;
                     :is_mentioned_in_source :Source_35 ;
@@ -835,7 +938,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit163
 :settlement_unit163 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3003 ;
                     :has_indexed_name "Pojedyncze zabudowania"^^xsd:string ;
                     :has_source_name "Pojedyncze zabudowania"^^xsd:string ;
                     :is_mentioned_in_source :Source_39 ,
@@ -864,7 +967,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit166
 :settlement_unit166 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta prowincjonalne"^^xsd:string ;
                     :has_source_name "Provinzial Staedte"^^xsd:string ;
                     :is_mentioned_in_source :Source_35 ;
@@ -888,7 +991,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit168
 :settlement_unit168 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3008 ;
                     :has_indexed_name "Przedmieścia"^^xsd:string ;
                     :has_source_name "Przedmieścia"^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -899,7 +1002,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit169
 :settlement_unit169 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3008 ;
                     :has_abbreviation "Przedm."^^xsd:string ;
                     :has_indexed_name "Przedmieście"^^xsd:string ;
                     :has_source_name "Przedmieście"^^xsd:string ;
@@ -910,7 +1013,18 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit17
 :settlement_unit17 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ,
+                                   [ rdf:type owl:Class ;
+                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasPart ;
+                                                     owl:someValuesFrom :object_2
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasPart ;
+                                                     owl:someValuesFrom :settlement_unit3013
+                                                   ]
+                                                 )
+                                   ] ;
                    :has_indexed_name "Wsie z kościołem lub parafią"^^xsd:string ;
                    :has_source_name "Dorfer mit Kirche oder Pfarrein"^^xsd:string ;
                    :is_mentioned_in_source :Source_25 ;
@@ -952,7 +1066,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit173
 :settlement_unit173 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto rejencyjne"^^xsd:string ;
                     :has_source_name "Regierugs Stadte"^^xsd:string ;
                     :is_mentioned_in_source :Source_46 ;
@@ -1027,7 +1141,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit18
 :settlement_unit18 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
                    :has_indexed_name "Wsie bez kościoła lub parafii"^^xsd:string ;
                    :has_source_name "Dorfer ohne Kirchen oder Pfarrein"^^xsd:string ;
                    :is_mentioned_in_source :Source_25 ;
@@ -1041,12 +1155,27 @@
                     :has_indexed_name "Romunek"^^xsd:string ;
                     :has_source_name "Romunek"^^xsd:string ;
                     :is_mentioned_in_source :Source_19 ;
+                    rdfs:comment """Nie wiem, jaki teren znajduje się na mapie ani kto ją sporządzał, ale pragnę zauważyć, że w historycznej ziemi dobrzyńskiej rumunek to ‘oddzielne gospodarstwo poza zwartą zabudową wsi’, ewentualnie skupisko domów poza wsią, czyli odpowiednik tzw. kolonii.
+Słowo to można prawdopodobnie albo wywodzić od rumowiska, albo wiązać z niemieckim Raum ‘miejsce’, räumen ‘wyprowadzić się (m.in.)’.
+Postać romunek mogła powstać w wyniku typowych dla XIX wieku wahań fonetyczno-ortograficznych, wywoływanych przez sąsiedztwo spółgłosek sonornych, czyli także r i m.
+Artur Czesak, IJP PAN, Kraków"""@pl ;
                     rdfs:label "Romunek"^^xsd:string .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :settlement_unit180 ;
+   owl:annotatedProperty rdfs:comment ;
+   owl:annotatedTarget """Nie wiem, jaki teren znajduje się na mapie ani kto ją sporządzał, ale pragnę zauważyć, że w historycznej ziemi dobrzyńskiej rumunek to ‘oddzielne gospodarstwo poza zwartą zabudową wsi’, ewentualnie skupisko domów poza wsią, czyli odpowiednik tzw. kolonii.
+Słowo to można prawdopodobnie albo wywodzić od rumowiska, albo wiązać z niemieckim Raum ‘miejsce’, räumen ‘wyprowadzić się (m.in.)’.
+Postać romunek mogła powstać w wyniku typowych dla XIX wieku wahań fonetyczno-ortograficznych, wywoływanych przez sąsiedztwo spółgłosek sonornych, czyli także r i m.
+Artur Czesak, IJP PAN, Kraków"""@pl ;
+   :is_mentioned_in_source <http://sjp.pwn.pl/poradnia/haslo/romunek;7157.html>
+ ] .
 
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit181
 :settlement_unit181 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3014 ;
+                    :hasOntologyDevelopmentComment "Pierwotnie był to rodzaj settlement_unit1000."@pl ;
                     :has_abbreviation "Sch."^^xsd:string ;
                     :has_indexed_name "Wójtostwo"^^xsd:string ;
                     :has_source_name "Schulzenhofe"^^xsd:string ;
@@ -1133,7 +1262,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit187
 :settlement_unit187 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit2000 ;
+                    rdfs:subClassOf :settlement_unit3020 ;
                     :has_indexed_name "Granica państwa"^^xsd:string ;
                     :has_source_name "Staatengrenze"^^xsd:string ;
                     :is_mentioned_in_source :Source_55 ;
@@ -1142,7 +1271,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit188
 :settlement_unit188 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto"^^xsd:string ;
                     :has_source_name "Stadt"^^xsd:string ;
                     :is_mentioned_in_source :Source_11 ,
@@ -1156,7 +1285,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit189
 :settlement_unit189 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto powyżej 30 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt mit uber 30 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_10 ;
@@ -1165,7 +1294,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit19
 :settlement_unit19 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie poniżej 300 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer unter 300 Einwohnern"^^xsd:string ;
                    :is_mentioned_in_source :Source_38 ;
@@ -1174,7 +1303,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit190
 :settlement_unit190 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto powyżej 5 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt mit uber 5 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_10 ,
@@ -1184,7 +1313,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit191
 :settlement_unit191 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto poniżej 5 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt mit unter 5 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_10 ,
@@ -1194,7 +1323,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit192
 :settlement_unit192 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto powyżej 100 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt uber 100 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1203,7 +1332,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit193
 :settlement_unit193 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto 50 000 - 100 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt von 50 000 bis 100 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1212,7 +1341,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit194
 :settlement_unit194 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto, targ, wieś poniżej 2000 mieszkańców z kościołem"^^xsd:string ;
                     :has_source_name "Stadt, Markt, Dorf unter 2000 Einwohner mit Kirche"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1221,7 +1350,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit195
 :settlement_unit195 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto, targ, wieś poniżej 2000 mieszkańców bez kościoła"^^xsd:string ;
                     :has_source_name "Stadt, Markt, Dorf unter 2000 Einwohner ohne Kirche"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1230,7 +1359,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit196
 :settlement_unit196 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto, targ, wieś 10 000 - 20 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt, Markt, Dorf von 10 000 bis 50 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1239,7 +1368,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit197
 :settlement_unit197 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasto, targ, wieś 2 000 - 10 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadt, Markt, Dorf von 2 000 bis 10 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_69 ;
@@ -1248,7 +1377,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit198
 :settlement_unit198 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta większe niż 100 000 mieszkańców, Twierdze i porty morskie"^^xsd:string ;
                     :has_source_name "Stadte mit mehr 100 000 Einwohnern, Festungen und Kriegshafen"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -1257,7 +1386,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit199
 :settlement_unit199 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka poniej 2 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte und Stadtchen unter 5 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1266,7 +1395,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit2
 :settlement_unit2 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1001 ;
+                  rdfs:subClassOf :settlement_unit3011 ;
                   :has_abbreviation "A.V."^^xsd:string ;
                   :has_indexed_name "Urząd gminy"^^xsd:string ;
                   :has_source_name "Amtsverwaltung"^^xsd:string ;
@@ -1276,7 +1405,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit20
 :settlement_unit20 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie od 1000 do 2000 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer von 1 000 bis 2 000 Einwohnern"^^xsd:string ;
                    :is_mentioned_in_source :Source_38 ;
@@ -1285,7 +1414,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit200
 :settlement_unit200 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka od 2000 do 5000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte und Stadtchen von 2 000 bis 5 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1316,6 +1445,14 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit2002
 :settlement_unit2002 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( obo:BFO_0000016
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :isFunctionOf ;
+                                                                  owl:someValuesFrom :settlement_unit1000
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
                      rdfs:subClassOf obo:BFO_0000016 ;
                      rdfs:label "funkcja miejscowości"@pl ,
                                 "settlement function"@en .
@@ -1323,7 +1460,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit201
 :settlement_unit201 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta i miasteczka od 5 000 do 25 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte und Stadtchen von 5 000 bis 25 0000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1332,7 +1469,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit202
 :settlement_unit202 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta od 25 000 do 75 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte von 20 000 bis 75 0000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1341,7 +1478,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit203
 :settlement_unit203 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta od 75 000 do 200 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte von 75 000 bis 200 0000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1350,7 +1487,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit204
 :settlement_unit204 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta ponad 200 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte von uber 200 000 Einwohnern"^^xsd:string ;
                     :is_mentioned_in_source :Source_38 ;
@@ -1359,7 +1496,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit205
 :settlement_unit205 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 10 000 - 50 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte: uber 10 000 bis 50 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -1368,7 +1505,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit206
 :settlement_unit206 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 2000 - 10 000 mieszkańców, dawny krój pisma dla fortów, zamków, baterii, fortyfikacji i umocnień"^^xsd:string ;
                     :has_source_name "Stadte: uber 2000 bis 10 000 Einwohner, erstere Schrift fur Forts, Sperren, Batterien, Kastelle und Feldbefestigungen"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -1377,7 +1514,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit207
 :settlement_unit207 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta 50 000 - 100 000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte: uber 50 000 bis 100 000 Einwohner"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -1386,7 +1523,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit208
 :settlement_unit208 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta mniejsze niż 2000 mieszkańców"^^xsd:string ;
                     :has_source_name "Stadte: weniger als 2000 Einwohnern, letztere Schrift fur Kollektivnamen, welche nicht mit einem Ortsnamen gleich lautzen, Bahnhofe, besonders benannte Eisenbahnen, Chausseen und Landstrassen"^^xsd:string ;
                     :is_mentioned_in_source :Source_23 ;
@@ -1395,7 +1532,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit209
 :settlement_unit209 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3001 ;
                     :has_indexed_name "Miasta"^^xsd:string ;
                     :has_source_name "Staedte"^^xsd:string ;
                     :is_mentioned_in_source :Source_25 ,
@@ -1405,7 +1542,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit21
 :settlement_unit21 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie od 300 do 1000 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer von 300 bis 1 000 Einwohnern"^^xsd:string ;
                    :is_mentioned_in_source :Source_38 ;
@@ -1414,7 +1551,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit210
 :settlement_unit210 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1001 ;
+                    rdfs:subClassOf :settlement_unit3014 ;
                     :has_abbreviation "St."^^xsd:string ;
                     :has_indexed_name "Starostwo"^^xsd:string ;
                     :has_source_name "Starostwo"^^xsd:string ;
@@ -1425,7 +1562,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit211
 :settlement_unit211 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1001 ;
+                    rdfs:subClassOf :settlement_unit3011 ;
                     :has_abbreviation "U.gm."^^xsd:string ;
                     :has_indexed_name "Urząd gminy"^^xsd:string ;
                     :has_source_name "Urząd gminy"^^xsd:string ;
@@ -1438,7 +1575,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit212
 :settlement_unit212 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1001 ;
+                    rdfs:subClassOf :settlement_unit3005 ;
                     :has_indexed_name "Urząd powiatowy"^^xsd:string ;
                     :has_source_name "Urząd powiatowy"^^xsd:string ;
                     :is_mentioned_in_source :Source_34 ;
@@ -1447,7 +1584,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit213
 :settlement_unit213 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3008 ;
                     :has_abbreviation "Vorst."^^xsd:string ,
                                       "Vsrt."^^xsd:string ;
                     :has_indexed_name "Przedmieście"^^xsd:string ;
@@ -1484,7 +1621,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit216
 :settlement_unit216 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wieś"^^xsd:string ;
                     :has_source_name "Wieś"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ,
@@ -1498,7 +1635,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit217
 :settlement_unit217 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wieś mała (kościelna)"^^xsd:string ;
                     :has_source_name "Wieś mała (kościelna)"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -1507,7 +1644,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit218
 :settlement_unit218 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wieś mała (niekościelna)"^^xsd:string ;
                     :has_source_name "Wieś mała (niekościelna)"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -1516,7 +1653,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit219
 :settlement_unit219 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wioski 100 - 400 mieszk."^^xsd:string ;
                     :has_source_name "Wioski 100 - 400 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -1527,7 +1664,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit22
 :settlement_unit22 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie ponad 2000 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer von uber 2000 Einwohnern"^^xsd:string ;
                    :is_mentioned_in_source :Source_38 ;
@@ -1536,7 +1673,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit220
 :settlement_unit220 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wioski 20 -100 mieszk."^^xsd:string ;
                     :has_source_name "Wioski 20 -100 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -1547,7 +1684,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit221
 :settlement_unit221 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
+                    owl:disjointWith :settlement_unit244 ;
                     :has_indexed_name "Wioski do 200 mieszk."^^xsd:string ;
                     :has_source_name "Wioski do 200 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -1557,7 +1695,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit222
 :settlement_unit222 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wioski ponad 400 mieszk."^^xsd:string ;
                     :has_source_name "Wioski ponad 400 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -1568,7 +1706,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit223
 :settlement_unit223 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1001 ;
+                    rdfs:subClassOf :settlement_unit3015 ;
                     :has_abbreviation "W"^^xsd:string ,
                                       "W."^^xsd:string ;
                     :has_indexed_name "Województwo"^^xsd:string ;
@@ -1580,7 +1718,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit224
 :settlement_unit224 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie"^^xsd:string ;
                     :has_source_name "Wsie"^^xsd:string ;
                     :is_mentioned_in_source :Source_39 ,
@@ -1590,7 +1728,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit225
 :settlement_unit225 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 1 000 – 2 000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie 1 000 – 2 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -1602,7 +1740,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit226
 :settlement_unit226 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 2 000 – 5 000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie 2 000 – 5 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -1614,7 +1752,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit227
 :settlement_unit227 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 20 - 40 domów"^^xsd:string ;
                     :has_source_name "Wsie 20 - 40 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -1623,7 +1761,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit228
 :settlement_unit228 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 200 – 1 000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie 200 – 1 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -1633,7 +1771,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit229
 :settlement_unit229 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 300 – 1000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie 300 – 1000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -1645,7 +1783,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit23
 :settlement_unit23 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie 10 000 - 50 000 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer: uber 10 000 bis 50 000 Einwohner"^^xsd:string ;
                    :is_mentioned_in_source :Source_23 ;
@@ -1654,7 +1792,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit230
 :settlement_unit230 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 4 - 20 domów"^^xsd:string ;
                     :has_source_name "Wsie 4 - 20 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -1663,7 +1801,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit231
 :settlement_unit231 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 40 - 200 domów"^^xsd:string ;
                     :has_source_name "Wsie 40 - 200 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -1672,7 +1810,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit232
 :settlement_unit232 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie 400 - 1000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie 400 - 1000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -1683,7 +1821,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit233
 :settlement_unit233 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie do 10 domów"^^xsd:string ;
                     :has_source_name "Wsie do 10 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -1692,7 +1830,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit234
 :settlement_unit234 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie do 4 domów"^^xsd:string ;
                     :has_source_name "Wsie do 4 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -1701,7 +1839,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit235
 :settlement_unit235 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie duże"^^xsd:string ;
                     :has_source_name "Wsie duże"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ;
@@ -1710,7 +1848,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit236
 :settlement_unit236 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie kościelne"^^xsd:string ;
                     :has_source_name "Wsie kościelne"^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -1729,7 +1867,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit237
 :settlement_unit237 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 10 do 30 domów"^^xsd:string ;
                     :has_source_name "Wsie od 10 do 30 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -1738,7 +1876,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit238
 :settlement_unit238 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 1000 do 2000 mieszkańców"^^xsd:string ;
                     :has_source_name "Wsie od 1000 do 2000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -1750,7 +1888,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit239
 :settlement_unit239 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 30 do 40 domów"^^xsd:string ;
                     :has_source_name "Wsie od 30 do 40 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -1759,7 +1897,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit24
 :settlement_unit24 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie 2000 - 10 000 mieszkańców, dawny krój pisma dla fortów, zamków, baterii, fortyfikacji i umocnień"^^xsd:string ;
                    :has_source_name "Dorfer: uber 2000 bis 10 000 Einwohner, erstere Schrift fur Forts, Sperren, Betterien, Kastelle und Feldbefestigungen"^^xsd:string ;
                    :is_mentioned_in_source :Source_23 ;
@@ -1768,7 +1906,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit240
 :settlement_unit240 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 30 do 50 dymów"^^xsd:string ;
                     :has_source_name "Wsie od 30 do 50 dymów"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -1777,7 +1915,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit241
 :settlement_unit241 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 300 do 1000 mieszkańców"^^xsd:string ;
                     :has_source_name "Wsie od 300 do 1000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -1789,7 +1927,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit242
 :settlement_unit242 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 40 do 150 domów"^^xsd:string ;
                     :has_source_name "Wsie od 40 do 150 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -1798,7 +1936,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit243
 :settlement_unit243 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie od 6 do 20-kilku dymów"^^xsd:string ;
                     :has_source_name "Wsie od 6 do 20-kilku dymów"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -1807,7 +1945,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit244
 :settlement_unit244 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie pon. 300 mieszk."^^xsd:string ;
                     :has_source_name "Wsie pon. 300 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_14 ,
@@ -1819,7 +1957,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit245
 :settlement_unit245 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie ponad 1 000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie ponad 1 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_1 ,
@@ -1831,7 +1969,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit246
 :settlement_unit246 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie ponad 150 domów"^^xsd:string ;
                     :has_source_name "Wsie ponad 150 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_36 ;
@@ -1840,7 +1978,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit247
 :settlement_unit247 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie ponad 200 domów"^^xsd:string ;
                     :has_source_name "Wsie ponad 200 domów"^^xsd:string ;
                     :is_mentioned_in_source :Source_13 ;
@@ -1849,7 +1987,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit248
 :settlement_unit248 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
+                    owl:disjointWith :settlement_unit25 ;
                     :has_indexed_name "Wsie ponad 2000 mieszkańców"^^xsd:string ;
                     :has_source_name "Wsie ponad 2000 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -1861,7 +2000,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit249
 :settlement_unit249 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie poniżej 300 mieszkańców"^^xsd:string ;
                     :has_source_name "Wsie poniżej 300 mieszkańców"^^xsd:string ;
                     :is_mentioned_in_source :Source_37 ,
@@ -1873,7 +2012,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit25
 :settlement_unit25 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie mniejsze niż 2000 mieszkańców"^^xsd:string ;
                    :has_source_name "Dorfer: weniger als 2000 Einwohnern, letztere Schrift fur Kollektivnamen, welche nicht mit einem Ortsnamen gleich lautzen, Bahnhofe, besonders benannte Eisenbahnen, Chausseen und Landstrassen"^^xsd:string ;
                    :is_mentioned_in_source :Source_23 ;
@@ -1882,7 +2021,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit250
 :settlement_unit250 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie poniżej 400 mieszk."^^xsd:string ;
                     :has_source_name "Wsie poniżej 400 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_5 ,
@@ -1893,7 +2032,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit251
 :settlement_unit251 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie pow. 1 000 mieszk."^^xsd:string ;
                     :has_source_name "Wsie pow. 1 000 mieszk."^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ;
@@ -1902,7 +2041,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit252
 :settlement_unit252 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie wyżej 100 dymów"^^xsd:string ;
                     :has_source_name "Wsie wyżej 100 dymów"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -1911,7 +2050,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit253
 :settlement_unit253 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ;
                     :has_indexed_name "Wsie wyżej 50 dymów"^^xsd:string ;
                     :has_source_name "Wsie wyżej 50 dymów"^^xsd:string ;
                     :is_mentioned_in_source :Source_24 ;
@@ -1920,7 +2059,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit254
 :settlement_unit254 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3009 ;
                     :has_indexed_name "Wsie z kościołem"^^xsd:string ;
                     :has_source_name "Wsie z kościołem"^^xsd:string ;
                     :is_mentioned_in_source :Source_25 ;
@@ -1929,7 +2068,18 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit255
 :settlement_unit255 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ,
+                                    [ rdf:type owl:Class ;
+                                      owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasPart ;
+                                                      owl:someValuesFrom :object_2
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasPart ;
+                                                      owl:someValuesFrom :settlement_unit3011
+                                                    ]
+                                                  )
+                                    ] ;
                     :has_indexed_name "Wsie z kościołem lub urzędem gminy"^^xsd:string ;
                     :has_source_name "Wsie z kościołem lub urzędem gminy"^^xsd:string ;
                     :is_mentioned_in_source :Source_12 ;
@@ -1938,7 +2088,11 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit256
 :settlement_unit256 rdf:type owl:Class ;
-                    rdfs:subClassOf :settlement_unit1000 ;
+                    rdfs:subClassOf :settlement_unit3000 ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasPart ;
+                                      owl:someValuesFrom :settlement_unit3013
+                                    ] ;
                     :has_indexed_name "Wsie z parafią"^^xsd:string ;
                     :has_source_name "Wsie z parafią"^^xsd:string ;
                     :is_mentioned_in_source :Source_25 ;
@@ -1947,7 +2101,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit26
 :settlement_unit26 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_indexed_name "Pojedyncze zabudowania"^^xsd:string ;
                    :has_source_name "Einzelhofe"^^xsd:string ;
                    :is_mentioned_in_source :Source_41 ,
@@ -1958,7 +2112,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit27
 :settlement_unit27 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ,
+                                   :settlement_unit3007 ;
                    :has_indexed_name "Odosobnione zagrody"^^xsd:string ;
                    :has_source_name "Einzelne Gehofte"^^xsd:string ;
                    :is_mentioned_in_source :Source_17 ;
@@ -1967,7 +2122,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit28
 :settlement_unit28 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ,
+                                   :settlement_unit3007 ;
                    :has_indexed_name "Przedmioty odosobnione: zabudowania, schroniska górskie, karczmy, kaplice i pojedyncze szańce polowe"^^xsd:string ;
                    :has_source_name "Einzelne Objekte: Gebaude, Aplenhuten, Wirtshausern, Kapellen, und einzelne Feldschanzen"^^xsd:string ;
                    :is_mentioned_in_source :Source_23 ;
@@ -1976,7 +2132,8 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit29
 :settlement_unit29 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :object_1 ;
+                   :hasOntologyDevelopmentComment "Pierwotnie był to rodzaj settlement_unit1000." ;
                    :has_indexed_name "Twierdze"^^xsd:string ;
                    :has_source_name "Festungen erhalten die dem Charakter des Orts angemessene Schrift Gathung"^^xsd:string ;
                    :is_mentioned_in_source :Source_35 ;
@@ -1985,7 +2142,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit3
 :settlement_unit3 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1000 ;
+                  rdfs:subClassOf :settlement_unit3004 ;
                   :has_indexed_name "Związek chłopski"^^xsd:string ;
                   :has_source_name "Bauerschaften"^^xsd:string ;
                   :is_mentioned_in_source :Source_35 ;
@@ -1994,16 +2151,215 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit30
 :settlement_unit30 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie kościelne (filialne)"^^xsd:string ;
                    :has_source_name "Filialkirchdorfer"^^xsd:string ;
                    :is_mentioned_in_source :Source_35 ;
                    rdfs:label "Filialkirchdorfer"^^xsd:string .
 
 
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3000
+:settlement_unit3000 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3004 ,
+                                     :settlement_unit3007 ;
+                     rdfs:label "wieś"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3001
+:settlement_unit3001 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3004 ,
+                                     :settlement_unit3007 ;
+                     rdfs:label "miasto"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3002
+:settlement_unit3002 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3004 ;
+                     rdfs:label "targ"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3003
+:settlement_unit3003 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit1000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasPart ;
+                                                                  owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass :settlement_unit1000
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit1000 ;
+                     rdfs:comment "Miejscowość jest (mereologicznie) prosta, gdy żadna jej część nie jest miejscowością."@pl ;
+                     rdfs:label "(mereologically) simple human settlement"@en ,
+                                "(mereologicznie) prosta miejscowość"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3004
+:settlement_unit3004 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit1000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasPart ;
+                                                                  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass :settlement_unit1000
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit1000 ;
+                     rdfs:comment "Miejscowość jest (mereologicznie) prosta, gdy niektóre jej części są miejscowościami."@pl ;
+                     rdfs:label "(mereologically) complex human settlement"@en ,
+                                "(mereologicznie) złożona miejscowość"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3005
+:settlement_unit3005 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit1001 ;
+                     owl:disjointWith :settlement_unit3006 ;
+                     rdfs:label "organ administracji"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3006
+:settlement_unit3006 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit1001 ;
+                     rdfs:label "obszar adminstracyjny"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3007
+:settlement_unit3007 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit1000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :isPartOf ;
+                                                                  owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass :settlement_unit1000
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit1000 ;
+                     rdfs:label "(mereologically) complete human settlement"@en ,
+                                "(mereologicznie) samodzielna miejscowość"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3008
+:settlement_unit3008 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit1000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :isPartOf ;
+                                                                  owl:someValuesFrom :settlement_unit1000
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit1000 ;
+                     rdfs:label "(mereologically) incomplete human settlement"@en ,
+                                "(mereologicznie) niesamodzielna miejscowość"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3009
+:settlement_unit3009 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit3000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasPart ;
+                                                                  owl:someValuesFrom :object_2
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit3000 ;
+                     rdfs:label "wieś z kościołem"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3010
+:settlement_unit3010 rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :settlement_unit3000
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasPart ;
+                                                                  owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass :object_2
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :settlement_unit3000 ;
+                     rdfs:label "wieś bez kościoła"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3011
+:settlement_unit3011 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3005 ;
+                     rdfs:label "urząd gminy"@en .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3012
+:settlement_unit3012 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3006 ;
+                     rdfs:label "obszar administracji religijnej"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3013
+:settlement_unit3013 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3012 ;
+                     rdfs:label "parafia"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3014
+:settlement_unit3014 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3006 ;
+                     rdfs:label "obszar administracji świeckiej"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3015
+:settlement_unit3015 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3014 ;
+                     rdfs:label "województwo"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3016
+:settlement_unit3016 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit2000 ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isBoundaryOf ;
+                                       owl:someValuesFrom :settlement_unit3017
+                                     ] ;
+                     rdfs:label "granica gminy"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3017
+:settlement_unit3017 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3014 ;
+                     rdfs:label "gmina"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3018
+:settlement_unit3018 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit2000 ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isBoundaryOf ;
+                                       owl:someValuesFrom :settlement_unit3015
+                                     ] ;
+                     rdfs:label "granica województwa"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3019
+:settlement_unit3019 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit3014 ;
+                     rdfs:label "państwo"@pl .
+
+
+###  http://onto.kul.pl/ontohgis.owl#settlement_unit3020
+:settlement_unit3020 rdf:type owl:Class ;
+                     rdfs:subClassOf :settlement_unit2000 ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isBoundaryOf ;
+                                       owl:someValuesFrom :settlement_unit3019
+                                     ] ;
+                     rdfs:label "granica państwa"@pl .
+
+
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit31
 :settlement_unit31 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Miastecznko, wieś kościelna"^^xsd:string ;
                    :has_source_name "Flecken, Kirchdorf"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2012,7 +2368,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit32
 :settlement_unit32 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_abbreviation "Fut."^^xsd:string ;
                    :has_indexed_name "Futor"^^xsd:string ;
                    :has_source_name "Futor"^^xsd:string ;
@@ -2038,7 +2394,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit33
 :settlement_unit33 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_indexed_name "Futory"^^xsd:string ;
                    :has_source_name "Futory"^^xsd:string ;
                    :is_mentioned_in_source :Source_34 ;
@@ -2047,7 +2403,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit34
 :settlement_unit34 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3016 ;
                    :has_indexed_name "Granice gmin"^^xsd:string ;
                    :has_source_name "Gemeinde Grenzen"^^xsd:string ;
                    :is_mentioned_in_source :Source_25 ;
@@ -2056,7 +2412,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit35
 :settlement_unit35 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3016 ;
                    :has_indexed_name "Granica gminy"^^xsd:string ;
                    :has_source_name "Gemeindegrenze"^^xsd:string ;
                    :is_mentioned_in_source :Source_18 ,
@@ -2072,7 +2428,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit36
 :settlement_unit36 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1001 ;
+                   rdfs:subClassOf :settlement_unit3017 ;
                    :has_abbreviation "Gm."^^xsd:string ;
                    :has_indexed_name "Gmina"^^xsd:string ;
                    :has_source_name "Gmina"^^xsd:string ;
@@ -2085,7 +2441,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit37
 :settlement_unit37 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1001 ;
+                   rdfs:subClassOf :settlement_unit3011 ;
                    :has_abbreviation "Gm."^^xsd:string ;
                    :has_indexed_name "Gmina (siedziba urzędu)"^^xsd:string ;
                    :has_source_name "Gmina (siedziba urzędu)"^^xsd:string ;
@@ -2102,7 +2458,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit38
 :settlement_unit38 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1001 ;
+                   rdfs:subClassOf :settlement_unit3011 ;
                    :has_abbreviation "Gm."^^xsd:string ;
                    :has_indexed_name "Gmina (siedziba zarządu)"^^xsd:string ;
                    :has_source_name "Gmina (siedziba zarządu)"^^xsd:string ;
@@ -2112,7 +2468,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit39
 :settlement_unit39 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_indexed_name "Gospodarstwa górskie"^^xsd:string ;
                    :has_source_name "Gospodarstwa górskie"^^xsd:string ;
                    :is_mentioned_in_source :Source_42 ;
@@ -2121,7 +2477,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit4
 :settlement_unit4 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1000 ;
+                  rdfs:subClassOf :settlement_unit3001 ;
                   :has_indexed_name "Miasta warowne"^^xsd:string ;
                   :has_source_name "Befestigite Staedte"^^xsd:string ;
                   :is_mentioned_in_source :Source_16 ;
@@ -2139,7 +2495,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit41
 :settlement_unit41 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto rządowe i okręgowe"^^xsd:string ;
                    :has_source_name "Gouvernements und Kreis-Stadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2159,7 +2515,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit43
 :settlement_unit43 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto rządowe"^^xsd:string ;
                    :has_source_name "Gouvernementsstadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2177,7 +2533,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit45
 :settlement_unit45 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3016 ;
                    :has_indexed_name "Granica Gminy"^^xsd:string ,
                                      "Granica gminy"^^xsd:string ;
                    :has_source_name "Granica Gminy"^^xsd:string ,
@@ -2210,7 +2566,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit47
 :settlement_unit47 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3020 ;
                    :has_indexed_name "Granica kraju"^^xsd:string ;
                    :has_source_name "Granica kraju"^^xsd:string ;
                    :is_mentioned_in_source :Source_42 ;
@@ -2238,7 +2594,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit5
 :settlement_unit5 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1001 ;
+                  rdfs:subClassOf :settlement_unit3005 ;
                   :has_indexed_name "Urząd powiatowy"^^xsd:string ;
                   :has_source_name "Bezirksbehorde"^^xsd:string ;
                   :is_mentioned_in_source :Source_23 ;
@@ -2247,7 +2603,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit50
 :settlement_unit50 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3020 ;
                    :has_indexed_name "Granica Państwa"^^xsd:string ,
                                      "Granica państwa"^^xsd:string ;
                    :has_source_name "Granica Państwa"^^xsd:string ,
@@ -2288,7 +2644,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit51
 :settlement_unit51 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3020 ;
                    :has_indexed_name "Granica Państwa po 10.12.1938"^^xsd:string ;
                    :has_source_name "Granica Państwa po 10.12.1938"^^xsd:string ;
                    :is_mentioned_in_source :Source_58 ;
@@ -2297,7 +2653,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit52
 :settlement_unit52 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3020 ;
                    :has_indexed_name "Granica Państwa po 10.XII.1938 r"^^xsd:string ;
                    :has_source_name "Granica Państwa po 10.XII.1938 r"^^xsd:string ;
                    :is_mentioned_in_source :Source_14 ;
@@ -2350,7 +2706,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit55
 :settlement_unit55 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3018 ;
                    :has_indexed_name "Granica Województwa"^^xsd:string ,
                                      "Granica województwa"^^xsd:string ;
                    :has_source_name "Granica Województwa"^^xsd:string ,
@@ -2389,7 +2745,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit57
 :settlement_unit57 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit2000 ;
+                   rdfs:subClassOf :settlement_unit3018 ;
                    :has_indexed_name "Granice województw"^^xsd:string ;
                    :has_source_name "Granice województw"^^xsd:string ;
                    :is_mentioned_in_source :Source_39 ,
@@ -2399,7 +2755,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit58
 :settlement_unit58 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_indexed_name "Duże gospodarstwa chłopskie"^^xsd:string ;
                    :has_source_name "Grosse Bauernguter"^^xsd:string ;
                    :is_mentioned_in_source :Source_35 ;
@@ -2408,7 +2764,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit59
 :settlement_unit59 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
                    :has_indexed_name "Wieś powyżej 100 mieszkańców bez kościoła"^^xsd:string ;
                    :has_source_name "Grossere Dorfer (uber 100 Einwohner ohne Kirche)"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2426,7 +2782,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit60
 :settlement_unit60 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Duża wieś"^^xsd:string ,
                                      "Większa wieś"^^xsd:string ;
                    :has_source_name "Grosses Dorf"^^xsd:string ;
@@ -2439,7 +2795,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit61
 :settlement_unit61 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Duże miasto powyżej 100 000 mieszkańców"^^xsd:string ;
                    :has_source_name "Grossstadt uber 100 000 Einwohner"^^xsd:string ;
                    :is_mentioned_in_source :Source_54 ,
@@ -2450,7 +2806,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit62
 :settlement_unit62 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3004 ;
                    :has_abbreviation "H./Hol."^^xsd:string ,
                                      "Hol."^^xsd:string ;
                    :has_indexed_name "Holendry"^^xsd:string ;
@@ -2463,7 +2819,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit63
 :settlement_unit63 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wieś kościelna"^^xsd:string ;
                    :has_source_name "Kirchdorf"^^xsd:string ;
                    :is_mentioned_in_source :Source_10 ,
@@ -2475,7 +2831,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit64
 :settlement_unit64 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Wsie kościelne"^^xsd:string ;
                    :has_source_name "Kirchdorfer"^^xsd:string ;
                    :is_mentioned_in_source :Source_38 ,
@@ -2485,7 +2841,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit65
 :settlement_unit65 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3009 ;
                    :has_indexed_name "Wsie z kościołem parafialnym lub filialnym"^^xsd:string ;
                    :has_source_name "Kirchdorfer, Dorfer mit Kirche, gleichviel ob Mutter oder Filialkirche"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2494,7 +2850,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit66
 :settlement_unit66 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3010 ;
                    :has_indexed_name "Wieś poniżej 100 mieszkańców bez kościoła"^^xsd:string ;
                    :has_source_name "Kleinere Dorfer (unter 100 Einwohner ohne Kirche)"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2503,7 +2859,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit67
 :settlement_unit67 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3003 ;
                    :has_indexed_name "Mała zagroda"^^xsd:string ;
                    :has_source_name "Kleinere Gehofte"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2512,7 +2868,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit68
 :settlement_unit68 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Mała wieś"^^xsd:string ;
                    :has_source_name "Kleines Dorf"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2521,7 +2877,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit69
 :settlement_unit69 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Mała wieś lub Kolonia"^^xsd:string ;
                    :has_source_name "Kleines Dorf oder Kolonie"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2539,7 +2895,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit70
 :settlement_unit70 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3000 ;
                    :has_indexed_name "Mała wieś, pojedyncze zabudowania"^^xsd:string ;
                    :has_source_name "Kleines Dorf, Enzelobjekte"^^xsd:string ;
                    :is_mentioned_in_source :Source_54 ,
@@ -2550,7 +2906,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit71
 :settlement_unit71 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Małe miasto 5 000 - 30 000 mieszkańców"^^xsd:string ;
                    :has_source_name "Kleinstadt 5 000 - 30 000 Einwohner"^^xsd:string ;
                    :is_mentioned_in_source :Source_54 ,
@@ -2561,7 +2917,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit72
 :settlement_unit72 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3004 ;
                    :has_abbreviation "K./Kol."^^xsd:string ,
                                      "Kol."^^xsd:string ;
                    :has_indexed_name "Kolonia"^^xsd:string ;
@@ -2577,7 +2933,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit73
 :settlement_unit73 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3004 ;
                    :has_abbreviation "Kol"^^xsd:string ,
                                      "Kol."^^xsd:string ;
                    :has_indexed_name "Kolonia"^^xsd:string ,
@@ -2598,7 +2954,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit74
 :settlement_unit74 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3004 ;
                    :has_abbreviation "Kol."^^xsd:string ;
                    :has_indexed_name "Kolonja"^^xsd:string ;
                    :has_source_name "Kolonja"^^xsd:string ;
@@ -2612,7 +2968,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit75
 :settlement_unit75 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasta królewskie i cyrkularne"^^xsd:string ;
                    :has_source_name "Koniglche und Kreis Staedte"^^xsd:string ;
                    :is_mentioned_in_source :Source_16 ;
@@ -2630,7 +2986,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit77
 :settlement_unit77 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto cyrkularne"^^xsd:string ;
                    :has_source_name "Kreis Stadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2639,7 +2995,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit78
 :settlement_unit78 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasta cyrkularne"^^xsd:string ;
                    :has_source_name "Kreis Stadte"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2657,7 +3013,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit8
 :settlement_unit8 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1000 ;
+                  rdfs:subClassOf :settlement_unit3004 ;
                   :has_abbreviation "Col."^^xsd:string ;
                   :has_indexed_name "Kolonie"^^xsd:string ;
                   :has_source_name "Colonien"^^xsd:string ;
@@ -2667,7 +3023,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit80
 :settlement_unit80 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1001 ;
+                   rdfs:subClassOf :settlement_unit3005 ;
                    :has_indexed_name "Urząd okręgowy, komitatowy"^^xsd:string ;
                    :has_source_name "Kreis, Komitats (Gespanschafts) Behorde"^^xsd:string ;
                    :is_mentioned_in_source :Source_23 ;
@@ -2731,7 +3087,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit85
 :settlement_unit85 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto cyrkularne"^^xsd:string ;
                    :has_source_name "Kreisstadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2749,7 +3105,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit87
 :settlement_unit87 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto w landach"^^xsd:string ;
                    :has_source_name "Land Stadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2758,7 +3114,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit88
 :settlement_unit88 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasta w landach"^^xsd:string ;
                    :has_source_name "Land Stadte"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2767,7 +3123,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit89
 :settlement_unit89 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Land Staedte"^^xsd:string ;
                    :has_source_name "Land Staedte"^^xsd:string ;
                    :is_mentioned_in_source :Source_35 ;
@@ -2776,7 +3132,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit9
 :settlement_unit9 rdf:type owl:Class ;
-                  rdfs:subClassOf :settlement_unit1000 ;
+                  rdfs:subClassOf :settlement_unit3004 ;
                   :has_indexed_name "Domy pojedyncze i Wioski mniej 6 dymów"^^xsd:string ;
                   :has_source_name "Domy pojedyncze i Wioski mniej 6 dymów"^^xsd:string ;
                   :is_mentioned_in_source :Source_24 ;
@@ -2803,7 +3159,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit92
 :settlement_unit92 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Landes haupstadte und residenzen"^^xsd:string ;
                    :has_source_name "Landes haupstadte und residenzen"^^xsd:string ;
                    :is_mentioned_in_source :Source_35 ;
@@ -2840,7 +3196,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit95
 :settlement_unit95 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Główne miasto krajowe"^^xsd:string ;
                    :has_source_name "Landeshauptsdatd"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -2849,7 +3205,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit96
 :settlement_unit96 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Główne miasta"^^xsd:string ;
                    :has_source_name "Landesstadte, Haupstadte"^^xsd:string ;
                    :is_mentioned_in_source :Source_46 ;
@@ -2876,7 +3232,7 @@
 
 ###  http://onto.kul.pl/ontohgis.owl#settlement_unit99
 :settlement_unit99 rdf:type owl:Class ;
-                   rdfs:subClassOf :settlement_unit1000 ;
+                   rdfs:subClassOf :settlement_unit3001 ;
                    :has_indexed_name "Miasto krajowe"^^xsd:string ;
                    :has_source_name "Landstadt"^^xsd:string ;
                    :is_mentioned_in_source :Source_47 ;
@@ -3306,6 +3662,387 @@
 :Source_9 rdf:type owl:NamedIndividual ,
                    :source ;
           rdfs:label "MSB_GASIEWICZ_1930"^^xsd:string .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit103
+                :settlement_unit104
+                :settlement_unit105
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit103
+                :settlement_unit112
+                :settlement_unit113
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit118
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit124
+                :settlement_unit125
+                :settlement_unit126
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit129
+                :settlement_unit133
+                :settlement_unit136
+                :settlement_unit146
+                :settlement_unit147
+                :settlement_unit191
+                :settlement_unit192
+                :settlement_unit194
+                :settlement_unit195
+                :settlement_unit198
+                :settlement_unit199
+                :settlement_unit200
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit107
+                :settlement_unit110
+                :settlement_unit111
+                :settlement_unit113
+                :settlement_unit114
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit117
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit122
+                :settlement_unit123
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit133
+                :settlement_unit141
+                :settlement_unit146
+                :settlement_unit147
+                :settlement_unit191
+                :settlement_unit194
+                :settlement_unit195
+                :settlement_unit196
+                :settlement_unit197
+                :settlement_unit199
+                :settlement_unit200
+                :settlement_unit201
+                :settlement_unit202
+                :settlement_unit205
+                :settlement_unit208
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit107
+                :settlement_unit111
+                :settlement_unit113
+                :settlement_unit114
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit117
+                :settlement_unit118
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit123
+                :settlement_unit125
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit129
+                :settlement_unit133
+                :settlement_unit136
+                :settlement_unit146
+                :settlement_unit147
+                :settlement_unit150
+                :settlement_unit191
+                :settlement_unit192
+                :settlement_unit197
+                :settlement_unit199
+                :settlement_unit200
+                :settlement_unit201
+                :settlement_unit204
+                :settlement_unit206
+                :settlement_unit208
+                :settlement_unit61
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit107
+                :settlement_unit111
+                :settlement_unit113
+                :settlement_unit114
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit117
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit123
+                :settlement_unit125
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit129
+                :settlement_unit133
+                :settlement_unit136
+                :settlement_unit140
+                :settlement_unit141
+                :settlement_unit146
+                :settlement_unit147
+                :settlement_unit191
+                :settlement_unit192
+                :settlement_unit194
+                :settlement_unit195
+                :settlement_unit197
+                :settlement_unit198
+                :settlement_unit199
+                :settlement_unit200
+                :settlement_unit201
+                :settlement_unit204
+                :settlement_unit206
+                :settlement_unit208
+                :settlement_unit61
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit111
+                :settlement_unit113
+                :settlement_unit114
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit117
+                :settlement_unit118
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit123
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit133
+                :settlement_unit136
+                :settlement_unit141
+                :settlement_unit147
+                :settlement_unit189
+                :settlement_unit191
+                :settlement_unit194
+                :settlement_unit195
+                :settlement_unit197
+                :settlement_unit199
+                :settlement_unit200
+                :settlement_unit201
+                :settlement_unit206
+                :settlement_unit208
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit112
+                :settlement_unit115
+                :settlement_unit116
+                :settlement_unit117
+                :settlement_unit118
+                :settlement_unit119
+                :settlement_unit120
+                :settlement_unit123
+                :settlement_unit124
+                :settlement_unit125
+                :settlement_unit126
+                :settlement_unit127
+                :settlement_unit128
+                :settlement_unit129
+                :settlement_unit133
+                :settlement_unit192
+                :settlement_unit193
+                :settlement_unit194
+                :settlement_unit195
+                :settlement_unit203
+                :settlement_unit204
+                :settlement_unit206
+                :settlement_unit207
+                :settlement_unit208
+                :settlement_unit71
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit115
+                :settlement_unit118
+                :settlement_unit127
+                :settlement_unit133
+                :settlement_unit134
+                :settlement_unit136
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit133
+                :settlement_unit136
+                :settlement_unit190
+                :settlement_unit208
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit15
+                :settlement_unit22
+                :settlement_unit226
+                :settlement_unit228
+                :settlement_unit23
+                :settlement_unit24
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit19
+                :settlement_unit20
+                :settlement_unit22
+                :settlement_unit222
+                :settlement_unit225
+                :settlement_unit226
+                :settlement_unit23
+                :settlement_unit24
+                :settlement_unit248
+                :settlement_unit251
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit20
+                :settlement_unit21
+                :settlement_unit22
+                :settlement_unit221
+                :settlement_unit229
+                :settlement_unit23
+                :settlement_unit232
+                :settlement_unit238
+                :settlement_unit24
+                :settlement_unit241
+                :settlement_unit245
+                :settlement_unit248
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit20
+                :settlement_unit21
+                :settlement_unit22
+                :settlement_unit222
+                :settlement_unit225
+                :settlement_unit226
+                :settlement_unit23
+                :settlement_unit24
+                :settlement_unit248
+                :settlement_unit25
+                :settlement_unit251
+                :settlement_unit59
+                :settlement_unit66
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit20
+                :settlement_unit219
+                :settlement_unit22
+                :settlement_unit220
+                :settlement_unit225
+                :settlement_unit226
+                :settlement_unit23
+                :settlement_unit232
+                :settlement_unit238
+                :settlement_unit24
+                :settlement_unit248
+                :settlement_unit251
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit20
+                :settlement_unit22
+                :settlement_unit225
+                :settlement_unit226
+                :settlement_unit23
+                :settlement_unit232
+                :settlement_unit238
+                :settlement_unit24
+                :settlement_unit248
+                :settlement_unit249
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit22
+                :settlement_unit238
+                :settlement_unit24
+                :settlement_unit248
+                :settlement_unit25
+                :settlement_unit250
+                :settlement_unit251
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit227
+                :settlement_unit233
+                :settlement_unit234
+                :settlement_unit246
+                :settlement_unit247
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit230
+                :settlement_unit231
+                :settlement_unit233
+                :settlement_unit237
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit230
+                :settlement_unit237
+                :settlement_unit239
+                :settlement_unit242
+                :settlement_unit246
+                :settlement_unit247
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit234
+                :settlement_unit243
+                :settlement_unit253
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :settlement_unit240
+                :settlement_unit243
+                :settlement_unit252
+              )
+] .
 
 
 ###  Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi

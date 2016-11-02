@@ -12,7 +12,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/">
     <owl:Ontology rdf:about="http://onto.kul.pl/ontohgis.owl">
         <owl:imports rdf:resource="http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl"/>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</owl:versionInfo>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</owl:versionInfo>
     </owl:Ontology>
     
 
@@ -175,8 +175,73 @@
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_2">
         <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit215"/>
+        <rdfs:label xml:lang="de">Kirche</rdfs:label>
         <rdfs:label xml:lang="en">church</rdfs:label>
         <rdfs:label xml:lang="pl">kościół</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_3 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_3">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit215"/>
+        <rdfs:label xml:lang="de">Kloster</rdfs:label>
+        <rdfs:label xml:lang="pl">klasztor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_4 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_4">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:label xml:lang="pl">zamek</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_5 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_5">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit215"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit28"/>
+        <rdfs:label xml:lang="de">Eisenbahnstation</rdfs:label>
+        <rdfs:label xml:lang="pl">stacja kolejowa</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_6 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_6">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit28"/>
+        <rdfs:label xml:lang="pl">schronisko górskie</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_7 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_7">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit28"/>
+        <rdfs:label xml:lang="pl">kaplica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#object_8 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#object_8">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit28"/>
+        <rdfs:label xml:lang="de">Wirtshaus</rdfs:label>
+        <rdfs:label xml:lang="pl">karczma</rdfs:label>
     </owl:Class>
     
 
@@ -237,6 +302,12 @@
                 <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2001"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasBoundary"/>
+                <owl:allValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2001"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit1001"/>
         <has_source_name xml:lang="pl">Miejscowość</has_source_name>
         <rdfs:label xml:lang="en">human settlement</rdfs:label>
@@ -252,6 +323,12 @@
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasBoundary"/>
                 <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasBoundary"/>
+                <owl:allValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <has_source_name xml:lang="pl">Podział administracyjny</has_source_name>
@@ -1264,6 +1341,20 @@
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit17">
         <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3000"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasPart"/>
+                        <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#object_2"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasPart"/>
+                        <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3013"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wsie z kościołem lub parafią</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dorfer mit Kirche oder Pfarrein</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_25"/>
@@ -1451,7 +1542,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit181 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit181">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3014"/>
         <hasOntologyDevelopmentComment xml:lang="pl">Pierwotnie był to rodzaj settlement_unit1000.</hasOntologyDevelopmentComment>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sch.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wójtostwo</has_indexed_name>
@@ -1557,7 +1648,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit187 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit187">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3020"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica państwa</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Staatengrenze</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_55"/>
@@ -1732,7 +1823,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit2 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit2">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3005"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3011"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A.V.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Urząd gminy</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amtsverwaltung</has_source_name>
@@ -1943,7 +2034,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit210 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit210">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3014"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">St.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Starostwo</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Starostwo</has_source_name>
@@ -1957,7 +2048,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit211 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit211">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3005"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3011"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">U.gm.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Urząd gminy</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Urząd gminy</has_source_name>
@@ -2140,7 +2231,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit223 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit223">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3015"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">W</has_abbreviation>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">W.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Województwo</has_indexed_name>
@@ -2608,6 +2699,20 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit255">
         <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3000"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasPart"/>
+                        <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#object_2"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasPart"/>
+                        <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3011"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wsie z kościołem lub urzędem gminy</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wsie z kościołem lub urzędem gminy</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_12"/>
@@ -2620,6 +2725,12 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit256">
         <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3000"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3013"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wsie z parafią</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wsie z parafią</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_25"/>
@@ -2671,7 +2782,8 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit29 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit29">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3003"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#object_1"/>
+        <hasOntologyDevelopmentComment>Pierwotnie był to rodzaj settlement_unit1000.</hasOntologyDevelopmentComment>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Twierdze</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Festungen erhalten die dem Charakter des Orts angemessene Schrift Gathung</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_35"/>
@@ -2882,6 +2994,114 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     
 
 
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3011 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3011">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3005"/>
+        <rdfs:label xml:lang="en">urząd gminy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3012 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3012">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:label xml:lang="pl">obszar administracji religijnej</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3013 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3013">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3012"/>
+        <rdfs:label xml:lang="pl">parafia</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3014 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3014">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:label xml:lang="pl">obszar administracji świeckiej</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3015 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3015">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3014"/>
+        <rdfs:label xml:lang="pl">województwo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3016 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3016">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#isBoundaryOf"/>
+                <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3017"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="pl">granica gminy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3017 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3017">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3014"/>
+        <rdfs:label xml:lang="pl">gmina</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3018 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3018">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#isBoundaryOf"/>
+                <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3015"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="pl">granica województwa</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3019 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3019">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3014"/>
+        <rdfs:label xml:lang="pl">państwo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit3020 -->
+
+    <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit3020">
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.kul.pl/ontohgis.owl#isBoundaryOf"/>
+                <owl:someValuesFrom rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3019"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="pl">granica państwa</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit31 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit31">
@@ -2938,7 +3158,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit34 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit34">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3016"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granice gmin</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gemeinde Grenzen</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_25"/>
@@ -2950,7 +3170,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit35 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit35">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3016"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica gminy</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gemeindegrenze</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_18"/>
@@ -2969,7 +3189,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit36 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit36">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3006"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3017"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gm.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina</has_source_name>
@@ -2985,7 +3205,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit37 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit37">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3005"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3011"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gm.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina (siedziba urzędu)</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina (siedziba urzędu)</has_source_name>
@@ -3005,7 +3225,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit38 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit38">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3005"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3011"/>
         <has_abbreviation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gm.</has_abbreviation>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina (siedziba zarządu)</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gmina (siedziba zarządu)</has_source_name>
@@ -3104,7 +3324,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit45 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit45">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3016"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Gminy</has_indexed_name>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica gminy</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Gminy</has_source_name>
@@ -3143,7 +3363,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit47 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit47">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3020"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica kraju</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica kraju</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_42"/>
@@ -3192,7 +3412,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit50 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit50">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3020"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa</has_indexed_name>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica państwa</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa</has_source_name>
@@ -3236,7 +3456,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit51 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit51">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3020"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa po 10.12.1938</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa po 10.12.1938</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_58"/>
@@ -3248,7 +3468,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit52 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit52">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3020"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa po 10.XII.1938 r</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Państwa po 10.XII.1938 r</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_14"/>
@@ -3310,7 +3530,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit55 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit55">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3018"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Województwa</has_indexed_name>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica województwa</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granica Województwa</has_source_name>
@@ -3355,7 +3575,7 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
     <!-- http://onto.kul.pl/ontohgis.owl#settlement_unit57 -->
 
     <owl:Class rdf:about="http://onto.kul.pl/ontohgis.owl#settlement_unit57">
-        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit2000"/>
+        <rdfs:subClassOf rdf:resource="http://onto.kul.pl/ontohgis.owl#settlement_unit3018"/>
         <has_indexed_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granice województw</has_indexed_name>
         <has_source_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Granice województw</has_source_name>
         <is_mentioned_in_source rdf:resource="http://onto.kul.pl/ontohgis.owl#Source_39"/>
@@ -5020,5 +5240,5 @@ Artur Czesak, IJP PAN, Kraków</owl:annotatedTarget>
 
 
 
-<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
 
