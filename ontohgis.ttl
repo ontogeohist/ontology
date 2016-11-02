@@ -7,7 +7,6 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ontohgis: <http://ontohgis.pl/ontohgis.owl#> .
 @base <http://onto.kul.pl/ontohgis.owl> .
 
 <http://onto.kul.pl/ontohgis.owl> rdf:type owl:Ontology ;
