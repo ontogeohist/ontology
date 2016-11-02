@@ -10,7 +10,7 @@
 @base <http://onto.kul.pl/ontohgis.owl> .
 
 <http://onto.kul.pl/ontohgis.owl> rdf:type owl:Ontology ;
-                                   owl:imports obo:bfo/2.0/bfo.owl ;
+                                   owl:imports <http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl> ;
                                    owl:versionInfo 0.7 .
 
 #################################################################
