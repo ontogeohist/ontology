@@ -80,6 +80,7 @@
 # http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by> a owl:AnnotationProperty ;
+	rdfs:range rdfs:Literal ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E93_Place> .
 # 
 # 
@@ -138,6 +139,7 @@
 # http://purl.org/ontohgis/hasPart
 
 <http://purl.org/ontohgis/hasPart> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P10i_contains> ;
 	owl:inverseOf <http://purl.org/ontohgis/isPartOf> ;
 	owl:propertyDisjointWith <http://purl.org/ontohgis/isPartOf> ;
 	rdfs:label "has part"@en , "ma część"@pl .
@@ -161,11 +163,8 @@
 # http://www.cidoc-crm.org/cidoc-crm/P100_was_death_of
 
 <http://www.cidoc-crm.org/cidoc-crm/P100_was_death_of> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P100_was_death_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E69_Death> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E69_Death> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E21_Person> ;
 	rdfs:comment "This property property links an E69 Death event to the E21 Person that died."@en ;
 	rdfs:label "Tod von"@de , "a été la mort de"@fr , "foi a morte para "@pt , "was death of"@en , "ήταν θάνατος του/της"@el , "был смертью для"@ru , "灭亡了"@zh .
@@ -173,11 +172,8 @@
 # http://www.cidoc-crm.org/cidoc-crm/P100i_died_in
 
 <http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P100i_died_in> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E21_Person> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E21_Person> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E69_Death> ;
 	rdfs:label "died in"@en , "est mort par"@fr , "morreu em"@pt , "starb in"@de , "πέθανε σε"@el , "умер в"@ru , "死亡於"@zh .
 # 
@@ -201,11 +197,8 @@ It allows the relationship between particular things, both physical and immateri
 # http://www.cidoc-crm.org/cidoc-crm/P102_has_title
 
 <http://www.cidoc-crm.org/cidoc-crm/P102_has_title> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P102_has_title> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E71_Man-Made_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E71_Man-Made_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E35_Title> ;
 	rdfs:comment """This property describes the E35 Title applied to an instance of E71 Man-Made Thing. The E55 Type of Title is assigned in a sub property.
 The P102.1 has type property of the P102 has title (is title of) property enables the relationship between the Title and the thing to be further clarified, for example, if the Title was a given Title, a supplied Title etc.
@@ -216,11 +209,8 @@ It allows any man-made material or immaterial thing to be given a Title. It is p
 # http://www.cidoc-crm.org/cidoc-crm/P102i_is_title_of
 
 <http://www.cidoc-crm.org/cidoc-crm/P102i_is_title_of> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P1i_identifies> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P1i_identifies> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P102i_is_title_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E35_Title> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P1i_identifies> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E35_Title> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E71_Man-Made_Thing> ;
 	rdfs:label "est le titre de"@fr , "is title of"@en , "ist der Titel von"@de , "é título de"@pt , "είναι τίτλος του/της"@el , "является заголовком для"@ru , "被用为标题来称呼"@zh .
 # 
@@ -313,15 +303,8 @@ The property P107.1 kind of member can be used to specify the type of membership
 # http://www.cidoc-crm.org/cidoc-crm/P108_has_produced
 
 <http://www.cidoc-crm.org/cidoc-crm/P108_has_produced> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P31_has_modified> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P31_has_modified> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P108_has_produced> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P108_has_produced> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E12_Production> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P31_has_modified> , <http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E12_Production> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Man-Made_Thing> ;
 	rdfs:comment """This property identifies the E24 Physical Man-Made Thing that came into existence as a result of an E12 Production.
 The identity of an instance of E24 Physical Man-Made Thing is not defined by its matter, but by its existence as a subject of documentation. An E12 Production can result in the creation of multiple instances of E24 Physical Man-Made Thing.
@@ -331,26 +314,16 @@ The identity of an instance of E24 Physical Man-Made Thing is not defined by its
 # http://www.cidoc-crm.org/cidoc-crm/P108i_was_produced_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P108i_was_produced_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P108i_was_produced_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P108i_was_produced_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Man-Made_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by> , <http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Man-Made_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E12_Production> ;
 	rdfs:label "a été produit par"@fr , "foi produzido por"@pt , "was produced by"@en , "wurde hergestellt durch"@de , "παρήχθη από"@el , "был произведен посредством"@ru , "被制作於"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P109_has_current_or_former_curator
 
 <http://www.cidoc-crm.org/cidoc-crm/P109_has_current_or_former_curator> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P109_has_current_or_former_curator> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E78_Collection> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E78_Collection> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
 	rdfs:comment """This property identifies the E39 Actor or Actors who assume or have assumed overall curatorial responsibility for an E78 Collection.
 
@@ -361,11 +334,8 @@ It does not allow a history of curation to be recorded. This would require use o
 # http://www.cidoc-crm.org/cidoc-crm/P109i_is_current_or_former_curator_of
 
 <http://www.cidoc-crm.org/cidoc-crm/P109i_is_current_or_former_curator_of> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P109i_is_current_or_former_curator_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E78_Collection> ;
 	rdfs:label "est ou a été le conservateur de"@fr , "is current or former curator of"@en , "ist derzeitiger oder früherer Kurator von"@de , "é ou foi curador de"@pt , "είναι ή ήταν επιμελητής του/της"@el , "является действующим или бывшим хранителем"@ru , "目前或曾经典藏管理"@zh .
 # 
@@ -407,15 +377,8 @@ Although a Part Addition event normally concerns only one item of Physical Man-M
 # http://www.cidoc-crm.org/cidoc-crm/P111_added
 
 <http://www.cidoc-crm.org/cidoc-crm/P111_added> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P111_added> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P111_added> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E79_Part_Addition> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> , <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E79_Part_Addition> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:comment """This property identifies the E18 Physical Thing that is added during an E79 Part Addition activity
 """@en ;
@@ -424,15 +387,8 @@ Although a Part Addition event normally concerns only one item of Physical Man-M
 # http://www.cidoc-crm.org/cidoc-crm/P111i_was_added_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P111i_was_added_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P111i_was_added_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P111i_was_added_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> , <http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E79_Part_Addition> ;
 	rdfs:label "a été ajouté par"@fr , "foi adicionado por"@pt , "was added by"@en , "wurde hinzugefügt durch"@de , "προστέθηκε από"@el , "был добавлен посредством"@ru , "被附加於"@zh .
 # 
@@ -718,11 +674,8 @@ The E57 Material used during the E11 Modification does not necessarily become in
 # http://www.cidoc-crm.org/cidoc-crm/P128_carries
 
 <http://www.cidoc-crm.org/cidoc-crm/P128_carries> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P128_carries> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object> ;
 	rdfs:comment """This property identifies an E90 Symbolic Object carried by an instance of E18 Physical Thing.
 """@en ;
@@ -731,22 +684,16 @@ The E57 Material used during the E11 Modification does not necessarily become in
 # http://www.cidoc-crm.org/cidoc-crm/P128i_is_carried_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P128i_is_carried_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P128i_is_carried_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:label "a pour support"@fr , "is carried by"@en , "wird getragen von"@de , "é suportado por"@pt , "φέρεται από"@el , "переносится посредством"@ru , "被承载于"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P129_is_about
 
 <http://www.cidoc-crm.org/cidoc-crm/P129_is_about> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P129_is_about> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:comment """This property documents that an E89 Propositional Object has as subject an instance of E1 CRM Entity. 
 """@en ;
@@ -755,17 +702,15 @@ The E57 Material used during the E11 Modification does not necessarily become in
 # http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of
 
 <http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
 	rdfs:label "est le sujet de"@fr , "is subject of"@en , "wird behandelt in"@de , "é assunto de"@pt , "είναι θέμα  του/της"@el , "является предметом для"@ru , "被陈述於"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E5_Event> ;
+<http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E5_Event> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:comment """This property describes the active or passive presence of an E77 Persistent Item in an E5 Event without implying any specific role. 
 It connects the history of a thing with the E53 Place and E50 Date of an event. For example, an object may be the desk, now in a museum on which a treaty was signed. The presence of an immaterial thing implies the presence of at least one of its carriers.
@@ -774,17 +719,16 @@ It connects the history of a thing with the E53 Place and E50 Date of an event. 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at
 
-<http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
+<http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E5_Event> ;
 	rdfs:label "estava presente no"@pt , "war anwesend bei"@de , "was present at"@en , "était présent à"@fr , "ήταν παρών/παρούσα/παρόν σε"@el , "присутствовал при"@ru , "当时在场於"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
+<http://www.cidoc-crm.org/cidoc-crm/P130_shows_features_of> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:comment """This property generalises the notions of  \"copy of\" and \"similar to\" into a dynamic, asymmetric relationship, where the domain expresses the derivative, if such a direction can be established.
 Otherwise, the relationship is symmetric. It is a short-cut of P15 was influenced by (influenced) in a creation or production, if such a reason for the similarity can be verified. Moreover it expresses similarity in cases that can be stated between two objects only, without historical knowledge about its reasons.
@@ -793,7 +737,8 @@ Otherwise, the relationship is symmetric. It is a short-cut of P15 was influence
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on
 
-<http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
+<http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:label "Merkmale auch auf"@de , "a des caractéristiques se trouvant aussi sur"@fr , "características são também encontradas em"@pt , "features are also found on"@en , "χαρακτηριστικά του βρίσκονται επίσης σε"@el , "признаки также найдены на"@ru , "外观特征被复制於"@zh .
 # 
@@ -839,11 +784,8 @@ This property does not imply any ordering or sequence between the two periods ei
 # http://www.cidoc-crm.org/cidoc-crm/P134_continued
 
 <http://www.cidoc-crm.org/cidoc-crm/P134_continued> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P134_continued> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:comment """This property associates two instances of E7 Activity, where the domain is considered as an intentional continuation of the range. A continuation of an activity may happen when the continued activity is still ongoing or after the continued activity has completely ended. The continuing activity may have started already before it decided to continue the other one. Continuation implies a coherence of intentions and outcomes of the involved activities.
 """@en ;
@@ -852,22 +794,16 @@ This property does not imply any ordering or sequence between the two periods ei
 # http://www.cidoc-crm.org/cidoc-crm/P134i_was_continued_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P134i_was_continued_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P134i_was_continued_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:label "a été continuée par"@fr , "foi continuada por"@pt , "was continued by"@en , "wurde fortgesetzt durch"@de , "συνεχίστηκε από"@el , "был продолжен"@ru , "有延续活动"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P135_created_type
 
 <http://www.cidoc-crm.org/cidoc-crm/P135_created_type> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P94_has_created> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P94_has_created> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P135_created_type> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E83_Type_Creation> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P94_has_created> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E83_Type_Creation> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:comment "This property identifies the E55 Type, which is created in an E83Type Creation activity."@en ;
 	rdfs:label "a créé le type"@fr , "created type"@en , "criou tipo"@pt , "erschuf Typus"@de , "δημιούργησε τύπο"@el , "создал тип"@ru , "创造了类型"@zh .
@@ -875,11 +811,8 @@ This property does not imply any ordering or sequence between the two periods ei
 # http://www.cidoc-crm.org/cidoc-crm/P135i_was_created_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P135i_was_created_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P135i_was_created_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E83_Type_Creation> ;
 	rdfs:label "a été créé par"@fr , "foi criado por"@pt , "was created by"@en , "wurde geschaffen durch"@de , "δημιουργήθηκε από"@el , "был создан посредством"@ru , "被创造於"@zh .
 # 
@@ -905,11 +838,8 @@ The examination of these items is often the only objective way to understand the
 # http://www.cidoc-crm.org/cidoc-crm/P137_exemplifies
 
 <http://www.cidoc-crm.org/cidoc-crm/P137_exemplifies> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P2_has_type> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P137_exemplifies> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:comment """This property allows an item to be declared as a particular example of an E55 Type or taxon
 	The P137.1 in the taxonomic role property of P137 exemplifies (is exemplified by) allows differentiation of taxonomic roles. The taxonomic role renders the specific relationship of this example to the Type, such as \"prototypical\", \"archetypical\", \"lectotype\", etc. The taxonomic role \"lectotype\" is not associated with the Type Creation (E83) itself, but selected in a later phase.
@@ -919,11 +849,8 @@ The examination of these items is often the only objective way to understand the
 # http://www.cidoc-crm.org/cidoc-crm/P137i_is_exemplified_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P137i_is_exemplified_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P137i_is_exemplified_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:label "erläutert durch Beispiel"@de , "est exemplifié par"@fr , "exemplifica"@pt , "is exemplified by"@en , "δειγματίζεται από"@el , "поясняется посредством"@ru , "有例示"@zh .
 # 
@@ -1224,11 +1151,8 @@ It allows Types to be organised into hierarchies. This is the sense of \"broader
 # http://www.cidoc-crm.org/cidoc-crm/P156_occupies
 
 <http://www.cidoc-crm.org/cidoc-crm/P156_occupies> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P156_occupies> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:comment """This property describes the largest volume in space that an instance of E18 Physical Thing has occupied at any time during its existence, with respect to the reference space relative to itself. This allows you to describe the thing itself as a place that may contain other things, such as a box that may contain coins. In other words, it is the volume that contains all the points which the thing has covered at some time during its existence. In the case of an E26 Physical Feature the default reference space is the one in which the object that bears the feature or at least the surrounding matter of the feature is at rest. In this case there is a 1:1 relation of E26 Feature and E53 Place. For simplicity of implementation multiple inheritance (E26 Feature IsA E53 Place) may be a practical approach.
 
@@ -1243,22 +1167,16 @@ In contrast to P156  occupies, the property P53 has former or current location i
 # http://www.cidoc-crm.org/cidoc-crm/P156i_is_occupied_by
 
 <http://www.cidoc-crm.org/cidoc-crm/P156i_is_occupied_by> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P156i_is_occupied_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:label "is occupied by"@en .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P157_is_at_rest_relative_to
 
 <http://www.cidoc-crm.org/cidoc-crm/P157_is_at_rest_relative_to> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P157_is_at_rest_relative_to> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:comment """This property associates an instance of P53 Place with the instance of E18 Physical Thing that determines a reference space for this instance of P53 Place by being at rest with respect to this reference space. The relative stability of form of an E18 Physical Thing defines its default reference space. The reference space is not spatially limited to the referred thing. For example, a ship determines a reference space in terms of which other ships in its neighbourhood may be described. Larger constellations of matter, such as continental plates, may comprise many physical features that are at rest with them and define the same reference space.
 	"""@en ;
@@ -1267,17 +1185,15 @@ In contrast to P156  occupies, the property P53 has former or current location i
 # http://www.cidoc-crm.org/cidoc-crm/P157i_provides_reference_space_for
 
 <http://www.cidoc-crm.org/cidoc-crm/P157i_provides_reference_space_for> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P59_has_section> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P59_has_section> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P157i_provides_reference_space_for> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P59_has_section> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:label "provides reference space for"@en .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+<http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:comment """This is a high level property, which captures the relationship between an E7 Activity and anything that may have had some bearing upon it.
 The property has more specific sub properties.
@@ -1286,7 +1202,8 @@ The property has more specific sub properties.
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P15i_influenced
 
-<http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+<http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:label "a influencé"@fr , "beeinflußte"@de , "influenced"@en , "influenciou"@pt , "επηρέασε"@el , "оказал влияние на"@ru , "影响了"@zh .
 # 
@@ -1308,7 +1225,8 @@ The property has more specific sub properties.
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection
 
-<http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E92_Spacetime_Volume> ;
+<http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E92_Spacetime_Volume> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:comment """This property associates an instance of a E92 Spacetime Volume with an instance of E53 Place that is the result of the spatial projection of the instance of a E92 Spacetime Volume on a reference space. In general there can be more than one useful reference space to describe the spatial projection of a spacetime volume, such as that of a battle ship versus that of the seafloor. Therefore the projection is not unique.
 This is part of the fully developed path that is shortcut by P7took place at (witnessed).The more fully developed path from E4 Period through P161 has spatial projection, E53 Place, P89 falls within (contains) to E53 Place. 
@@ -1317,7 +1235,8 @@ This is part of the fully developed path that is shortcut by P7took place at (wi
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+<http://www.cidoc-crm.org/cidoc-crm/P161i_is_spatial_projection_of> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E92_Spacetime_Volume> ;
 	rdfs:label "is spatial projection of"@en .
 # 
@@ -1379,11 +1298,8 @@ A digital photograph of a manuscript page incorporates the text of the manuscrip
 
 <http://www.cidoc-crm.org/cidoc-crm/P167_was_at> a owl:ObjectProperty ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E93_Presence> ;
-	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E93_Place> .
-
-<http://www.cidoc-crm.org/cidoc-crm/E93_Place> a owl:Class .
-
-<http://www.cidoc-crm.org/cidoc-crm/P167_was_at> rdfs:comment """This property points to a wider area in which my thing /event was… 
+	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E93_Place> ;
+	rdfs:comment """This property points to a wider area in which my thing /event was… 
 	"""@en ;
 	rdfs:label "was at"@en .
 # 
@@ -1396,7 +1312,8 @@ A digital photograph of a manuscript page incorporates the text of the manuscrip
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object
 
-<http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> , <http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> ;
+<http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> , <http://www.cidoc-crm.org/cidoc-crm/P15_was_influenced_by> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:comment """This property describes the use of material or immaterial things in a way essential to the performance or the outcome of an E7 Activity. 
@@ -1407,7 +1324,8 @@ Another example is the use of a particular name by a particular group of people 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for
 
-<http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> , <http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> ;
+<http://www.cidoc-crm.org/cidoc-crm/P16i_was_used_for> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> , <http://www.cidoc-crm.org/cidoc-crm/P15i_influenced> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E70_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
 	rdfs:label "a été utilisé pour"@fr , "foi usado por"@pt , "was used for"@en , "wurde benutzt für"@de , "χρησιμοποιήθηκε για"@el , "был использован для"@ru , "被用於"@zh .
@@ -1449,7 +1367,8 @@ This is distinct from the intended use of an item in some general type of activi
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+<http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation> ;
 	rdfs:comment """This property describes the naming or identification of any real world item by a name or any other identifier. 
 This property is intended for identifiers in general use, which form part of the world the model intends to describe, and not merely for internal database identifiers which are specific to a technical system, unless these latter also have a more general use outside the technical context. This property includes in particular identification by mathematical expressions such as coordinate systems used for the identification of instances of E53 Place. The property does not reveal anything about when, where and by whom this identifier was used. A more detailed representation can be made using the fully developed (i.e. indirect) path through E15 Identifier Assignment.
@@ -1458,7 +1377,8 @@ This property is intended for identifiers in general use, which form part of the
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P1i_identifies
 
-<http://www.cidoc-crm.org/cidoc-crm/P1i_identifies> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation> ;
+<http://www.cidoc-crm.org/cidoc-crm/P1i_identifies> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:label "bezeichnet"@de , "identifica"@pt , "identifie"@fr , "identifies"@en , "είναι αναγνωριστικό"@el , "идентифицирует"@ru , "被用来识别"@zh .
 # 
@@ -1586,11 +1506,8 @@ Therefore the described destination is an instance of E53 Place which P89 falls 
 # http://www.cidoc-crm.org/cidoc-crm/P26i_was_destination_of
 
 <http://www.cidoc-crm.org/cidoc-crm/P26i_was_destination_of> a owl:ObjectProperty ;
-	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed> .
-
-<http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed> a owl:ObjectProperty .
-
-<http://www.cidoc-crm.org/cidoc-crm/P26i_was_destination_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed> ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E9_Move> ;
 	rdfs:label "a été la destination de"@fr , "era destinação de"@pt , "war Zielort von"@de , "was destination of"@en , "ήταν προορισμός του/της"@el , "был пунктом назначения для"@ru , "被作为移入地於"@zh .
 # 
@@ -1656,7 +1573,8 @@ In reality, custody is either transferred to someone or from someone, or both.
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P2_has_type
 
-<http://www.cidoc-crm.org/cidoc-crm/P2_has_type> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+<http://www.cidoc-crm.org/cidoc-crm/P2_has_type> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:comment """This property allows sub typing of CRM entities - a form of specialisation – through the use of a terminological hierarchy, or thesaurus. 
 The CRM is intended to focus on the high-level entities and relationships needed to describe data structures. Consequently, it does not specialise entities any further than is required for this immediate purpose. However, entities in the isA hierarchy of the CRM may by specialised into any number of sub entities, which can be defined in the E55 Type hierarchy. E51 Contact Point, for example, may be specialised into “e-mail address”, “telephone number”, “post office box”, “URL” etc. none of which figures explicitly in the CRM hierarchy. Sub typing obviously requires consistency between the meaning of the terms assigned and the more general intent of the CRM entity in question.
@@ -1665,7 +1583,8 @@ The CRM is intended to focus on the high-level entities and relationships needed
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
+<http://www.cidoc-crm.org/cidoc-crm/P2i_is_type_of> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E55_Type> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:label "est le type de"@fr , "is type of"@en , "ist Typus von"@de , "é o tipo de"@pt , "είναι ο τύπος του/της"@el , "является типом для"@ru , "被用来分类"@zh .
 # 
@@ -1688,7 +1607,8 @@ The property will typically describe the object that is handed over by an E39 Ac
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P31_has_modified
 
-<http://www.cidoc-crm.org/cidoc-crm/P31_has_modified> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
+<http://www.cidoc-crm.org/cidoc-crm/P31_has_modified> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E11_Modification> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Man-Made_Thing> ;
 	rdfs:comment """This property identifies the E24 Physical Man-Made Thing modified in an E11 Modification.
@@ -1698,7 +1618,8 @@ If a modification is applied to a non-man-made object, it is regarded as an E22 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
+<http://www.cidoc-crm.org/cidoc-crm/P31i_was_modified_by> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E24_Physical_Man-Made_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E11_Modification> ;
 	rdfs:label "a été modifié par"@fr , "foi modificada por"@pt , "was modified by"@en , "wurde verändert durch"@de , "τροποποιήθηκε από"@el , "был изменен посредством"@ru , "被修改於"@zh .
@@ -1995,7 +1916,8 @@ P48 has preferred identifier (is preferred identifier of), is a shortcut for the
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper
 
-<http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+<http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
 	rdfs:comment """This property identifies the E39 Actor or Actors who have or have had custody of an instance of E18 Physical Thing at some time. 
 The distinction with P50 has current keeper (is current keeper of) is that P49 has former or current keeper (is former or current keeper of) leaves open the question as to whether the specified keepers are current. 
@@ -2005,7 +1927,8 @@ P49 has former or current keeper (is former or current keeper of) is a shortcut 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
+<http://www.cidoc-crm.org/cidoc-crm/P49i_is_former_or_current_keeper_of> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:label "est ou a été détenteur de"@fr , "is former or current keeper of"@en , "ist früherer oder derzeitiger Betreuer von"@de , "é ou foi guardador de"@pt , "κατέχει ή κατείχε"@el , "является бывшим или текущим смотрителем для"@ru , "目前或曾经保管"@zh .
 # 
@@ -2179,7 +2102,8 @@ A particular instance of a Section Definition only applies to one instance of Ph
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P59_has_section
 
-<http://www.cidoc-crm.org/cidoc-crm/P59_has_section> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
+<http://www.cidoc-crm.org/cidoc-crm/P59_has_section> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:comment """This property links an area to the instance of E18 Physical Thing upon which it is found.
 It is typically used when a named E46 Section Definition is not appropriate.
@@ -2190,7 +2114,8 @@ P59 has section (is located on or within) is a shortcut. If the E53 Place is ide
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within
 
-<http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+<http://www.cidoc-crm.org/cidoc-crm/P59i_is_located_on_or_within> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> ;
 	rdfs:label "befindet sich auf oder in"@de , "está localizada sobre ou dentro de"@pt , "is located on or within"@en , "se situe sur ou dans"@fr , "βρίσκεται σε ή εντός"@el , "находится на или внутри"@ru , "位於"@zh .
 # 
@@ -2252,7 +2177,8 @@ This property is part of the fully developed path from E24 Physical Man-Made Thi
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P67_refers_to
 
-<http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
+<http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:comment """This property documents that an E89 Propositional Object makes a statement about an instance of E1 CRM Entity. P67 refers to (is referred to by) has the P67.1 has type link to an instance of E55 Type. This is intended to allow a more detailed description of the type of reference. This differs from P129 is about (is subject of), which describes the primary subject or subjects of the E89 Propositional Object.
 """@en ;
@@ -2260,7 +2186,8 @@ This property is part of the fully developed path from E24 Physical Man-Made Thi
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
+<http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
 	rdfs:label "est référencé par"@fr , "is referred to by"@en , "wird angeführt von"@de , "é referenciado por"@pt , "αναφέρεται από"@el , "имеет ссылку на себя от"@ru , "被论及於"@zh .
 # 
@@ -2362,7 +2289,8 @@ When a Linguistic Object is translated into a new language it becomes a new Ling
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of
 
-<http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> ;
+<http://www.cidoc-crm.org/cidoc-crm/P73i_is_translation_of> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P130i_features_are_also_found_on> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object> ;
 	rdfs:label "est la traduction de"@fr , "is translation of"@en , "ist Übersetzung von"@de , "é tradução de"@pt , "είναι μετάφραση του/της"@el , "является переводом"@ru , "翻译自"@zh .
@@ -2447,7 +2375,8 @@ It is a shortcut of the more fully developed path from E4 Period through P161 ha
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed
 
-<http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed> rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+<http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed> a owl:ObjectProperty ;
+	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E4_Period> ;
 	rdfs:label "a été témoin de"@fr , "bezeugte"@de , "testemunhou"@pt , "witnessed"@en , "υπήρξε τόπος του"@el , "был местом совершения"@ru , "发生过"@zh .
 # 
@@ -2575,7 +2504,8 @@ For example, the French and German armistice of 22 June 1940 was signed in the s
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence
 
-<http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
+<http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E63_Beginning_of_Existence> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:comment """This property allows an E63 Beginning of Existence event to be linked to the E77 Persistent Item brought into existence by it.
@@ -2584,14 +2514,16 @@ It allows a “start” to be attached to any Persistent Item being documented i
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
+<http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E63_Beginning_of_Existence> ;
 	rdfs:label "a commencé à exister du fait de"@fr , "passou a existir por"@pt , "was brought into existence by"@en , "wurde in Existenz gebracht durch"@de , "γεννήθηκε από"@el , "был создан посредством"@ru , "被开始於"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence
 
-<http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
+<http://www.cidoc-crm.org/cidoc-crm/P93_took_out_of_existence> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E64_End_of_Existence> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:comment """This property allows an E64 End of Existence event to be linked to the E77 Persistent Item taken out of existence by it.
@@ -2602,14 +2534,16 @@ This allows an “end” to be attached to any Persistent Item being documented 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
+<http://www.cidoc-crm.org/cidoc-crm/P93i_was_taken_out_of_existence_by> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12i_was_present_at> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E64_End_of_Existence> ;
 	rdfs:label "a cessé d’exister du fait de"@fr , "deixou de existir"@pt , "was taken out of existence by"@en , "wurde seiner Existenz beraubt durch"@de , "αναιρέθηκε από"@el , "прекратил существование посредством"@ru , "被结束於"@zh .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P94_has_created
 
-<http://www.cidoc-crm.org/cidoc-crm/P94_has_created> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> ;
+<http://www.cidoc-crm.org/cidoc-crm/P94_has_created> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E65_Creation> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object> ;
 	rdfs:comment """This property allows a conceptual E65 Creation to be linked to the E28 Conceptual Object created by it. 
@@ -2619,7 +2553,8 @@ It represents the act of conceiving the intellectual content of the E28 Conceptu
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by> rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> ;
+<http://www.cidoc-crm.org/cidoc-crm/P94i_was_created_by> a owl:ObjectProperty ;
+	rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P92i_was_brought_into_existence_by> ;
 	rdfs:domain <http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object> ;
 	rdfs:range <http://www.cidoc-crm.org/cidoc-crm/E65_Creation> ;
 	rdfs:label "a été créé par"@fr , "foi criado por"@pt , "was created by"@en , "wurde erschaffen durch"@de , "δημιουργήθηκε από"@el , "был создан посредством"@ru , "被创造於"@zh .
@@ -2759,8 +2694,7 @@ Twins, triplets etc. are brought into life by the same Birth event. This is not 
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by
 
-<http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by> a owl:DatatypeProperty ;
-	rdfs:range rdfs:Literal .
+<http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by> a owl:DatatypeProperty .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/P3_has_note
 
@@ -2901,7 +2835,7 @@ _:genid1 a owl:Restriction ;
 # http://purl.org/ontohgis#object_11
 
 :object_11 a owl:Class ;
-	rdfs:subClassOf :object_10 ;
+	rdfs:subClassOf :object_10 , <http://www.cidoc-crm.org/cidoc-crm/E27_Site> ;
 	owl:disjointWith :object_12 ;
 	rdfs:label "właściwa jednostka osadnicza"@pl .
 # 
@@ -2984,7 +2918,7 @@ _:genid4 a owl:Restriction ;
 # http://purl.org/ontohgis/object_1
 
 <http://purl.org/ontohgis/object_1> a owl:Class ;
-	rdfs:subClassOf :object_10 ;
+	rdfs:subClassOf :object_10 , <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> ;
 	rdfs:label "budowla"@pl .
 # 
 # http://purl.org/ontohgis/object_2
@@ -6655,6 +6589,8 @@ It may also describe events where a collector appropriates legal title, for exam
 	rdfs:label "Spacetime Volume"@en .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/E93_Place
+
+<http://www.cidoc-crm.org/cidoc-crm/E93_Place> a owl:Class .
 # 
 # http://www.cidoc-crm.org/cidoc-crm/E93_Presence
 
