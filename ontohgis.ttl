@@ -11,7 +11,7 @@
 <http://purl.org/ontohgis> a owl:Ontology ;
 	owl:imports <http://www.opengis.net/ont/geosparql> , <http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl> , <http://purl.obolibrary.org/obo/iao/2015-02-23/iao.owl> ;
 	rdfs:comment "Ontologia powstała w ramach projektu 'Ontologiczne podstawy budowy historycznych systemów informacji geograficznej' (2bH 15 0216 83) finansowanego przez Narodowy Programu Rozwoju Humanistyki 2015 r., IV edycja, moduł \"Rozwój\" 2 b."@pl ;
-	owl:versionInfo "0.15"^^xsd:decimal .
+	owl:versionInfo "0.16"^^xsd:decimal .
 # 
 # 
 # #################################################################
@@ -304,6 +304,12 @@ _:genid7 a owl:Class .
 	rdfs:subClassOf <http://purl.org/ontohgis/object_1> ;
 	rdfs:label "budynek"@pl .
 # 
+# http://purl.org/ontohgis#object_24
+
+:object_24 a owl:Class ;
+	rdfs:subClassOf :object_12 ;
+	rdfs:label "ruiny zamku"@pl .
+# 
 # http://purl.org/ontohgis#object_31
 
 :object_31 a owl:Class ;
@@ -391,6 +397,12 @@ _:genid19 a owl:Restriction ;
 :settlement_unit3032 a owl:Class ;
 	rdfs:subClassOf <http://purl.org/ontohgis/settlement_unit2002> ;
 	rdfs:label "bycie miejscem wymianu handlowej"@pl .
+# 
+# http://purl.org/ontohgis#settlement_unit3100
+
+:settlement_unit3100 a owl:Class ;
+	rdfs:subClassOf <http://purl.org/ontohgis/settlement_unit3008> ;
+	rdfs:label "dzielnica"@pl .
 # 
 # http://purl.org/ontohgis/object_1
 
@@ -1181,7 +1193,7 @@ _:genid25 a owl:Restriction ;
 # http://purl.org/ontohgis/settlement_unit168
 
 <http://purl.org/ontohgis/settlement_unit168> a owl:Class ;
-	rdfs:subClassOf <http://purl.org/ontohgis/settlement_unit3008> ;
+	rdfs:subClassOf :settlement_unit3100 ;
 	<http://purl.org/ontohgis/has_indexed_name> "Przedmieścia"^^xsd:string ;
 	<http://purl.org/ontohgis/has_source_name> "Przedmieścia"^^xsd:string ;
 	<http://purl.org/ontohgis/is_mentioned_in_source> <http://purl.org/ontohgis/Source_1> , <http://purl.org/ontohgis/Source_13> , <http://purl.org/ontohgis/Source_36> ;
@@ -1190,7 +1202,7 @@ _:genid25 a owl:Restriction ;
 # http://purl.org/ontohgis/settlement_unit169
 
 <http://purl.org/ontohgis/settlement_unit169> a owl:Class ;
-	rdfs:subClassOf <http://purl.org/ontohgis/settlement_unit3008> ;
+	rdfs:subClassOf :settlement_unit3100 ;
 	<http://purl.org/ontohgis/has_abbreviation> "Przedm."^^xsd:string ;
 	<http://purl.org/ontohgis/has_indexed_name> "Przedmieście"^^xsd:string ;
 	<http://purl.org/ontohgis/has_source_name> "Przedmieście"^^xsd:string ;
@@ -1743,7 +1755,7 @@ _:genid36 a owl:Class .
 # http://purl.org/ontohgis/settlement_unit213
 
 <http://purl.org/ontohgis/settlement_unit213> a owl:Class ;
-	rdfs:subClassOf <http://purl.org/ontohgis/settlement_unit3008> ;
+	rdfs:subClassOf :settlement_unit3100 ;
 	<http://purl.org/ontohgis/has_abbreviation> "Vorst."^^xsd:string , "Vsrt."^^xsd:string ;
 	<http://purl.org/ontohgis/has_indexed_name> "Przedmieście"^^xsd:string ;
 	<http://purl.org/ontohgis/has_source_name> "Vorstadt"^^xsd:string ;
