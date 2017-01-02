@@ -1,0 +1,413 @@
+@prefix : <http://lei.info/gleio/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://lei.info/gleio/> a owl:Ontology ;
+	rdfs:label "Global Legal Entity Identifier Ontology (GLEIO)"@en ;
+	skos:changeNote """VERSION 1.0 (since 2016-02-10)
+
+VERSION 1.1 (since 2016-06-08)
+
+2016-06-08
+Inverse of hasPredecessorEntityManifestation has been added."""@en ;
+	rdfs:comment """Created by MakoLab S.A.
+
+Contact:
+Robert Trypuz (robert.trypuz@makolab.pl)
+Dominik Kuziński (Dominik.Kuzinski@makolab.net)"""@en ;
+	owl:versionInfo "varion 1.1"@en .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#changeNote
+
+skos:changeNote a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#closeMatch
+
+skos:closeMatch a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#definition
+
+skos:definition a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#narrowMatch
+
+skos:narrowMatch a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#notation
+
+skos:notation a owl:AnnotationProperty .
+# 
+# http://www.w3.org/2004/02/skos/core#scopeNote
+
+skos:scopeNote a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://lei.info/gleio/hasLastManifestation
+
+:hasLastManifestation a owl:ObjectProperty ;
+	rdfs:subPropertyOf :hasManifestation ;
+	owl:inverseOf :isLastManifestationOf ;
+	rdfs:label "has last manifestation"@en ;
+	skos:definition "The property assigns the last manifestation to a variable entity."@en .
+# 
+# http://lei.info/gleio/hasManifestation
+
+:hasManifestation a owl:ObjectProperty ;
+	owl:inverseOf :isManifestationOf ;
+	rdfs:domain :VariableEntity ;
+	rdfs:range :VariableEntityManifestation ;
+	rdfs:label "has manifestation"@en ;
+	skos:definition "The property assigns a manifestation to a variable entity."@en .
+# 
+# http://lei.info/gleio/hasPredecessorEntityManifestation
+
+:hasPredecessorEntityManifestation a owl:ObjectProperty ;
+	owl:inverseOf :isPredecessorEntityManifestationOf ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range :VariableEntityManifestation ;
+	rdfs:label "has predecessor entity manifestation"@en ;
+	skos:definition "The property establishes the temporal linear order of the manifestations of an entity."@en .
+# 
+# http://lei.info/gleio/hasSuccessorEntity
+
+:hasSuccessorEntity a owl:ObjectProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range :VariableEntity ;
+	rdfs:label "has successor entity"@en ;
+	skos:definition "The property assigns to an entity other entity that supersedes or subsumes it."@en .
+# 
+# http://lei.info/gleio/isLastManifestationOf
+
+:isLastManifestationOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf :isManifestationOf ;
+	rdfs:label "is last manifestation of"@en ;
+	skos:definition "The property indicates which manifestations of a variable entities are last."@en .
+# 
+# http://lei.info/gleio/isManifestationOf
+
+:isManifestationOf a owl:ObjectProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range :VariableEntity ;
+	rdfs:label "is manifestation of"@en ;
+	skos:definition "The property indicates to each manifestation the variable entity it is a manifestation of."@en .
+# 
+# http://lei.info/gleio/isPredecessorEntityManifestationOf
+
+:isPredecessorEntityManifestationOf a owl:ObjectProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range :VariableEntityManifestation ;
+	rdfs:label "is predecessor entity manifestation of"@en ;
+	skos:definition "The property establishes the temporal linear order of the manifestations of an entity."@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://lei.info/gleio/hasBeginning
+
+:hasBeginning a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :hasDate ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has beginning"@en ;
+	skos:definition "The property assigns to a variable entity manifestation date and time information about it was most recently updated."@en .
+# 
+# http://lei.info/gleio/hasDate
+
+:hasDate a owl:DatatypeProperty ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has date"@en .
+# 
+# http://lei.info/gleio/hasEnd
+
+:hasEnd a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :hasDate ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has end"@en ;
+	skos:definition "The property assigns to a variable entity manifestation date and time information about it was most recently updated."@en .
+# 
+# http://lei.info/gleio/hasUpdateDate
+
+:hasUpdateDate a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :hasDate ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :VariableEntityManifestation ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "has update date"@en ;
+	skos:definition "The property assigns to a variable entity manifestation date and time information about it was most recently updated."@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://lei.info/gleio/NonVariableEntity
+
+:NonVariableEntity a owl:Class ;
+	owl:disjointWith :VariableEntity ;
+	rdfs:label "non-variable entity"@en ;
+	skos:definition "Non-variable entities are entities that do not have different manifestations as different objects at different times and in different worlds or situations."@en .
+# 
+# http://lei.info/gleio/VariableEntity
+
+:VariableEntity a owl:Class ;
+	rdfs:subClassOf _:genid1 .
+
+_:genid1 a owl:Restriction ;
+	owl:onProperty :hasLastManifestation ;
+	owl:someValuesFrom :VariableEntityManifestation .
+
+:VariableEntity rdfs:label "variable entity"@en ;
+	skos:definition "Variable entities are entities that have different manifestations as different objects at different times and in different worlds or situations. If a variable entity e is manifested at time t by some variable entity manifestation m, then e exists at t, takes a geographical location of m and has all qualities possessed by m in t. A variable entity possesses a quality q (without temporal reference) if all of its manifestations have this quality q."@en .
+# 
+# http://lei.info/gleio/VariableEntityManifestation
+
+:VariableEntityManifestation a owl:Class ;
+	rdfs:subClassOf :NonVariableEntity , _:genid2 .
+
+_:genid2 a owl:Restriction ;
+	owl:onProperty :isManifestationOf ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :VariableEntity .
+
+:VariableEntityManifestation rdfs:subClassOf _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty :hasUpdateDate ;
+	owl:someValuesFrom xsd:dateTime .
+
+:VariableEntityManifestation rdfs:label "variable entity manifestation"@en ;
+	skos:definition "A variable entity manifestation is a manifestation (in particular time and space with a particular collection of qualities) of a variable entity."@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://lei.info/gleio/Active
+
+:Active a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.6." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Active"@en ;
+	skos:definition "As of the last report or update, the legal entity reported that is was legally registered and operating."@en .
+# 
+# http://lei.info/gleio/Annulled
+
+:Annulled a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Annulled"@en ;
+	skos:definition "A global legal entity identifier registration that was marked as erroneous or invalid after it was issued."@en .
+# 
+# http://lei.info/gleio/Cancelled
+
+:Cancelled a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Cancelled"@en ;
+	skos:definition "A global legal entity identifier registration that was abandoned prior to issuance of a global legal entity identifier."@en .
+# 
+# http://lei.info/gleio/CorporateAction
+
+:CorporateAction a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.4." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Corporate Action"@en ;
+	skos:definition "The legal entity was acquired or merged with another legal entity."@en .
+# 
+# http://lei.info/gleio/Dissolved
+
+:Dissolved a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.4." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Dissolved"@en ;
+	skos:definition "The legal entity ceased to operate."@en .
+# 
+# http://lei.info/gleio/Duplicate
+
+:Duplicate a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Duplicate"@en ;
+	skos:definition "A global legal entity identifier registration that has been determined to be a duplicate registration of the same legal entity as another global legal entity identifier registration."@en ;
+	skos:scopeNote """The DUPLICATE status is assigned to the non-surviving registration (i.e., the LEI that should no longer be used). 
+
+Only one of the potential multiple identifiers will survive; for all other duplicate registrations:
+1. The RegistrationStatus is set to DUPLICATE
+2. The LEI of the surviving LEI Registration is set in the SuccessorLEI data element of (each) duplicate LEI registration
+3. The LastUpdateDate is set to reflect the date of this update
+4. No further updates of the DUPLICATE registration record will occur""" .
+# 
+# http://lei.info/gleio/EntitySuppliedOnly
+
+:EntitySuppliedOnly a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.8." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Entity Supplied Only"@en ;
+	skos:definition "Based on the validation procedures in use by the local operating unit responsible for the record, the information associated with this record has significant reliance on the information that a submitter provided due to the unavailability of corroborating information."@en .
+# 
+# http://lei.info/gleio/FullyCorroborated
+
+:FullyCorroborated a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.8." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Fully Corroborated"@en ;
+	skos:definition "Based on the validation procedures in use by the local operating unit  responsible for the record, there is sufficient information contained in authoritative public sources to corroborate the information that the submitter has provided for the record."@en .
+# 
+# http://lei.info/gleio/Inactive
+
+:Inactive a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.6." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Inactive"@en ;
+	skos:definition """It has been determined that the lrgal entity that was assigned the global legal entity identifier is no longer legally registered and/or operating, whether as a result of:
+1. Business closure
+2. Acquisition by or merger with another (or new) entity
+3. Determination of illegitimacy."""@en .
+# 
+# http://lei.info/gleio/Issued
+
+:Issued a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Issued"@en ;
+	skos:definition "A global legal entity identifier registration that has been validated and issued, and which identifies an entity that was an operating legal entity as of the last update."@en .
+# 
+# http://lei.info/gleio/Lapsed
+
+:Lapsed a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Lapsed"@en ;
+	skos:definition "A global legal entity identifier registration that has not been renewed and has exceeded any allowed grace period for renewal."@en ;
+	skos:scopeNote """After being issued an LEI, an entity must regularly do the following:
+- Periodically verify the continued accuracy of its registration reference data that is recorded in the LOU that is responsible for managing the LEI registration of the entity, updating any aspect of the registration reference data that has changed;
+- Periodically renew its LEI registration agreement with the LOU, paying the renewal fee.
+
+(Although both of the above actions are typically performed at the same time, it is certainly possible that the frequency of each action could be different.) If, after being issued an LEI,
+
+- A legal entity fails to renew and re-certify its LEI registration with the LOU responsible to manage the registration by the leiNextRenewalDate, and
+- The legal entity fails to do so for a pre-determined (as yet unspecified) period of time, and
+- The legal entity is not known by public sources to have ceased operation
+
+Then
+1. The leiRegistrationStatus is set to LAPSED,
+2. Updates to the LEI registration are permitted, notably to reinstate the registration to the ISSUED status.""" .
+# 
+# http://lei.info/gleio/Merged
+
+:Merged a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Merged"@en ;
+	skos:definition "A global legal entity identifier registration for an entity that has been merged into another legal entity, such that this legal entity no longer exists as an operating entity."@en ;
+	skos:scopeNote """If
+- After being issued an LEI, the entity is acquired by, or merged with, another legal entity;
+- Per agreements among the parties to the transaction, the LEI of the acquired or merged entity will not be used to identify the surviving entity (or if a new entity is created that is issued a new LEI)
+
+Then
+1. The leiRegistrationStatus is set to “MERGED”,
+2. The LEI of the surviving/new legal entity is set in the successorLEI data element of (each) LEI registration that is no longer to be used;
+3. The leiRecordLastUpdate is set to reflect the date of this update,
+4. The EntityExpirationDate is also set to the date of this update,
+5. The EntityExpirationReason is set to “CORPORATE_ACTION”,
+6. The EntityStatus is set to “INACTIVE”; and
+7. No further updates of the MERGED registration record(s) will occur.""" .
+# 
+# http://lei.info/gleio/Other
+
+:Other a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.4." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Other"@en ;
+	skos:definition "The reason for expiry is not corporate action or dissolved."@en .
+# 
+# http://lei.info/gleio/PartiallyCorroborated
+
+:PartiallyCorroborated a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.8." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Fully Corroborated"@en , "Partially Corroborated"@en ;
+	skos:definition "Based on the validation procedures in use by the local operating unit  responsible for the record, there is sufficient information contained in authoritative public sources to corroborate the information that the submitter has provided for the record."@en , "Based on the validation procedures in use by the local operating unit responsible for the record, the information supplied by the registrant can be partially corroborated by public authoritative sources, while some of the record is dependent upon the information that the registrant submitted, either due to conflicts with authoritative information, or due to data unavailability."@en .
+# 
+# http://lei.info/gleio/Pending
+
+:Pending a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.8." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Pending"@en ;
+	skos:definition "The validation of the reference data provided by the registrant has not yet occurred."@en .
+# 
+# http://lei.info/gleio/PendingArchival
+
+:PendingArchival a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Pending Archival"@en ;
+	skos:definition "A global legal entity identifier registration is about to be transferred to a different local operating unit, after which its registration status will revert to a non-pending status. The pending archival status serves to inform recipients of local operating unit provided data files that a global legal entity identifier record will be removed from that local operating unit’s published file after the transfer is complete."@en .
+# 
+# http://lei.info/gleio/PendingTransfer
+
+:PendingTransfer a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Pending Transfer"@en ;
+	skos:definition "A global legal entity identifier registration that has been requested to be transferred to another local operating unit. The request is being processed at the sending local operating unit. When the receiving local operating unit is ready, the status will be changed to pending archival by the sending local operating unit prior to completion of the transfer."@en .
+# 
+# http://lei.info/gleio/PendingValidation
+
+:PendingValidation a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Pending Validation"@en ;
+	skos:definition "An application for a global legal entity identifier that has been submitted and which is being processed and validated. A global legal entity identifier registrations in the pending state are not intended for public release, but could be used internally between local operating units."@en .
+# 
+# http://lei.info/gleio/Retired
+
+:Retired a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Retired"@en ;
+	skos:definition "A global legal entity identifier registration for an entity that has ceased operation, without having been merged into another entity."@en ;
+	skos:scopeNote """If
+- After being issued an LEI, the entity ceases to operate (goes out of business and/or dissolves its legal standing)
+- The entity informs the LOU of the cessation of business, OR, the managing LOU determines by public sources that the legal entity has been dissolved or ceased to operate (and the LOU seeks to confirm this status through all available channels with the entity)
+
+Then
+1. The leiRegistrationStatus is set to “RETIRED”;
+2. The leiRecordLastUpdate is set to reflect the date of this update;
+3. The EntityExpirationDate is also set to the date of this update;
+4. The EntityExpirationReason is set to “DISSOLVED”;
+5. The EntityStatus is set to “INACTIVE”; and
+6. No further updates of the RETIRED registration record will occur.""" .
+# 
+# http://lei.info/gleio/Transferred
+
+:Transferred a owl:NamedIndividual ;
+	rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." , "https://www.gleif.org/_documents/lei-data-file-format.xsd"^^xsd:anyURI , "https://www.gleif.org/content/4-events-and-media/1-press-releases/7-lei-data-file-format-1-0/lou-20140620.pdf"^^xsd:anyURI ;
+	rdfs:label "Transferred"@en ;
+	skos:definition "A global legal entity identifier registration that has been transferred to a different local operting unit as the managing local operting unit. A record in this state is not published, but may be used internally by the prior local operting unit for audit trail purposes."@en .
+# 
+# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
