@@ -9,9 +9,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 <http://purl.org/ontohgis> a owl:Ontology ;
-	owl:imports <http://www.opengis.net/ont/geosparql> , <http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl> , <http://purl.obolibrary.org/obo/iao/2015-02-23/iao.owl> ;
+	owl:imports <http://www.opengis.net/ont/geosparql> , <http://makolab.com/oc/> , <http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl> , <http://purl.obolibrary.org/obo/iao/2015-02-23/iao.owl> ;
 	rdfs:comment "Ontologia powstała w ramach projektu 'Ontologiczne podstawy budowy historycznych systemów informacji geograficznej' (2bH 15 0216 83) finansowanego przez Narodowy Programu Rozwoju Humanistyki 2015 r., IV edycja, moduł \"Rozwój\" 2 b."@pl ;
-	owl:versionInfo "0.16"^^xsd:decimal .
+	owl:versionInfo "0.17"^^xsd:decimal .
 # 
 # 
 # #################################################################
