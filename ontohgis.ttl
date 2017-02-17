@@ -3309,6 +3309,221 @@ _:genid86 a owl:Restriction ;
 # #################################################################
 # 
 # 
+# http://purl.org/ontohgis#area_1
+
+:area_1 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.89967059,52.841295824 18.9001440710001,52.8404396970001 18.9007360590001,52.8392981600001 18.9043931210001,52.837944995 18.9055784780001,52.8348767260001 18.905468209,52.831379155 18.9058311810001,52.82702543 18.9021786070001,52.8268083450001 18.9012943540001,52.8292807920001 18.8973399380001,52.829873482 18.898395409,52.8320870840001 18.897564554,52.834584573 18.8960255440001,52.8374383220001 18.895195825,52.8393647760001 18.89967059,52.841295824)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_2
+
+:area_2 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.5449818450001,52.9890081510001 18.5457850770001,52.991366627 18.550517911,52.9912418600001 18.5572644540001,52.9908389170001 18.561517565,52.991354308 18.5651822190001,52.991581893 18.5660195130001,52.990657066 18.5635492590001,52.9892918830001 18.554928153,52.987975159 18.5492576620001,52.9873114150001 18.546880258,52.9884443940001 18.5449818450001,52.9890081510001)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_3
+
+:area_3 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.5660195130001,52.990657066 18.5635492590001,52.9892918830001 18.5492576620001,52.9873114150001 18.546880258,52.9884443940001 18.5449818450001,52.9890081510001 18.5457850770001,52.991366627 18.5408464980001,52.9922993380001 18.540741392,52.9947732960001 18.5342808820001,53.0015050810001 18.5336964630001,53.0045005740001 18.538512183,53.0041386880001 18.5456267880001,53.0026909860001 18.555360868,52.9995872470001 18.5651822190001,52.991581893 18.5660195130001,52.990657066)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_4
+
+:area_4 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.486784055,52.9999010980001 18.495429557,52.9991529610001 18.503940103,52.9998311510001 18.515099279,52.996451135 18.515147245,52.992168774 18.5106975750001,52.988153491 18.50585403,52.9876338280001 18.5019321450001,52.989259114 18.498581534,52.992599705 18.4902973010001,52.9929213620001 18.4876865410001,52.9936239030001 18.486108116,52.9970431400001 18.486784055,52.9999010980001)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_5
+
+:area_5 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.5736219070001,52.9902039720001 18.5807896970001,52.993084491 18.5848904600001,52.997202982 18.592841607,53.0008587360001 18.600816594,53.002075367 18.605549151,53.002091159 18.606947307,53.000132959 18.608947062,52.9970466080001 18.6070072520001,52.9935309080001 18.606844671,52.989723665 18.6038021630001,52.988286051 18.5968855560001,52.990106677 18.5902899750001,52.989191937 18.582113072,52.9887471210001 18.579381584,52.9858229760001 18.5736219070001,52.9902039720001)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_6
+
+:area_6 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.57215948,53.0085184880001 18.572300253,53.01422904 18.5795659300001,53.017585803 18.5852362790001,53.0228399110001 18.586752027,53.0293879280001 18.5932275770001,53.03321693 18.6058579,53.0331404900001 18.6096200910001,53.0317253910001 18.616526477,53.031747856 18.623448415,53.029985588 18.6256549570001,53.025828996 18.626273585,53.022738012 18.6213706350001,53.019391657 18.6180496260001,53.0156933100001 18.623404437,53.0123795330001 18.61948062,53.0099878610001 18.613181083,53.008658988 18.6072785210001,53.007093173 18.600178866,53.0070695160001 18.5771108710001,53.0063949290001 18.57215948,53.0085184880001)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#area_7
+
+:area_7 a owl:NamedIndividual , <http://www.opengis.net/ont/sf#MultiPolygon> ;
+	<http://www.opengis.net/ont/geosparql#asWKT> "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> MULTIPOLYGON(((18.57215948,53.0085184880001 18.572300253,53.01422904 18.5795659300001,53.017585803 18.5852362790001,53.0228399110001 18.586752027,53.0293879280001 18.5932275770001,53.03321693 18.6058579,53.0331404900001 18.6096200910001,53.0317253910001 18.616526477,53.031747856 18.623448415,53.029985588 18.6256549570001,53.025828996 18.626273585,53.022738012 18.6213706350001,53.019391657 18.6180496260001,53.0156933100001 18.623404437,53.0123795330001 18.61948062,53.0099878610001 18.605549151,53.002091159 18.608947062,52.9970466080001 18.6070072520001,52.9935309080001 18.606844671,52.989723665 18.6038021630001,52.988286051 18.5968855560001,52.990106677 18.5902899750001,52.989191937 18.582113072,52.9887471210001 18.579381584,52.9858229760001 18.5736219070001,52.9902039720001 18.5807896970001,52.993084491 18.57215948,53.0085184880001)))"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+# 
+# http://purl.org/ontohgis#settlement_unit10000
+
+:settlement_unit10000 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10001
+
+:settlement_unit10001 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Roskydalino"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10002
+
+:settlement_unit10002 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10003
+
+:settlement_unit10003 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Mała Nieszawka"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10004
+
+:settlement_unit10004 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Wielka Nieszawka"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10005
+
+:settlement_unit10005 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Dybów"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10006
+
+:settlement_unit10006 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit10007
+
+:settlement_unit10007 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntity> ;
+	rdfs:label "Toruń"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20000
+
+:settlement_unit20000 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10000 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_1 ;
+	<http://makolab.com/oc/hasBeginning> "1460-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20001
+
+:settlement_unit20001 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10001 ;
+	<http://makolab.com/oc/hasEnd> "1460-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Roskydalino"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20002
+
+:settlement_unit20002 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10002 ;
+	<http://makolab.com/oc/hasBeginning> "1230-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1424-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20003
+
+:settlement_unit20003 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10002 ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20004
+
+:settlement_unit20004 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10003 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_2 ;
+	<http://makolab.com/oc/hasBeginning> "1230-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1900-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Mała Nieszawka"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20005
+
+:settlement_unit20005 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10004 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_4 ;
+	<http://makolab.com/oc/hasBeginning> "1230-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Wielka Nieszawka"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20006
+
+:settlement_unit20006 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10005 ;
+	<http://makolab.com/oc/hasBeginning> "1425-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1460-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Dybów"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20007
+
+:settlement_unit20007 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10005 ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Dybów"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20008
+
+:settlement_unit20008 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10000 ;
+	<http://makolab.com/oc/hasBeginning> "1425-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1462-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Nieszawa"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20009
+
+:settlement_unit20009 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10006 ;
+	<http://makolab.com/oc/hasBeginning> "1555-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1611-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20010
+
+:settlement_unit20010 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10006 ;
+	<http://makolab.com/oc/hasBeginning> "1611-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1876-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20011
+
+:settlement_unit20011 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10006 ;
+	<http://makolab.com/oc/hasBeginning> "1876-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1925-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20012
+
+:settlement_unit20012 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10006 ;
+	<http://makolab.com/oc/hasBeginning> "1925-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1934-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20013
+
+:settlement_unit20013 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10006 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_5 ;
+	<http://makolab.com/oc/hasBeginning> "1934-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Podgórz"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20014
+
+:settlement_unit20014 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10007 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_6 ;
+	<http://makolab.com/oc/hasBeginning> "1233-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "1934-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Toruń"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20015
+
+:settlement_unit20015 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10003 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_3 ;
+	<http://makolab.com/oc/hasBeginning> "1900-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Mała Nieszawka"^^xsd:string .
+# 
+# http://purl.org/ontohgis#settlement_unit20016
+
+:settlement_unit20016 a owl:NamedIndividual , <http://makolab.com/oc/VariableEntityManifestation> ;
+	<http://makolab.com/oc/isManifestationOf> :settlement_unit10007 ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> :area_7 ;
+	<http://makolab.com/oc/hasBeginning> "1934-01-01T00:00:00"^^xsd:dateTime ;
+	<http://makolab.com/oc/hasEnd> "2016-12-31T00:00:00"^^xsd:dateTime ;
+	rdfs:label "Toruń"^^xsd:string .
+# 
 # http://purl.org/ontohgis/Source_1
 
 <http://purl.org/ontohgis/Source_1> a owl:NamedIndividual , <http://purl.org/ontohgis/source> ;
@@ -5137,4 +5352,4 @@ _:genid386 a rdf:List ;
 	rdf:first <http://purl.org/ontohgis/Source_9> ;
 	rdf:rest rdf:nil .
 # 
-# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
+# Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi
