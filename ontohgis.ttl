@@ -17,8 +17,8 @@
 
 <http://purl.org/ontohgis> a owl:Ontology ;
 	owl:imports <http://www.opengis.net/ont/geosparql> , <http://makolab.com/oc/> , <http://purl.obolibrary.org/obo/bfo/2.0/bfo.owl> , <http://purl.obolibrary.org/obo/iao/2015-02-23/iao.owl> ;
-	rdfs:comment "Ontologia powstała w ramach projektu 'Ontologiczne podstawy budowy historycznych systemów informacji geograficznej' (2bH 15 0216 83) finansowanego przez Narodowy Programu Rozwoju Humanistyki 2015 r., IV edycja, moduł \"Rozwój\" 2 b."@pl ;
-	owl:versionInfo "0.18"^^xsd:decimal .
+	owl:versionInfo "1.0"^^xsd:decimal ;
+	rdfs:comment "Ontologia powstała w ramach projektu 'Ontologiczne podstawy budowy historycznych systemów informacji geograficznej' (2bH 15 0216 83) finansowanego przez Narodowy Programu Rozwoju Humanistyki 2015 r., IV edycja, moduł \"Rozwój\" 2 b."@pl .
 # 
 # 
 # #################################################################
@@ -43,8 +43,8 @@
 # http://purl.org/ontohgis#isValidAt
 
 :isValidAt a owl:AnnotationProperty ;
-	rdfs:comment "Relacja służy do ustalenia granic czasowych poprawnego użycia kategorii."@pl ;
-	rdfs:label "is in use at"@en , "jest w użyciu (w)"@pl ;
+	rdfs:comment "Relacja służy do określania czasu powstania i/lub wykorzystania źródła historycznego."@pl ;
+	rdfs:label "(source) is in use at"@en , "(źródło) jest w użyciu (w)"@pl ;
 	rdfs:range xsd:dateTime .
 # 
 # http://purl.org/ontohgis#isValidBefore
@@ -56,9 +56,9 @@
 # http://purl.org/ontohgis#isValidThroughout
 
 :isValidThroughout a owl:AnnotationProperty ;
-	rdfs:comment "Relacja służy do ustalenia granic przestrzennych poprawnego użycia kategorii."@pl ;
+	rdfs:comment "Relacja służy do ustalenia granic czasowych i przestrzennych poprawnego użycia kategorii."@pl ;
 	rdfs:label "is is use throughout"@en , "jest w użyciu (na)"@pl ;
-	rdfs:range ontohgis:settlement_unit1001 .
+	rdfs:range :object_204 .
 # 
 # http://purl.org/ontohgis/hasOntologyDevelopmentComment
 
@@ -117,8 +117,8 @@ obo:IAO_0000136 owl:inverseOf :InverseIAO_0000136 .
 :administersOver a owl:ObjectProperty ;
 	rdfs:subPropertyOf owl:topObjectProperty ;
 	a owl:FunctionalProperty ;
-	rdfs:domain ontohgis:settlement_unit3005 ;
-	rdfs:range ontohgis:settlement_unit3006 ;
+	rdfs:domain :object_203 ;
+	rdfs:range :object_204 ;
 	ontohgis:hasOntologyDevelopmentComment "Jeżeli organ administracji musi być zlokalizowany na obszarze swojej właściwości, relacja ta jest podrelacją isPartOf."@en ;
 	rdfs:label "administers over"@en , "ma właściwość w obszarze"@pl .
 # 
@@ -142,12 +142,11 @@ obo:IAO_0000136 owl:inverseOf :InverseIAO_0000136 .
 	owl:inverseOf :isProperFunctionOf ;
 	rdfs:label "has proper function"@en , "ma funkcję właściwą"@pl .
 # 
-# http://purl.org/ontohgis#hasSpatialCharacter
+# http://purl.org/ontohgis#isGeometryOf
 
-:hasSpatialCharacter a owl:ObjectProperty , owl:FunctionalProperty ;
-	rdfs:domain geosparql:Feature ;
-	rdfs:range geosparql:SpatialObject ;
-	rdfs:label "has spatial character"@en , "ma charakterystykę przestrzenną"@pl .
+:isGeometryOf a owl:ObjectProperty ;
+	owl:inverseOf geosparql:hasGeometry ;
+	rdfs:label "jest charakterystyką przestrzenną"@pl .
 # 
 # http://purl.org/ontohgis#isProperFunctionOf
 
@@ -190,6 +189,10 @@ ontohgis:isFunctionOf a owl:ObjectProperty ;
 
 ontohgis:isPartOf a owl:ObjectProperty ;
 	rdfs:label "is part of"@en , "jest częścią"@pl .
+# 
+# http://www.opengis.net/ont/geosparql#hasGeometry
+
+geosparql:hasGeometry rdfs:label "ma charakterystykę przestrzenną"@pl .
 # 
 # 
 # 
@@ -260,7 +263,7 @@ _:genid1 a owl:Restriction ;
 :object_10 rdfs:subClassOf _:genid2 .
 
 _:genid2 a owl:Restriction ;
-	owl:onProperty :hasSpatialCharacter ;
+	owl:onProperty geosparql:hasGeometry ;
 	owl:someValuesFrom owl:Thing .
 
 :object_10 rdfs:label "artefact"@en , "artefakt"@pl , "artifact"@en .
@@ -269,7 +272,7 @@ _:genid2 a owl:Restriction ;
 
 :object_102 a owl:Class ;
 	rdfs:subClassOf ontohgis:object_101 ;
-	rdfs:label "bycie miejscem wymianu handlowej"@pl .
+	rdfs:label "bycie miejscem wymiany handlowej"@pl .
 # 
 # http://purl.org/ontohgis#object_103
 
@@ -299,13 +302,146 @@ _:genid3 a owl:Restriction ;
 	owl:onProperty :hasImproperFunction ;
 	owl:someValuesFrom :object_103 .
 
-:object_12 rdfs:label "typ niewłaściwej jednostki osadniczej"@pl .
+:object_12 rdfs:label "manifestacja niewłaściwej jednostki osadniczej"@pl .
 # 
 # http://purl.org/ontohgis#object_20
 
 :object_20 a owl:Class ;
 	rdfs:subClassOf :object_12 , ontohgis:object_1 , ontohgis:settlement_unit215 ;
 	rdfs:label "benannte Fahr und Saumweg"@de , "droga"@pl .
+# 
+# http://purl.org/ontohgis#object_200
+
+:object_200 a owl:Class ;
+	owl:equivalentClass _:genid4 .
+
+_:genid4 a owl:Restriction ;
+	owl:onProperty oc:isManifestationOf ;
+	owl:someValuesFrom ontohgis:settlement_unit1001 .
+
+:object_200 rdfs:subClassOf oc:VariableEntityManifestation , _:genid5 .
+
+_:genid5 a owl:Restriction ;
+	owl:onProperty ontohgis:hasBoundary ;
+	owl:someValuesFrom ontohgis:settlement_unit2000 .
+
+:object_200 rdfs:subClassOf _:genid6 .
+
+_:genid6 a owl:Restriction ;
+	owl:onProperty ontohgis:hasBoundary ;
+	owl:allValuesFrom ontohgis:settlement_unit2000 .
+
+:object_200 rdfs:subClassOf _:genid7 .
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty geosparql:hasGeometry ;
+	owl:cardinality "1"^^xsd:nonNegativeInteger .
+
+:object_200 rdfs:subClassOf _:genid8 .
+
+_:genid8 a owl:Restriction ;
+	owl:onProperty oc:hasBeginning ;
+	owl:someValuesFrom xsd:dateTime .
+
+:object_200 owl:disjointWith :object_40 ;
+	rdfs:label "manifestacja jednostki podziału adminstracyjnego"@pl .
+# 
+# http://purl.org/ontohgis#object_201
+
+:object_201 a owl:Class ;
+	rdfs:subClassOf :object_203 , _:genid9 .
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty :administersOver ;
+	owl:someValuesFrom :object_205 .
+
+:object_201 rdfs:label "manifestacja organu administracji religijnej"@pl .
+# 
+# http://purl.org/ontohgis#object_202
+
+:object_202 a owl:Class ;
+	rdfs:subClassOf :object_203 , _:genid10 .
+
+_:genid10 a owl:Restriction ;
+	owl:onProperty :administersOver ;
+	owl:someValuesFrom :object_206 .
+
+:object_202 rdfs:label "manifestacja organu administracji świeckiej"@pl .
+# 
+# http://purl.org/ontohgis#object_203
+
+:object_203 a owl:Class ;
+	owl:equivalentClass _:genid11 .
+
+_:genid11 a owl:Class ;
+	owl:unionOf _:genid13 .
+
+_:genid13 a rdf:List ;
+	rdf:first :object_201 ;
+	rdf:rest _:genid12 .
+
+_:genid12 a rdf:List ;
+	rdf:first :object_202 ;
+	rdf:rest rdf:nil .
+
+:object_203 owl:equivalentClass _:genid14 .
+
+_:genid14 a owl:Restriction ;
+	owl:onProperty oc:isManifestationOf ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass ontohgis:settlement_unit3005 .
+
+:object_203 rdfs:subClassOf :object_200 , _:genid15 .
+
+_:genid15 a owl:Restriction ;
+	owl:onProperty :administersOver ;
+	owl:someValuesFrom owl:Thing .
+
+:object_203 owl:disjointWith :object_204 ;
+	rdfs:label "manifestacja organu administracji"@pl .
+# 
+# http://purl.org/ontohgis#object_204
+
+:object_204 a owl:Class ;
+	owl:equivalentClass _:genid16 .
+
+_:genid16 a owl:Class ;
+	owl:unionOf _:genid18 .
+
+_:genid18 a rdf:List ;
+	rdf:first :object_205 ;
+	rdf:rest _:genid17 .
+
+_:genid17 a rdf:List ;
+	rdf:first :object_206 ;
+	rdf:rest rdf:nil .
+
+:object_204 owl:equivalentClass _:genid19 .
+
+_:genid19 a owl:Restriction ;
+	owl:onProperty oc:isManifestationOf ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass ontohgis:settlement_unit3006 .
+
+:object_204 rdfs:subClassOf :object_200 , _:genid20 .
+
+_:genid20 a owl:Restriction ;
+	owl:onProperty ontohgis:hasPart ;
+	owl:someValuesFrom ontohgis:settlement_unit1000 .
+
+:object_204 rdfs:label "manifestacja obszaru administracyjnego"@pl .
+# 
+# http://purl.org/ontohgis#object_205
+
+:object_205 a owl:Class ;
+	rdfs:subClassOf :object_204 ;
+	rdfs:label "manifestacja obszaru administracji religijnej"@pl .
+# 
+# http://purl.org/ontohgis#object_206
+
+:object_206 a owl:Class ;
+	rdfs:subClassOf :object_204 ;
+	rdfs:label "manifestacja obszaru administracji świeckiej"@pl .
 # 
 # http://purl.org/ontohgis#object_21
 
@@ -322,24 +458,24 @@ _:genid3 a owl:Restriction ;
 # http://purl.org/ontohgis#object_23
 
 :object_23 a owl:Class ;
-	owl:equivalentClass _:genid4 .
+	owl:equivalentClass _:genid21 .
 
-_:genid4 owl:intersectionOf _:genid7 .
+_:genid21 owl:intersectionOf _:genid24 .
 
-_:genid7 a rdf:List ;
+_:genid24 a rdf:List ;
 	rdf:first ontohgis:object_1 ;
-	rdf:rest _:genid5 .
+	rdf:rest _:genid22 .
 
-_:genid5 a rdf:List ;
-	rdf:first _:genid6 .
+_:genid22 a rdf:List ;
+	rdf:first _:genid23 .
 
-_:genid6 a owl:Restriction ;
+_:genid23 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_110 .
 
-_:genid5 rdf:rest rdf:nil .
+_:genid22 rdf:rest rdf:nil .
 
-_:genid4 a owl:Class .
+_:genid21 a owl:Class .
 
 :object_23 rdfs:subClassOf ontohgis:object_1 ;
 	rdfs:isDefinedBy "Budynek jest to przedmiot trwający w czasie, który został wytworzony lub wykorzystany w celu odgraniczenia pewnej przestrzeni (“wewnątrz\") od innej przestrzeni (“zewnątrz”)."@pl ;
@@ -355,51 +491,53 @@ _:genid4 a owl:Class .
 # http://purl.org/ontohgis#object_30
 
 :object_30 a owl:Class ;
-	rdfs:subClassOf oc:VariableEntity , _:genid8 .
+	rdfs:subClassOf oc:VariableEntity , _:genid25 .
 
-_:genid8 a owl:Class ;
-	owl:unionOf _:genid11 .
+_:genid25 a owl:Class ;
+	owl:unionOf _:genid28 .
 
-_:genid11 a rdf:List ;
+_:genid28 a rdf:List ;
 	rdf:first :object_50 ;
-	rdf:rest _:genid9 .
+	rdf:rest _:genid26 .
 
-_:genid9 a rdf:List ;
-	rdf:first _:genid10 .
+_:genid26 a rdf:List ;
+	rdf:first _:genid27 .
 
-_:genid10 a owl:Restriction ;
+_:genid27 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom :object_50 .
 
-_:genid9 rdf:rest rdf:nil .
+_:genid26 rdf:rest rdf:nil .
 
-:object_30 rdfs:label "jednostka osadnicza"@pl .
+:object_30 owl:disjointWith ontohgis:settlement_unit1001 ;
+	rdfs:label "(Właściwa) jednostka osadnicza to budynek mieszkalny lub zespół budynków mieszkalnych."@en , "human settlement"@en , "jednostka osadnicza"@pl ;
+	rdfs:seeAlso "http://encyklopedia.pwn.pl/haslo/jednostka-osadnicza;3917491.html"^^xsd:anyURI .
 # 
 # http://purl.org/ontohgis#object_31
 
 :object_31 a owl:Class ;
-	owl:equivalentClass _:genid12 .
+	owl:equivalentClass _:genid29 .
 
-_:genid12 owl:intersectionOf _:genid15 .
+_:genid29 owl:intersectionOf _:genid32 .
 
-_:genid15 a rdf:List ;
+_:genid32 a rdf:List ;
 	rdf:first obo:IAO_0000590 ;
-	rdf:rest _:genid13 .
+	rdf:rest _:genid30 .
 
-_:genid13 a rdf:List ;
-	rdf:first _:genid14 .
+_:genid30 a rdf:List ;
+	rdf:first _:genid31 .
 
-_:genid14 a owl:Restriction ;
+_:genid31 a owl:Restriction ;
 	owl:onProperty obo:IAO_0000219 ;
 	owl:someValuesFrom :object_40 .
 
-_:genid13 rdf:rest rdf:nil .
+_:genid30 rdf:rest rdf:nil .
 
-_:genid12 a owl:Class .
+_:genid29 a owl:Class .
 
-:object_31 rdfs:subClassOf obo:IAO_0000590 , _:genid16 .
+:object_31 rdfs:subClassOf obo:IAO_0000590 , _:genid33 .
 
-_:genid16 a owl:Restriction ;
+_:genid33 a owl:Restriction ;
 	owl:onProperty obo:IAO_0000219 ;
 	owl:maxCardinality "1"^^xsd:nonNegativeInteger .
 
@@ -408,59 +546,71 @@ _:genid16 a owl:Restriction ;
 # http://purl.org/ontohgis#object_40
 
 :object_40 a owl:Class ;
-	rdfs:subClassOf oc:VariableEntityManifestation , :object_10 , _:genid17 .
+	owl:equivalentClass _:genid34 .
 
-_:genid17 a owl:Restriction ;
-	owl:onProperty :InverseIAO_0000136 ;
-	owl:someValuesFrom :object_31 .
-
-:object_40 rdfs:subClassOf _:genid18 .
-
-_:genid18 a owl:Restriction ;
-	owl:onProperty :hasFunction ;
-	owl:someValuesFrom :object_103 .
-
-:object_40 rdfs:subClassOf _:genid19 .
-
-_:genid19 a owl:Restriction ;
+_:genid34 a owl:Restriction ;
 	owl:onProperty oc:isManifestationOf ;
 	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass :object_30 .
 
-:object_40 owl:disjointUnionOf _:genid21 .
+:object_40 rdfs:subClassOf oc:VariableEntityManifestation , :object_10 , _:genid35 .
 
-_:genid21 a rdf:List ;
+_:genid35 a owl:Restriction ;
+	owl:onProperty :InverseIAO_0000136 ;
+	owl:someValuesFrom :object_31 .
+
+:object_40 rdfs:subClassOf _:genid36 .
+
+_:genid36 a owl:Restriction ;
+	owl:onProperty :hasFunction ;
+	owl:someValuesFrom :object_103 .
+
+:object_40 rdfs:subClassOf _:genid37 .
+
+_:genid37 a owl:Restriction ;
+	owl:onProperty geosparql:hasGeometry ;
+	owl:maxCardinality "1"^^xsd:nonNegativeInteger .
+
+:object_40 rdfs:subClassOf _:genid38 .
+
+_:genid38 a owl:Restriction ;
+	owl:onProperty oc:hasBeginning ;
+	owl:someValuesFrom xsd:dateTime .
+
+:object_40 owl:disjointUnionOf _:genid40 .
+
+_:genid40 a rdf:List ;
 	rdf:first :object_12 ;
-	rdf:rest _:genid20 .
+	rdf:rest _:genid39 .
 
-_:genid20 a rdf:List ;
+_:genid39 a rdf:List ;
 	rdf:first ontohgis:settlement_unit1000 ;
 	rdf:rest rdf:nil .
 
-:object_40 rdfs:label "typ jednostki osadniczej"@pl ;
-	rdfs:seeAlso "http://encyklopedia.pwn.pl/haslo/jednostka-osadnicza;3917491.html" .
+:object_40 rdfs:comment "We assume that each settlement manifests itself as of a certain type, e.g., as a village."@en ;
+	rdfs:label "manifestacja jednostki osadniczej"@pl .
 # 
 # http://purl.org/ontohgis#object_50
 
 :object_50 a owl:Class ;
-	owl:equivalentClass _:genid22 .
+	owl:equivalentClass _:genid41 .
 
-_:genid22 owl:intersectionOf _:genid25 .
+_:genid41 owl:intersectionOf _:genid44 .
 
-_:genid25 a rdf:List ;
+_:genid44 a rdf:List ;
 	rdf:first :object_23 ;
-	rdf:rest _:genid23 .
+	rdf:rest _:genid42 .
 
-_:genid23 a rdf:List ;
-	rdf:first _:genid24 .
+_:genid42 a rdf:List ;
+	rdf:first _:genid43 .
 
-_:genid24 a owl:Restriction ;
+_:genid43 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_103 .
 
-_:genid23 rdf:rest rdf:nil .
+_:genid42 rdf:rest rdf:nil .
 
-_:genid22 a owl:Class .
+_:genid41 a owl:Class .
 
 :object_50 rdfs:subClassOf :object_23 , ontohgis:settlement_unit1000 ;
 	rdfs:isDefinedBy "Budynek mieszkalny jest to budynek, w którym odgraniczona przestrzeń (“wewnątrz\") jest przeznaczona do przebywania ludzi."@pl ;
@@ -469,24 +619,14 @@ _:genid22 a owl:Class .
 # http://purl.org/ontohgis#settlement_unit3020
 
 :settlement_unit3020 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit3005 , _:genid26 .
-
-_:genid26 a owl:Restriction ;
-	owl:onProperty :administersOver ;
-	owl:someValuesFrom ontohgis:settlement_unit3012 .
-
-:settlement_unit3020 rdfs:label "organ administracji religijnej"@pl .
+	rdfs:subClassOf ontohgis:settlement_unit3005 ;
+	rdfs:label "organ administracji religijnej"@pl .
 # 
 # http://purl.org/ontohgis#settlement_unit3021
 
 :settlement_unit3021 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit3005 , _:genid27 .
-
-_:genid27 a owl:Restriction ;
-	owl:onProperty :administersOver ;
-	owl:someValuesFrom ontohgis:settlement_unit3014 .
-
-:settlement_unit3021 rdfs:label "organ administracji świeckiej"@pl .
+	rdfs:subClassOf ontohgis:settlement_unit3005 ;
+	rdfs:label "organ administracji świeckiej"@pl .
 # 
 # http://purl.org/ontohgis#settlement_unit3100
 
@@ -503,24 +643,24 @@ ontohgis:object_1 a owl:Class ;
 # http://purl.org/ontohgis/object_101
 
 ontohgis:object_101 a owl:Class ;
-	owl:equivalentClass _:genid28 .
+	owl:equivalentClass _:genid45 .
 
-_:genid28 owl:intersectionOf _:genid31 .
+_:genid45 owl:intersectionOf _:genid48 .
 
-_:genid31 a rdf:List ;
+_:genid48 a rdf:List ;
 	rdf:first obo:BFO_0000034 ;
-	rdf:rest _:genid29 .
+	rdf:rest _:genid46 .
 
-_:genid29 a rdf:List ;
-	rdf:first _:genid30 .
+_:genid46 a rdf:List ;
+	rdf:first _:genid47 .
 
-_:genid30 a owl:Restriction ;
+_:genid47 a owl:Restriction ;
 	owl:onProperty :isProperFunctionOf ;
 	owl:someValuesFrom ontohgis:settlement_unit1000 .
 
-_:genid29 rdf:rest rdf:nil .
+_:genid46 rdf:rest rdf:nil .
 
-_:genid28 a owl:Class .
+_:genid45 a owl:Class .
 
 ontohgis:object_101 rdfs:label "funkcja miejscowości"@pl , "settlement function"@en .
 # 
@@ -539,9 +679,9 @@ ontohgis:object_3 a owl:Class ;
 # http://purl.org/ontohgis/object_4
 
 ontohgis:object_4 a owl:Class ;
-	rdfs:subClassOf :object_23 , _:genid32 .
+	rdfs:subClassOf :object_23 , _:genid49 .
 
-_:genid32 a owl:Restriction ;
+_:genid49 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_103 .
 
@@ -556,9 +696,9 @@ ontohgis:object_5 a owl:Class ;
 # http://purl.org/ontohgis/object_6
 
 ontohgis:object_6 a owl:Class ;
-	rdfs:subClassOf :object_23 , ontohgis:settlement_unit28 , _:genid33 .
+	rdfs:subClassOf :object_23 , ontohgis:settlement_unit28 , _:genid50 .
 
-_:genid33 a owl:Restriction ;
+_:genid50 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_103 .
 
@@ -608,40 +748,28 @@ ontohgis:settlement_unit100 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit1000
 
 ontohgis:settlement_unit1000 a owl:Class ;
-	rdfs:subClassOf :object_40 , _:genid34 .
+	rdfs:subClassOf :object_40 , _:genid51 .
 
-_:genid34 a owl:Restriction ;
+_:genid51 a owl:Restriction ;
 	owl:onProperty ontohgis:hasBoundary ;
 	owl:someValuesFrom ontohgis:settlement_unit2001 .
 
-ontohgis:settlement_unit1000 rdfs:subClassOf _:genid35 .
+ontohgis:settlement_unit1000 rdfs:subClassOf _:genid52 .
 
-_:genid35 a owl:Restriction ;
+_:genid52 a owl:Restriction ;
 	owl:onProperty ontohgis:hasBoundary ;
 	owl:allValuesFrom ontohgis:settlement_unit2001 .
 
 ontohgis:settlement_unit1000 ontohgis:has_source_name "Miejscowość"@pl ;
-	rdfs:isDefinedBy "(Właściwa) jednostka osadnicza to budynek mieszkalny lub zespół budynków mieszkalnych."@pl ;
-	rdfs:label "human settlement type"@en , "typ właściwej jednostki osadniczej"@pl .
+	rdfs:label "human settlement manifestation"@en , "manifestacja właściwej jednostki osadniczej"@pl .
 # 
 # http://purl.org/ontohgis/settlement_unit1001
 
 ontohgis:settlement_unit1001 a owl:Class ;
-	rdfs:subClassOf :object_12 , _:genid36 .
+	rdfs:subClassOf oc:VariableEntity ;
+	owl:hasKey _:genid53 .
 
-_:genid36 a owl:Restriction ;
-	owl:onProperty ontohgis:hasBoundary ;
-	owl:someValuesFrom ontohgis:settlement_unit2000 .
-
-ontohgis:settlement_unit1001 rdfs:subClassOf _:genid37 .
-
-_:genid37 a owl:Restriction ;
-	owl:onProperty ontohgis:hasBoundary ;
-	owl:allValuesFrom ontohgis:settlement_unit2000 .
-
-ontohgis:settlement_unit1001 owl:hasKey _:genid38 .
-
-_:genid38 a rdf:List ;
+_:genid53 a rdf:List ;
 	rdf:first :hasExternalIdentifier ;
 	rdf:rest rdf:nil .
 
@@ -1333,28 +1461,28 @@ ontohgis:settlement_unit169 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit17
 
 ontohgis:settlement_unit17 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid39 .
+	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid54 .
 
-_:genid39 a owl:Class ;
-	owl:unionOf _:genid42 .
+_:genid54 a owl:Class ;
+	owl:unionOf _:genid57 .
 
-_:genid42 a rdf:List ;
-	rdf:first _:genid43 .
+_:genid57 a rdf:List ;
+	rdf:first _:genid58 .
 
-_:genid43 a owl:Restriction ;
+_:genid58 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:object_2 .
 
-_:genid42 rdf:rest _:genid40 .
+_:genid57 rdf:rest _:genid55 .
 
-_:genid40 a rdf:List ;
-	rdf:first _:genid41 .
+_:genid55 a rdf:List ;
+	rdf:first _:genid56 .
 
-_:genid41 a owl:Restriction ;
+_:genid56 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:settlement_unit3013 .
 
-_:genid40 rdf:rest rdf:nil .
+_:genid55 rdf:rest rdf:nil .
 
 ontohgis:settlement_unit17 ontohgis:has_indexed_name "Wsie z kościołem lub parafią"^^xsd:string ;
 	ontohgis:has_source_name "Dorfer mit Kirche oder Pfarrein"^^xsd:string ;
@@ -1474,7 +1602,7 @@ Postać romunek mogła powstać w wyniku typowych dla XIX wieku wahań fonetyczn
 Artur Czesak, IJP PAN, Kraków"""@pl ;
 	rdfs:label "Romunek"^^xsd:string .
 
-_:genid44 a owl:Axiom ;
+_:genid59 a owl:Axiom ;
 	owl:annotatedSource ontohgis:settlement_unit180 ;
 	owl:annotatedProperty rdfs:comment ;
 	owl:annotatedTarget """Nie wiem, jaki teren znajduje się na mapie ani kto ją sporządzał, ale pragnę zauważyć, że w historycznej ziemi dobrzyńskiej rumunek to ‘oddzielne gospodarstwo poza zwartą zabudową wsi’, ewentualnie skupisko domów poza wsią, czyli odpowiednik tzw. kolonii.
@@ -1699,34 +1827,34 @@ ontohgis:settlement_unit200 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit2000
 
 ontohgis:settlement_unit2000 a owl:Class ;
-	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid45 .
+	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid60 .
 
-_:genid45 a owl:Restriction ;
-	owl:onProperty :hasSpatialCharacter ;
-	owl:someValuesFrom owl:Thing .
-
-ontohgis:settlement_unit2000 rdfs:subClassOf _:genid46 .
-
-_:genid46 a owl:Restriction ;
+_:genid60 a owl:Restriction ;
 	owl:onProperty ontohgis:isBoundaryOf ;
 	owl:someValuesFrom ontohgis:settlement_unit1001 .
+
+ontohgis:settlement_unit2000 rdfs:subClassOf _:genid61 .
+
+_:genid61 a owl:Restriction ;
+	owl:onProperty geosparql:hasGeometry ;
+	owl:someValuesFrom owl:Thing .
 
 ontohgis:settlement_unit2000 rdfs:label "administrative unit boundary"@en , "granica podziału administracyjnego"@pl .
 # 
 # http://purl.org/ontohgis/settlement_unit2001
 
 ontohgis:settlement_unit2001 a owl:Class ;
-	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid47 .
+	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid62 .
 
-_:genid47 a owl:Restriction ;
-	owl:onProperty :hasSpatialCharacter ;
-	owl:someValuesFrom owl:Thing .
-
-ontohgis:settlement_unit2001 rdfs:subClassOf _:genid48 .
-
-_:genid48 a owl:Restriction ;
+_:genid62 a owl:Restriction ;
 	owl:onProperty ontohgis:isBoundaryOf ;
 	owl:someValuesFrom ontohgis:settlement_unit1000 .
+
+ontohgis:settlement_unit2001 rdfs:subClassOf _:genid63 .
+
+_:genid63 a owl:Restriction ;
+	owl:onProperty geosparql:hasGeometry ;
+	owl:someValuesFrom owl:Thing .
 
 ontohgis:settlement_unit2001 rdfs:label "granica miejscowości"@pl , "settlement unit boundary"@en .
 # 
@@ -1871,9 +1999,9 @@ ontohgis:settlement_unit214 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit215
 
 ontohgis:settlement_unit215 a owl:Class ;
-	rdfs:subClassOf :grochzkapusta , _:genid49 .
+	rdfs:subClassOf :grochzkapusta , _:genid64 .
 
-_:genid49 a owl:Restriction ;
+_:genid64 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:settlement_unit215 .
 
@@ -2275,28 +2403,28 @@ ontohgis:settlement_unit254 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit255
 
 ontohgis:settlement_unit255 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid50 .
+	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid65 .
 
-_:genid50 a owl:Class ;
-	owl:unionOf _:genid53 .
+_:genid65 a owl:Class ;
+	owl:unionOf _:genid68 .
 
-_:genid53 a rdf:List ;
-	rdf:first _:genid54 .
+_:genid68 a rdf:List ;
+	rdf:first _:genid69 .
 
-_:genid54 a owl:Restriction ;
+_:genid69 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:object_2 .
 
-_:genid53 rdf:rest _:genid51 .
+_:genid68 rdf:rest _:genid66 .
 
-_:genid51 a rdf:List ;
-	rdf:first _:genid52 .
+_:genid66 a rdf:List ;
+	rdf:first _:genid67 .
 
-_:genid52 a owl:Restriction ;
+_:genid67 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:settlement_unit3011 .
 
-_:genid51 rdf:rest rdf:nil .
+_:genid66 rdf:rest rdf:nil .
 
 ontohgis:settlement_unit255 ontohgis:has_indexed_name "Wsie z kościołem lub urzędem gminy"^^xsd:string ;
 	ontohgis:has_source_name "Wsie z kościołem lub urzędem gminy"^^xsd:string ;
@@ -2306,9 +2434,9 @@ ontohgis:settlement_unit255 ontohgis:has_indexed_name "Wsie z kościołem lub ur
 # http://purl.org/ontohgis/settlement_unit256
 
 ontohgis:settlement_unit256 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid55 .
+	rdfs:subClassOf ontohgis:settlement_unit3000 , _:genid70 .
 
-_:genid55 a owl:Restriction ;
+_:genid70 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:settlement_unit3013 .
 
@@ -2347,9 +2475,9 @@ ontohgis:settlement_unit28 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit29
 
 ontohgis:settlement_unit29 a owl:Class ;
-	rdfs:subClassOf :object_23 , _:genid56 .
+	rdfs:subClassOf :object_23 , _:genid71 .
 
-_:genid56 a owl:Restriction ;
+_:genid71 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_103 .
 
@@ -2393,9 +2521,9 @@ ontohgis:settlement_unit3001 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit3002
 
 ontohgis:settlement_unit3002 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit1000 , _:genid57 .
+	rdfs:subClassOf ontohgis:settlement_unit1000 , _:genid72 .
 
-_:genid57 a owl:Restriction ;
+_:genid72 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_102 .
 
@@ -2404,25 +2532,25 @@ ontohgis:settlement_unit3002 rdfs:label "targ"@pl .
 # http://purl.org/ontohgis/settlement_unit3003
 
 ontohgis:settlement_unit3003 a owl:Class ;
-	owl:equivalentClass _:genid58 .
+	owl:equivalentClass _:genid73 .
 
-_:genid58 owl:intersectionOf _:genid61 .
+_:genid73 owl:intersectionOf _:genid76 .
 
-_:genid61 a rdf:List ;
+_:genid76 a rdf:List ;
 	rdf:first ontohgis:settlement_unit1000 ;
-	rdf:rest _:genid59 .
+	rdf:rest _:genid74 .
 
-_:genid59 a rdf:List ;
-	rdf:first _:genid60 .
+_:genid74 a rdf:List ;
+	rdf:first _:genid75 .
 
-_:genid60 a owl:Restriction ;
+_:genid75 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
 	owl:onClass ontohgis:settlement_unit1000 .
 
-_:genid59 rdf:rest rdf:nil .
+_:genid74 rdf:rest rdf:nil .
 
-_:genid58 a owl:Class .
+_:genid73 a owl:Class .
 
 ontohgis:settlement_unit3003 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 	rdfs:comment "Miejscowość jest (mereologicznie) prosta, gdy żadna jej część nie jest miejscowością."@pl ;
@@ -2431,25 +2559,25 @@ ontohgis:settlement_unit3003 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 # http://purl.org/ontohgis/settlement_unit3004
 
 ontohgis:settlement_unit3004 a owl:Class ;
-	owl:equivalentClass _:genid62 .
+	owl:equivalentClass _:genid77 .
 
-_:genid62 owl:intersectionOf _:genid65 .
+_:genid77 owl:intersectionOf _:genid80 .
 
-_:genid65 a rdf:List ;
+_:genid80 a rdf:List ;
 	rdf:first ontohgis:settlement_unit1000 ;
-	rdf:rest _:genid63 .
+	rdf:rest _:genid78 .
 
-_:genid63 a rdf:List ;
-	rdf:first _:genid64 .
+_:genid78 a rdf:List ;
+	rdf:first _:genid79 .
 
-_:genid64 a owl:Restriction ;
+_:genid79 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass ontohgis:settlement_unit1000 .
 
-_:genid63 rdf:rest rdf:nil .
+_:genid78 rdf:rest rdf:nil .
 
-_:genid62 a owl:Class .
+_:genid77 a owl:Class .
 
 ontohgis:settlement_unit3004 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 	rdfs:comment "Miejscowość jest (mereologicznie) prosta, gdy niektóre jej części są miejscowościami."@pl ;
@@ -2458,26 +2586,33 @@ ontohgis:settlement_unit3004 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 # http://purl.org/ontohgis/settlement_unit3005
 
 ontohgis:settlement_unit3005 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit1001 , _:genid66 .
+	owl:equivalentClass _:genid81 .
 
-_:genid66 a owl:Restriction ;
-	owl:onProperty :administersOver ;
-	owl:someValuesFrom owl:Thing .
+_:genid81 a owl:Class ;
+	owl:unionOf _:genid83 .
 
-ontohgis:settlement_unit3005 rdfs:subClassOf _:genid67 .
+_:genid83 a rdf:List ;
+	rdf:first :settlement_unit3020 ;
+	rdf:rest _:genid82 .
 
-_:genid67 a owl:Restriction ;
+_:genid82 a rdf:List ;
+	rdf:first :settlement_unit3021 ;
+	rdf:rest rdf:nil .
+
+ontohgis:settlement_unit3005 rdfs:subClassOf ontohgis:settlement_unit1001 , _:genid84 .
+
+_:genid84 a owl:Restriction ;
 	owl:onProperty :hasProperFunction ;
 	owl:someValuesFrom :object_105 .
 
 ontohgis:settlement_unit3005 owl:disjointWith ontohgis:settlement_unit3006 ;
-	owl:disjointUnionOf _:genid69 .
+	owl:disjointUnionOf _:genid86 .
 
-_:genid69 a rdf:List ;
+_:genid86 a rdf:List ;
 	rdf:first :settlement_unit3020 ;
-	rdf:rest _:genid68 .
+	rdf:rest _:genid85 .
 
-_:genid68 a rdf:List ;
+_:genid85 a rdf:List ;
 	rdf:first :settlement_unit3021 ;
 	rdf:rest rdf:nil .
 
@@ -2487,49 +2622,44 @@ ontohgis:settlement_unit3005 ontohgis:hasOntologyDevelopmentComment "Czy to jest
 # http://purl.org/ontohgis/settlement_unit3006
 
 ontohgis:settlement_unit3006 a owl:Class ;
-	owl:equivalentClass _:genid70 .
+	owl:equivalentClass _:genid87 .
 
-_:genid70 a owl:Class ;
-	owl:unionOf _:genid72 .
+_:genid87 a owl:Class ;
+	owl:unionOf _:genid89 .
 
-_:genid72 a rdf:List ;
+_:genid89 a rdf:List ;
 	rdf:first ontohgis:settlement_unit3012 ;
-	rdf:rest _:genid71 .
+	rdf:rest _:genid88 .
 
-_:genid71 a rdf:List ;
+_:genid88 a rdf:List ;
 	rdf:first ontohgis:settlement_unit3014 ;
 	rdf:rest rdf:nil .
 
-ontohgis:settlement_unit3006 rdfs:subClassOf ontohgis:settlement_unit1001 , _:genid73 .
-
-_:genid73 a owl:Restriction ;
-	owl:onProperty ontohgis:hasPart ;
-	owl:someValuesFrom ontohgis:settlement_unit1000 .
-
-ontohgis:settlement_unit3006 rdfs:label "obszar adminstracyjny"@pl .
+ontohgis:settlement_unit3006 rdfs:subClassOf ontohgis:settlement_unit1001 ;
+	rdfs:label "obszar adminstracyjny"@pl .
 # 
 # http://purl.org/ontohgis/settlement_unit3007
 
 ontohgis:settlement_unit3007 a owl:Class ;
-	owl:equivalentClass _:genid74 .
+	owl:equivalentClass _:genid90 .
 
-_:genid74 owl:intersectionOf _:genid77 .
+_:genid90 owl:intersectionOf _:genid93 .
 
-_:genid77 a rdf:List ;
+_:genid93 a rdf:List ;
 	rdf:first ontohgis:settlement_unit1000 ;
-	rdf:rest _:genid75 .
+	rdf:rest _:genid91 .
 
-_:genid75 a rdf:List ;
-	rdf:first _:genid76 .
+_:genid91 a rdf:List ;
+	rdf:first _:genid92 .
 
-_:genid76 a owl:Restriction ;
+_:genid92 a owl:Restriction ;
 	owl:onProperty ontohgis:isPartOf ;
 	owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
 	owl:onClass ontohgis:settlement_unit1000 .
 
-_:genid75 rdf:rest rdf:nil .
+_:genid91 rdf:rest rdf:nil .
 
-_:genid74 a owl:Class .
+_:genid90 a owl:Class .
 
 ontohgis:settlement_unit3007 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 	rdfs:comment "Miejscowość jest (mereologicznie) samodzielna, gdy nie jest częścią żadnej miejscowości." ;
@@ -2538,24 +2668,24 @@ ontohgis:settlement_unit3007 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 # http://purl.org/ontohgis/settlement_unit3008
 
 ontohgis:settlement_unit3008 a owl:Class ;
-	owl:equivalentClass _:genid78 .
+	owl:equivalentClass _:genid94 .
 
-_:genid78 owl:intersectionOf _:genid81 .
+_:genid94 owl:intersectionOf _:genid97 .
 
-_:genid81 a rdf:List ;
+_:genid97 a rdf:List ;
 	rdf:first ontohgis:settlement_unit1000 ;
-	rdf:rest _:genid79 .
+	rdf:rest _:genid95 .
 
-_:genid79 a rdf:List ;
-	rdf:first _:genid80 .
+_:genid95 a rdf:List ;
+	rdf:first _:genid96 .
 
-_:genid80 a owl:Restriction ;
+_:genid96 a owl:Restriction ;
 	owl:onProperty ontohgis:isPartOf ;
 	owl:someValuesFrom ontohgis:settlement_unit1000 .
 
-_:genid79 rdf:rest rdf:nil .
+_:genid95 rdf:rest rdf:nil .
 
-_:genid78 a owl:Class .
+_:genid94 a owl:Class .
 
 ontohgis:settlement_unit3008 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 	rdfs:comment "Miejscowość jest (mereologicznie) niesamodzielna, gdy jest częścią pewnej miejscowości."@pl ;
@@ -2564,24 +2694,24 @@ ontohgis:settlement_unit3008 rdfs:subClassOf ontohgis:settlement_unit1000 ;
 # http://purl.org/ontohgis/settlement_unit3009
 
 ontohgis:settlement_unit3009 a owl:Class ;
-	owl:equivalentClass _:genid82 .
+	owl:equivalentClass _:genid98 .
 
-_:genid82 owl:intersectionOf _:genid85 .
+_:genid98 owl:intersectionOf _:genid101 .
 
-_:genid85 a rdf:List ;
+_:genid101 a rdf:List ;
 	rdf:first ontohgis:settlement_unit3000 ;
-	rdf:rest _:genid83 .
+	rdf:rest _:genid99 .
 
-_:genid83 a rdf:List ;
-	rdf:first _:genid84 .
+_:genid99 a rdf:List ;
+	rdf:first _:genid100 .
 
-_:genid84 a owl:Restriction ;
+_:genid100 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:someValuesFrom ontohgis:object_2 .
 
-_:genid83 rdf:rest rdf:nil .
+_:genid99 rdf:rest rdf:nil .
 
-_:genid82 a owl:Class .
+_:genid98 a owl:Class .
 
 ontohgis:settlement_unit3009 rdfs:subClassOf ontohgis:settlement_unit3000 ;
 	rdfs:label "wieś z kościołem"@pl .
@@ -2589,25 +2719,25 @@ ontohgis:settlement_unit3009 rdfs:subClassOf ontohgis:settlement_unit3000 ;
 # http://purl.org/ontohgis/settlement_unit3010
 
 ontohgis:settlement_unit3010 a owl:Class ;
-	owl:equivalentClass _:genid86 .
+	owl:equivalentClass _:genid102 .
 
-_:genid86 owl:intersectionOf _:genid89 .
+_:genid102 owl:intersectionOf _:genid105 .
 
-_:genid89 a rdf:List ;
+_:genid105 a rdf:List ;
 	rdf:first ontohgis:settlement_unit3000 ;
-	rdf:rest _:genid87 .
+	rdf:rest _:genid103 .
 
-_:genid87 a rdf:List ;
-	rdf:first _:genid88 .
+_:genid103 a rdf:List ;
+	rdf:first _:genid104 .
 
-_:genid88 a owl:Restriction ;
+_:genid104 a owl:Restriction ;
 	owl:onProperty ontohgis:hasPart ;
 	owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
 	owl:onClass ontohgis:object_2 .
 
-_:genid87 rdf:rest rdf:nil .
+_:genid103 rdf:rest rdf:nil .
 
-_:genid86 a owl:Class .
+_:genid102 a owl:Class .
 
 ontohgis:settlement_unit3010 rdfs:subClassOf ontohgis:settlement_unit3000 ;
 	rdfs:label "wieś bez kościoła"@pl .
@@ -2645,9 +2775,9 @@ ontohgis:settlement_unit3015 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit3016
 
 ontohgis:settlement_unit3016 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid90 .
+	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid106 .
 
-_:genid90 a owl:Restriction ;
+_:genid106 a owl:Restriction ;
 	owl:onProperty ontohgis:isBoundaryOf ;
 	owl:someValuesFrom ontohgis:settlement_unit3017 .
 
@@ -2662,9 +2792,9 @@ ontohgis:settlement_unit3017 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit3018
 
 ontohgis:settlement_unit3018 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid91 .
+	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid107 .
 
-_:genid91 a owl:Restriction ;
+_:genid107 a owl:Restriction ;
 	owl:onProperty ontohgis:isBoundaryOf ;
 	owl:someValuesFrom ontohgis:settlement_unit3015 .
 
@@ -2679,9 +2809,9 @@ ontohgis:settlement_unit3019 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit3020
 
 ontohgis:settlement_unit3020 a owl:Class ;
-	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid92 .
+	rdfs:subClassOf ontohgis:settlement_unit2000 , _:genid108 .
 
-_:genid92 a owl:Restriction ;
+_:genid108 a owl:Restriction ;
 	owl:onProperty ontohgis:isBoundaryOf ;
 	owl:someValuesFrom ontohgis:settlement_unit3019 .
 
@@ -2820,10 +2950,10 @@ ontohgis:settlement_unit43 a owl:Class ;
 # http://purl.org/ontohgis/settlement_unit44
 
 ontohgis:settlement_unit44 a owl:Class ;
-	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid93 .
+	rdfs:subClassOf obo:BFO_0000142 , geosparql:Feature , _:genid109 .
 
-_:genid93 a owl:Restriction ;
-	owl:onProperty :hasSpatialCharacter ;
+_:genid109 a owl:Restriction ;
+	owl:onProperty geosparql:hasGeometry ;
 	owl:someValuesFrom owl:Thing .
 
 ontohgis:settlement_unit44 ontohgis:has_indexed_name "Granica"^^xsd:string ;
@@ -3379,15 +3509,15 @@ ontohgis:settlement_unit99 a owl:Class ;
 # http://purl.org/ontohgis/source
 
 ontohgis:source a owl:Class ;
-	rdfs:subClassOf obo:IAO_0000310 , _:genid94 .
+	rdfs:subClassOf obo:IAO_0000310 , _:genid110 .
 
-_:genid94 a owl:Restriction ;
+_:genid110 a owl:Restriction ;
 	owl:onProperty :isPublishedAfter ;
 	owl:someValuesFrom xsd:dateTime .
 
-ontohgis:source rdfs:subClassOf _:genid95 .
+ontohgis:source rdfs:subClassOf _:genid111 .
 
-_:genid95 a owl:Restriction ;
+_:genid111 a owl:Restriction ;
 	owl:onProperty :isPublishedBefore ;
 	owl:someValuesFrom xsd:dateTime .
 
@@ -3395,19 +3525,31 @@ ontohgis:source rdfs:label "source"@en , "źródło"@pl .
 # 
 # http://www.opengis.net/ont/geosparql#SpatialObject
 
-geosparql:SpatialObject rdfs:subClassOf obo:BFO_0000002 .
+geosparql:SpatialObject rdfs:subClassOf obo:BFO_0000002 , _:genid112 .
+
+_:genid112 a owl:Restriction ;
+	owl:onProperty :isGeometryOf ;
+	owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :object_200 .
+
+geosparql:SpatialObject rdfs:subClassOf _:genid113 .
+
+_:genid113 a owl:Restriction ;
+	owl:onProperty :isGeometryOf ;
+	owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :object_40 .
 # 
 # http://www.opengis.net/ont/sf#Geometry
 
-<http://www.opengis.net/ont/sf#Geometry> rdfs:subClassOf _:genid96 .
+<http://www.opengis.net/ont/sf#Geometry> rdfs:subClassOf _:genid114 .
 
-_:genid96 a owl:Restriction ;
+_:genid114 a owl:Restriction ;
 	owl:onProperty :hasExternalIdentifier ;
 	owl:someValuesFrom xsd:integer .
 
-<http://www.opengis.net/ont/sf#Geometry> owl:hasKey _:genid97 .
+<http://www.opengis.net/ont/sf#Geometry> owl:hasKey _:genid115 .
 
-_:genid97 a rdf:List ;
+_:genid115 a rdf:List ;
 	rdf:first :hasExternalIdentifier ;
 	rdf:rest rdf:nil .
 # 
@@ -3497,7 +3639,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20000
 
-:settlement_unit20000 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20000 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10000 ;
 	geosparql:hasGeometry :area_1 ;
 	oc:hasBeginning "1460-01-01T00:00:00"^^xsd:dateTime ;
@@ -3506,14 +3648,14 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20001
 
-:settlement_unit20001 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3000 ;
+:settlement_unit20001 a owl:NamedIndividual , ontohgis:settlement_unit3000 ;
 	oc:isManifestationOf :settlement_unit10001 ;
 	oc:hasEnd "1460-12-31T00:00:00"^^xsd:dateTime ;
 	rdfs:label "Roskydalino"^^xsd:string .
 # 
 # http://purl.org/ontohgis#settlement_unit20002
 
-:settlement_unit20002 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:object_4 ;
+:settlement_unit20002 a owl:NamedIndividual , ontohgis:object_4 ;
 	oc:isManifestationOf :settlement_unit10002 ;
 	oc:hasBeginning "1230-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1424-12-31T00:00:00"^^xsd:dateTime ;
@@ -3521,7 +3663,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20003
 
-:settlement_unit20003 a owl:NamedIndividual , oc:VariableEntityManifestation , :object_24 ;
+:settlement_unit20003 a owl:NamedIndividual , :object_24 ;
 	oc:isManifestationOf :settlement_unit10002 ;
 	ontohgis:isPartOf :settlement_unit20015 ;
 	oc:hasEnd "2016-12-31T00:00:00"^^xsd:dateTime ;
@@ -3529,7 +3671,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20004
 
-:settlement_unit20004 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3000 ;
+:settlement_unit20004 a owl:NamedIndividual , ontohgis:settlement_unit3000 ;
 	oc:isManifestationOf :settlement_unit10003 ;
 	geosparql:hasGeometry :area_2 ;
 	oc:hasBeginning "1230-01-01T00:00:00"^^xsd:dateTime ;
@@ -3538,7 +3680,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20005
 
-:settlement_unit20005 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3000 ;
+:settlement_unit20005 a owl:NamedIndividual , ontohgis:settlement_unit3000 ;
 	oc:isManifestationOf :settlement_unit10004 ;
 	geosparql:hasGeometry :area_4 ;
 	oc:hasBeginning "1230-01-01T00:00:00"^^xsd:dateTime ;
@@ -3547,7 +3689,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20006
 
-:settlement_unit20006 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:object_4 ;
+:settlement_unit20006 a owl:NamedIndividual , ontohgis:object_4 ;
 	oc:isManifestationOf :settlement_unit10005 ;
 	oc:hasBeginning "1425-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1460-12-31T00:00:00"^^xsd:dateTime ;
@@ -3555,14 +3697,14 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20007
 
-:settlement_unit20007 a owl:NamedIndividual , oc:VariableEntityManifestation , :object_24 ;
+:settlement_unit20007 a owl:NamedIndividual , :object_24 ;
 	oc:isManifestationOf :settlement_unit10005 ;
 	oc:hasEnd "2016-12-31T00:00:00"^^xsd:dateTime ;
 	rdfs:label "Dybów"^^xsd:string .
 # 
 # http://purl.org/ontohgis#settlement_unit20008
 
-:settlement_unit20008 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20008 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10000 ;
 	oc:hasBeginning "1425-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1462-12-31T00:00:00"^^xsd:dateTime ;
@@ -3570,7 +3712,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20009
 
-:settlement_unit20009 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3000 ;
+:settlement_unit20009 a owl:NamedIndividual , ontohgis:settlement_unit3000 ;
 	oc:isManifestationOf :settlement_unit10006 ;
 	oc:hasBeginning "1555-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1611-12-31T00:00:00"^^xsd:dateTime ;
@@ -3578,7 +3720,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20010
 
-:settlement_unit20010 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20010 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10006 ;
 	oc:hasBeginning "1611-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1876-12-31T00:00:00"^^xsd:dateTime ;
@@ -3586,7 +3728,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20011
 
-:settlement_unit20011 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3002 ;
+:settlement_unit20011 a owl:NamedIndividual , ontohgis:settlement_unit3002 ;
 	oc:isManifestationOf :settlement_unit10006 ;
 	oc:hasBeginning "1876-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1925-12-31T00:00:00"^^xsd:dateTime ;
@@ -3594,7 +3736,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20012
 
-:settlement_unit20012 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20012 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10006 ;
 	oc:hasBeginning "1925-01-01T00:00:00"^^xsd:dateTime ;
 	oc:hasEnd "1934-12-31T00:00:00"^^xsd:dateTime ;
@@ -3602,7 +3744,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20013
 
-:settlement_unit20013 a owl:NamedIndividual , oc:VariableEntityManifestation , :settlement_unit3100 ;
+:settlement_unit20013 a owl:NamedIndividual , :settlement_unit3100 ;
 	oc:isManifestationOf :settlement_unit10006 ;
 	geosparql:hasGeometry :area_5 ;
 	oc:hasBeginning "1934-01-01T00:00:00"^^xsd:dateTime ;
@@ -3611,7 +3753,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20014
 
-:settlement_unit20014 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20014 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10007 ;
 	geosparql:hasGeometry :area_6 ;
 	oc:hasBeginning "1233-01-01T00:00:00"^^xsd:dateTime ;
@@ -3620,7 +3762,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20015
 
-:settlement_unit20015 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3000 ;
+:settlement_unit20015 a owl:NamedIndividual , ontohgis:settlement_unit3000 ;
 	oc:isManifestationOf :settlement_unit10003 ;
 	geosparql:hasGeometry :area_3 ;
 	oc:hasBeginning "1900-01-01T00:00:00"^^xsd:dateTime ;
@@ -3629,7 +3771,7 @@ _:genid97 a rdf:List ;
 # 
 # http://purl.org/ontohgis#settlement_unit20016
 
-:settlement_unit20016 a owl:NamedIndividual , oc:VariableEntityManifestation , ontohgis:settlement_unit3001 ;
+:settlement_unit20016 a owl:NamedIndividual , ontohgis:settlement_unit3001 ;
 	oc:isManifestationOf :settlement_unit10007 ;
 	geosparql:hasGeometry :area_7 ;
 	oc:hasBeginning "1934-01-01T00:00:00"^^xsd:dateTime ;
@@ -3782,7 +3924,7 @@ ontohgis:Source_35 a owl:NamedIndividual , ontohgis:source ;
 	:isPublishedAfter "1838-12-31T23:59:59"^^xsd:dateTime ;
 	rdfs:label "REYMANN_MUSTERBLATT_1822-1838"^^xsd:string .
 
-_:genid98 a owl:NegativePropertyAssertion ;
+_:genid116 a owl:NegativePropertyAssertion ;
 	owl:sourceIndividual ontohgis:Source_35 ;
 	owl:assertionProperty :isPublishedBefore ;
 	owl:targetValue "1822-01-01T00:00:00"^^xsd:dateTime .
@@ -3997,747 +4139,687 @@ ontohgis:Source_9 a owl:NamedIndividual , ontohgis:source ;
 # 
 # 
 
-_:genid99 a owl:AllDisjointClasses ;
-	owl:members _:genid102 .
+_:genid117 a owl:AllDisjointClasses ;
+	owl:members _:genid120 .
 
-_:genid102 a rdf:List ;
+_:genid120 a rdf:List ;
 	rdf:first :object_102 ;
-	rdf:rest _:genid101 .
+	rdf:rest _:genid119 .
 
-_:genid101 a rdf:List ;
+_:genid119 a rdf:List ;
 	rdf:first :object_103 ;
-	rdf:rest _:genid100 .
+	rdf:rest _:genid118 .
 
-_:genid100 a rdf:List ;
+_:genid118 a rdf:List ;
 	rdf:first :object_105 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid103 a owl:AllDisjointClasses ;
-	owl:members _:genid106 .
+_:genid121 a owl:AllDisjointClasses ;
+	owl:members _:genid124 .
 
-_:genid106 a rdf:List ;
+_:genid124 a rdf:List ;
 	rdf:first ontohgis:settlement_unit103 ;
-	rdf:rest _:genid105 .
+	rdf:rest _:genid123 .
 
-_:genid105 a rdf:List ;
+_:genid123 a rdf:List ;
 	rdf:first ontohgis:settlement_unit104 ;
-	rdf:rest _:genid104 .
+	rdf:rest _:genid122 .
 
-_:genid104 a rdf:List ;
+_:genid122 a rdf:List ;
 	rdf:first ontohgis:settlement_unit105 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid107 a owl:AllDisjointClasses ;
-	owl:members _:genid132 .
-
-_:genid132 a rdf:List ;
-	rdf:first ontohgis:settlement_unit103 ;
-	rdf:rest _:genid131 .
-
-_:genid131 a rdf:List ;
-	rdf:first ontohgis:settlement_unit112 ;
-	rdf:rest _:genid130 .
-
-_:genid130 a rdf:List ;
-	rdf:first ontohgis:settlement_unit113 ;
-	rdf:rest _:genid129 .
-
-_:genid129 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid128 .
-
-_:genid128 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid127 .
-
-_:genid127 a rdf:List ;
-	rdf:first ontohgis:settlement_unit118 ;
-	rdf:rest _:genid126 .
-
-_:genid126 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid125 .
-
-_:genid125 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid124 .
-
-_:genid124 a rdf:List ;
-	rdf:first ontohgis:settlement_unit124 ;
-	rdf:rest _:genid123 .
-
-_:genid123 a rdf:List ;
-	rdf:first ontohgis:settlement_unit125 ;
-	rdf:rest _:genid122 .
-
-_:genid122 a rdf:List ;
-	rdf:first ontohgis:settlement_unit126 ;
-	rdf:rest _:genid121 .
-
-_:genid121 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
-	rdf:rest _:genid120 .
-
-_:genid120 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
-	rdf:rest _:genid119 .
-
-_:genid119 a rdf:List ;
-	rdf:first ontohgis:settlement_unit129 ;
-	rdf:rest _:genid118 .
-
-_:genid118 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
-	rdf:rest _:genid117 .
-
-_:genid117 a rdf:List ;
-	rdf:first ontohgis:settlement_unit136 ;
-	rdf:rest _:genid116 .
-
-_:genid116 a rdf:List ;
-	rdf:first ontohgis:settlement_unit146 ;
-	rdf:rest _:genid115 .
-
-_:genid115 a rdf:List ;
-	rdf:first ontohgis:settlement_unit147 ;
-	rdf:rest _:genid114 .
-
-_:genid114 a rdf:List ;
-	rdf:first ontohgis:settlement_unit191 ;
-	rdf:rest _:genid113 .
-
-_:genid113 a rdf:List ;
-	rdf:first ontohgis:settlement_unit192 ;
-	rdf:rest _:genid112 .
-
-_:genid112 a rdf:List ;
-	rdf:first ontohgis:settlement_unit194 ;
-	rdf:rest _:genid111 .
-
-_:genid111 a rdf:List ;
-	rdf:first ontohgis:settlement_unit195 ;
-	rdf:rest _:genid110 .
-
-_:genid110 a rdf:List ;
-	rdf:first ontohgis:settlement_unit198 ;
-	rdf:rest _:genid109 .
-
-_:genid109 a rdf:List ;
-	rdf:first ontohgis:settlement_unit199 ;
-	rdf:rest _:genid108 .
-
-_:genid108 a rdf:List ;
-	rdf:first ontohgis:settlement_unit200 ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid133 a owl:AllDisjointClasses ;
-	owl:members _:genid162 .
-
-_:genid162 a rdf:List ;
-	rdf:first ontohgis:settlement_unit107 ;
-	rdf:rest _:genid161 .
-
-_:genid161 a rdf:List ;
-	rdf:first ontohgis:settlement_unit110 ;
-	rdf:rest _:genid160 .
-
-_:genid160 a rdf:List ;
-	rdf:first ontohgis:settlement_unit111 ;
-	rdf:rest _:genid159 .
-
-_:genid159 a rdf:List ;
-	rdf:first ontohgis:settlement_unit113 ;
-	rdf:rest _:genid158 .
-
-_:genid158 a rdf:List ;
-	rdf:first ontohgis:settlement_unit114 ;
-	rdf:rest _:genid157 .
-
-_:genid157 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid156 .
-
-_:genid156 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid155 .
-
-_:genid155 a rdf:List ;
-	rdf:first ontohgis:settlement_unit117 ;
-	rdf:rest _:genid154 .
-
-_:genid154 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid153 .
-
-_:genid153 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid152 .
-
-_:genid152 a rdf:List ;
-	rdf:first ontohgis:settlement_unit122 ;
-	rdf:rest _:genid151 .
-
-_:genid151 a rdf:List ;
-	rdf:first ontohgis:settlement_unit123 ;
-	rdf:rest _:genid150 .
+_:genid125 a owl:AllDisjointClasses ;
+	owl:members _:genid150 .
 
 _:genid150 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
+	rdf:first ontohgis:settlement_unit103 ;
 	rdf:rest _:genid149 .
 
 _:genid149 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
+	rdf:first ontohgis:settlement_unit112 ;
 	rdf:rest _:genid148 .
 
 _:genid148 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
+	rdf:first ontohgis:settlement_unit113 ;
 	rdf:rest _:genid147 .
 
 _:genid147 a rdf:List ;
-	rdf:first ontohgis:settlement_unit141 ;
+	rdf:first ontohgis:settlement_unit115 ;
 	rdf:rest _:genid146 .
 
 _:genid146 a rdf:List ;
-	rdf:first ontohgis:settlement_unit146 ;
+	rdf:first ontohgis:settlement_unit116 ;
 	rdf:rest _:genid145 .
 
 _:genid145 a rdf:List ;
-	rdf:first ontohgis:settlement_unit147 ;
+	rdf:first ontohgis:settlement_unit118 ;
 	rdf:rest _:genid144 .
 
 _:genid144 a rdf:List ;
-	rdf:first ontohgis:settlement_unit191 ;
+	rdf:first ontohgis:settlement_unit119 ;
 	rdf:rest _:genid143 .
 
 _:genid143 a rdf:List ;
-	rdf:first ontohgis:settlement_unit194 ;
+	rdf:first ontohgis:settlement_unit120 ;
 	rdf:rest _:genid142 .
 
 _:genid142 a rdf:List ;
-	rdf:first ontohgis:settlement_unit195 ;
+	rdf:first ontohgis:settlement_unit124 ;
 	rdf:rest _:genid141 .
 
 _:genid141 a rdf:List ;
-	rdf:first ontohgis:settlement_unit196 ;
+	rdf:first ontohgis:settlement_unit125 ;
 	rdf:rest _:genid140 .
 
 _:genid140 a rdf:List ;
-	rdf:first ontohgis:settlement_unit197 ;
+	rdf:first ontohgis:settlement_unit126 ;
 	rdf:rest _:genid139 .
 
 _:genid139 a rdf:List ;
-	rdf:first ontohgis:settlement_unit199 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid138 .
 
 _:genid138 a rdf:List ;
-	rdf:first ontohgis:settlement_unit200 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid137 .
 
 _:genid137 a rdf:List ;
-	rdf:first ontohgis:settlement_unit201 ;
+	rdf:first ontohgis:settlement_unit129 ;
 	rdf:rest _:genid136 .
 
 _:genid136 a rdf:List ;
-	rdf:first ontohgis:settlement_unit202 ;
+	rdf:first ontohgis:settlement_unit133 ;
 	rdf:rest _:genid135 .
 
 _:genid135 a rdf:List ;
-	rdf:first ontohgis:settlement_unit205 ;
+	rdf:first ontohgis:settlement_unit136 ;
 	rdf:rest _:genid134 .
 
 _:genid134 a rdf:List ;
-	rdf:first ontohgis:settlement_unit208 ;
+	rdf:first ontohgis:settlement_unit146 ;
+	rdf:rest _:genid133 .
+
+_:genid133 a rdf:List ;
+	rdf:first ontohgis:settlement_unit147 ;
+	rdf:rest _:genid132 .
+
+_:genid132 a rdf:List ;
+	rdf:first ontohgis:settlement_unit191 ;
+	rdf:rest _:genid131 .
+
+_:genid131 a rdf:List ;
+	rdf:first ontohgis:settlement_unit192 ;
+	rdf:rest _:genid130 .
+
+_:genid130 a rdf:List ;
+	rdf:first ontohgis:settlement_unit194 ;
+	rdf:rest _:genid129 .
+
+_:genid129 a rdf:List ;
+	rdf:first ontohgis:settlement_unit195 ;
+	rdf:rest _:genid128 .
+
+_:genid128 a rdf:List ;
+	rdf:first ontohgis:settlement_unit198 ;
+	rdf:rest _:genid127 .
+
+_:genid127 a rdf:List ;
+	rdf:first ontohgis:settlement_unit199 ;
+	rdf:rest _:genid126 .
+
+_:genid126 a rdf:List ;
+	rdf:first ontohgis:settlement_unit200 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid163 a owl:AllDisjointClasses ;
-	owl:members _:genid193 .
-
-_:genid193 a rdf:List ;
-	rdf:first ontohgis:settlement_unit107 ;
-	rdf:rest _:genid192 .
-
-_:genid192 a rdf:List ;
-	rdf:first ontohgis:settlement_unit111 ;
-	rdf:rest _:genid191 .
-
-_:genid191 a rdf:List ;
-	rdf:first ontohgis:settlement_unit113 ;
-	rdf:rest _:genid190 .
-
-_:genid190 a rdf:List ;
-	rdf:first ontohgis:settlement_unit114 ;
-	rdf:rest _:genid189 .
-
-_:genid189 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid188 .
-
-_:genid188 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid187 .
-
-_:genid187 a rdf:List ;
-	rdf:first ontohgis:settlement_unit117 ;
-	rdf:rest _:genid186 .
-
-_:genid186 a rdf:List ;
-	rdf:first ontohgis:settlement_unit118 ;
-	rdf:rest _:genid185 .
-
-_:genid185 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid184 .
-
-_:genid184 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid183 .
-
-_:genid183 a rdf:List ;
-	rdf:first ontohgis:settlement_unit123 ;
-	rdf:rest _:genid182 .
-
-_:genid182 a rdf:List ;
-	rdf:first ontohgis:settlement_unit125 ;
-	rdf:rest _:genid181 .
-
-_:genid181 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
-	rdf:rest _:genid180 .
+_:genid151 a owl:AllDisjointClasses ;
+	owl:members _:genid180 .
 
 _:genid180 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
+	rdf:first ontohgis:settlement_unit107 ;
 	rdf:rest _:genid179 .
 
 _:genid179 a rdf:List ;
-	rdf:first ontohgis:settlement_unit129 ;
+	rdf:first ontohgis:settlement_unit110 ;
 	rdf:rest _:genid178 .
 
 _:genid178 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
+	rdf:first ontohgis:settlement_unit111 ;
 	rdf:rest _:genid177 .
 
 _:genid177 a rdf:List ;
-	rdf:first ontohgis:settlement_unit136 ;
+	rdf:first ontohgis:settlement_unit113 ;
 	rdf:rest _:genid176 .
 
 _:genid176 a rdf:List ;
-	rdf:first ontohgis:settlement_unit146 ;
+	rdf:first ontohgis:settlement_unit114 ;
 	rdf:rest _:genid175 .
 
 _:genid175 a rdf:List ;
-	rdf:first ontohgis:settlement_unit147 ;
+	rdf:first ontohgis:settlement_unit115 ;
 	rdf:rest _:genid174 .
 
 _:genid174 a rdf:List ;
-	rdf:first ontohgis:settlement_unit150 ;
+	rdf:first ontohgis:settlement_unit116 ;
 	rdf:rest _:genid173 .
 
 _:genid173 a rdf:List ;
-	rdf:first ontohgis:settlement_unit191 ;
+	rdf:first ontohgis:settlement_unit117 ;
 	rdf:rest _:genid172 .
 
 _:genid172 a rdf:List ;
-	rdf:first ontohgis:settlement_unit192 ;
+	rdf:first ontohgis:settlement_unit119 ;
 	rdf:rest _:genid171 .
 
 _:genid171 a rdf:List ;
-	rdf:first ontohgis:settlement_unit197 ;
+	rdf:first ontohgis:settlement_unit120 ;
 	rdf:rest _:genid170 .
 
 _:genid170 a rdf:List ;
-	rdf:first ontohgis:settlement_unit199 ;
+	rdf:first ontohgis:settlement_unit122 ;
 	rdf:rest _:genid169 .
 
 _:genid169 a rdf:List ;
-	rdf:first ontohgis:settlement_unit200 ;
+	rdf:first ontohgis:settlement_unit123 ;
 	rdf:rest _:genid168 .
 
 _:genid168 a rdf:List ;
-	rdf:first ontohgis:settlement_unit201 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid167 .
 
 _:genid167 a rdf:List ;
-	rdf:first ontohgis:settlement_unit204 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid166 .
 
 _:genid166 a rdf:List ;
-	rdf:first ontohgis:settlement_unit206 ;
+	rdf:first ontohgis:settlement_unit133 ;
 	rdf:rest _:genid165 .
 
 _:genid165 a rdf:List ;
-	rdf:first ontohgis:settlement_unit208 ;
+	rdf:first ontohgis:settlement_unit141 ;
 	rdf:rest _:genid164 .
 
 _:genid164 a rdf:List ;
-	rdf:first ontohgis:settlement_unit61 ;
+	rdf:first ontohgis:settlement_unit146 ;
+	rdf:rest _:genid163 .
+
+_:genid163 a rdf:List ;
+	rdf:first ontohgis:settlement_unit147 ;
+	rdf:rest _:genid162 .
+
+_:genid162 a rdf:List ;
+	rdf:first ontohgis:settlement_unit191 ;
+	rdf:rest _:genid161 .
+
+_:genid161 a rdf:List ;
+	rdf:first ontohgis:settlement_unit194 ;
+	rdf:rest _:genid160 .
+
+_:genid160 a rdf:List ;
+	rdf:first ontohgis:settlement_unit195 ;
+	rdf:rest _:genid159 .
+
+_:genid159 a rdf:List ;
+	rdf:first ontohgis:settlement_unit196 ;
+	rdf:rest _:genid158 .
+
+_:genid158 a rdf:List ;
+	rdf:first ontohgis:settlement_unit197 ;
+	rdf:rest _:genid157 .
+
+_:genid157 a rdf:List ;
+	rdf:first ontohgis:settlement_unit199 ;
+	rdf:rest _:genid156 .
+
+_:genid156 a rdf:List ;
+	rdf:first ontohgis:settlement_unit200 ;
+	rdf:rest _:genid155 .
+
+_:genid155 a rdf:List ;
+	rdf:first ontohgis:settlement_unit201 ;
+	rdf:rest _:genid154 .
+
+_:genid154 a rdf:List ;
+	rdf:first ontohgis:settlement_unit202 ;
+	rdf:rest _:genid153 .
+
+_:genid153 a rdf:List ;
+	rdf:first ontohgis:settlement_unit205 ;
+	rdf:rest _:genid152 .
+
+_:genid152 a rdf:List ;
+	rdf:first ontohgis:settlement_unit208 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid194 a owl:AllDisjointClasses ;
-	owl:members _:genid227 .
-
-_:genid227 a rdf:List ;
-	rdf:first ontohgis:settlement_unit107 ;
-	rdf:rest _:genid226 .
-
-_:genid226 a rdf:List ;
-	rdf:first ontohgis:settlement_unit111 ;
-	rdf:rest _:genid225 .
-
-_:genid225 a rdf:List ;
-	rdf:first ontohgis:settlement_unit113 ;
-	rdf:rest _:genid224 .
-
-_:genid224 a rdf:List ;
-	rdf:first ontohgis:settlement_unit114 ;
-	rdf:rest _:genid223 .
-
-_:genid223 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid222 .
-
-_:genid222 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid221 .
-
-_:genid221 a rdf:List ;
-	rdf:first ontohgis:settlement_unit117 ;
-	rdf:rest _:genid220 .
-
-_:genid220 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid219 .
-
-_:genid219 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid218 .
-
-_:genid218 a rdf:List ;
-	rdf:first ontohgis:settlement_unit123 ;
-	rdf:rest _:genid217 .
-
-_:genid217 a rdf:List ;
-	rdf:first ontohgis:settlement_unit125 ;
-	rdf:rest _:genid216 .
-
-_:genid216 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
-	rdf:rest _:genid215 .
-
-_:genid215 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
-	rdf:rest _:genid214 .
-
-_:genid214 a rdf:List ;
-	rdf:first ontohgis:settlement_unit129 ;
-	rdf:rest _:genid213 .
-
-_:genid213 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
-	rdf:rest _:genid212 .
-
-_:genid212 a rdf:List ;
-	rdf:first ontohgis:settlement_unit136 ;
-	rdf:rest _:genid211 .
+_:genid181 a owl:AllDisjointClasses ;
+	owl:members _:genid211 .
 
 _:genid211 a rdf:List ;
-	rdf:first ontohgis:settlement_unit140 ;
+	rdf:first ontohgis:settlement_unit107 ;
 	rdf:rest _:genid210 .
 
 _:genid210 a rdf:List ;
-	rdf:first ontohgis:settlement_unit141 ;
+	rdf:first ontohgis:settlement_unit111 ;
 	rdf:rest _:genid209 .
 
 _:genid209 a rdf:List ;
-	rdf:first ontohgis:settlement_unit146 ;
+	rdf:first ontohgis:settlement_unit113 ;
 	rdf:rest _:genid208 .
 
 _:genid208 a rdf:List ;
-	rdf:first ontohgis:settlement_unit147 ;
+	rdf:first ontohgis:settlement_unit114 ;
 	rdf:rest _:genid207 .
 
 _:genid207 a rdf:List ;
-	rdf:first ontohgis:settlement_unit191 ;
+	rdf:first ontohgis:settlement_unit115 ;
 	rdf:rest _:genid206 .
 
 _:genid206 a rdf:List ;
-	rdf:first ontohgis:settlement_unit192 ;
+	rdf:first ontohgis:settlement_unit116 ;
 	rdf:rest _:genid205 .
 
 _:genid205 a rdf:List ;
-	rdf:first ontohgis:settlement_unit194 ;
+	rdf:first ontohgis:settlement_unit117 ;
 	rdf:rest _:genid204 .
 
 _:genid204 a rdf:List ;
-	rdf:first ontohgis:settlement_unit195 ;
+	rdf:first ontohgis:settlement_unit118 ;
 	rdf:rest _:genid203 .
 
 _:genid203 a rdf:List ;
-	rdf:first ontohgis:settlement_unit197 ;
+	rdf:first ontohgis:settlement_unit119 ;
 	rdf:rest _:genid202 .
 
 _:genid202 a rdf:List ;
-	rdf:first ontohgis:settlement_unit198 ;
+	rdf:first ontohgis:settlement_unit120 ;
 	rdf:rest _:genid201 .
 
 _:genid201 a rdf:List ;
-	rdf:first ontohgis:settlement_unit199 ;
+	rdf:first ontohgis:settlement_unit123 ;
 	rdf:rest _:genid200 .
 
 _:genid200 a rdf:List ;
-	rdf:first ontohgis:settlement_unit200 ;
+	rdf:first ontohgis:settlement_unit125 ;
 	rdf:rest _:genid199 .
 
 _:genid199 a rdf:List ;
-	rdf:first ontohgis:settlement_unit201 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid198 .
 
 _:genid198 a rdf:List ;
-	rdf:first ontohgis:settlement_unit204 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid197 .
 
 _:genid197 a rdf:List ;
-	rdf:first ontohgis:settlement_unit206 ;
+	rdf:first ontohgis:settlement_unit129 ;
 	rdf:rest _:genid196 .
 
 _:genid196 a rdf:List ;
-	rdf:first ontohgis:settlement_unit208 ;
+	rdf:first ontohgis:settlement_unit133 ;
 	rdf:rest _:genid195 .
 
 _:genid195 a rdf:List ;
+	rdf:first ontohgis:settlement_unit136 ;
+	rdf:rest _:genid194 .
+
+_:genid194 a rdf:List ;
+	rdf:first ontohgis:settlement_unit146 ;
+	rdf:rest _:genid193 .
+
+_:genid193 a rdf:List ;
+	rdf:first ontohgis:settlement_unit147 ;
+	rdf:rest _:genid192 .
+
+_:genid192 a rdf:List ;
+	rdf:first ontohgis:settlement_unit150 ;
+	rdf:rest _:genid191 .
+
+_:genid191 a rdf:List ;
+	rdf:first ontohgis:settlement_unit191 ;
+	rdf:rest _:genid190 .
+
+_:genid190 a rdf:List ;
+	rdf:first ontohgis:settlement_unit192 ;
+	rdf:rest _:genid189 .
+
+_:genid189 a rdf:List ;
+	rdf:first ontohgis:settlement_unit197 ;
+	rdf:rest _:genid188 .
+
+_:genid188 a rdf:List ;
+	rdf:first ontohgis:settlement_unit199 ;
+	rdf:rest _:genid187 .
+
+_:genid187 a rdf:List ;
+	rdf:first ontohgis:settlement_unit200 ;
+	rdf:rest _:genid186 .
+
+_:genid186 a rdf:List ;
+	rdf:first ontohgis:settlement_unit201 ;
+	rdf:rest _:genid185 .
+
+_:genid185 a rdf:List ;
+	rdf:first ontohgis:settlement_unit204 ;
+	rdf:rest _:genid184 .
+
+_:genid184 a rdf:List ;
+	rdf:first ontohgis:settlement_unit206 ;
+	rdf:rest _:genid183 .
+
+_:genid183 a rdf:List ;
+	rdf:first ontohgis:settlement_unit208 ;
+	rdf:rest _:genid182 .
+
+_:genid182 a rdf:List ;
 	rdf:first ontohgis:settlement_unit61 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid228 a owl:AllDisjointClasses ;
-	owl:members _:genid254 .
-
-_:genid254 a rdf:List ;
-	rdf:first ontohgis:settlement_unit111 ;
-	rdf:rest _:genid253 .
-
-_:genid253 a rdf:List ;
-	rdf:first ontohgis:settlement_unit113 ;
-	rdf:rest _:genid252 .
-
-_:genid252 a rdf:List ;
-	rdf:first ontohgis:settlement_unit114 ;
-	rdf:rest _:genid251 .
-
-_:genid251 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid250 .
-
-_:genid250 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid249 .
-
-_:genid249 a rdf:List ;
-	rdf:first ontohgis:settlement_unit117 ;
-	rdf:rest _:genid248 .
-
-_:genid248 a rdf:List ;
-	rdf:first ontohgis:settlement_unit118 ;
-	rdf:rest _:genid247 .
-
-_:genid247 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid246 .
-
-_:genid246 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid245 .
+_:genid212 a owl:AllDisjointClasses ;
+	owl:members _:genid245 .
 
 _:genid245 a rdf:List ;
-	rdf:first ontohgis:settlement_unit123 ;
+	rdf:first ontohgis:settlement_unit107 ;
 	rdf:rest _:genid244 .
 
 _:genid244 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
+	rdf:first ontohgis:settlement_unit111 ;
 	rdf:rest _:genid243 .
 
 _:genid243 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
+	rdf:first ontohgis:settlement_unit113 ;
 	rdf:rest _:genid242 .
 
 _:genid242 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
+	rdf:first ontohgis:settlement_unit114 ;
 	rdf:rest _:genid241 .
 
 _:genid241 a rdf:List ;
-	rdf:first ontohgis:settlement_unit136 ;
+	rdf:first ontohgis:settlement_unit115 ;
 	rdf:rest _:genid240 .
 
 _:genid240 a rdf:List ;
-	rdf:first ontohgis:settlement_unit141 ;
+	rdf:first ontohgis:settlement_unit116 ;
 	rdf:rest _:genid239 .
 
 _:genid239 a rdf:List ;
-	rdf:first ontohgis:settlement_unit147 ;
+	rdf:first ontohgis:settlement_unit117 ;
 	rdf:rest _:genid238 .
 
 _:genid238 a rdf:List ;
-	rdf:first ontohgis:settlement_unit189 ;
+	rdf:first ontohgis:settlement_unit119 ;
 	rdf:rest _:genid237 .
 
 _:genid237 a rdf:List ;
-	rdf:first ontohgis:settlement_unit191 ;
+	rdf:first ontohgis:settlement_unit120 ;
 	rdf:rest _:genid236 .
 
 _:genid236 a rdf:List ;
-	rdf:first ontohgis:settlement_unit194 ;
+	rdf:first ontohgis:settlement_unit123 ;
 	rdf:rest _:genid235 .
 
 _:genid235 a rdf:List ;
-	rdf:first ontohgis:settlement_unit195 ;
+	rdf:first ontohgis:settlement_unit125 ;
 	rdf:rest _:genid234 .
 
 _:genid234 a rdf:List ;
-	rdf:first ontohgis:settlement_unit197 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid233 .
 
 _:genid233 a rdf:List ;
-	rdf:first ontohgis:settlement_unit199 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid232 .
 
 _:genid232 a rdf:List ;
-	rdf:first ontohgis:settlement_unit200 ;
+	rdf:first ontohgis:settlement_unit129 ;
 	rdf:rest _:genid231 .
 
 _:genid231 a rdf:List ;
-	rdf:first ontohgis:settlement_unit201 ;
+	rdf:first ontohgis:settlement_unit133 ;
 	rdf:rest _:genid230 .
 
 _:genid230 a rdf:List ;
-	rdf:first ontohgis:settlement_unit206 ;
+	rdf:first ontohgis:settlement_unit136 ;
 	rdf:rest _:genid229 .
 
 _:genid229 a rdf:List ;
+	rdf:first ontohgis:settlement_unit140 ;
+	rdf:rest _:genid228 .
+
+_:genid228 a rdf:List ;
+	rdf:first ontohgis:settlement_unit141 ;
+	rdf:rest _:genid227 .
+
+_:genid227 a rdf:List ;
+	rdf:first ontohgis:settlement_unit146 ;
+	rdf:rest _:genid226 .
+
+_:genid226 a rdf:List ;
+	rdf:first ontohgis:settlement_unit147 ;
+	rdf:rest _:genid225 .
+
+_:genid225 a rdf:List ;
+	rdf:first ontohgis:settlement_unit191 ;
+	rdf:rest _:genid224 .
+
+_:genid224 a rdf:List ;
+	rdf:first ontohgis:settlement_unit192 ;
+	rdf:rest _:genid223 .
+
+_:genid223 a rdf:List ;
+	rdf:first ontohgis:settlement_unit194 ;
+	rdf:rest _:genid222 .
+
+_:genid222 a rdf:List ;
+	rdf:first ontohgis:settlement_unit195 ;
+	rdf:rest _:genid221 .
+
+_:genid221 a rdf:List ;
+	rdf:first ontohgis:settlement_unit197 ;
+	rdf:rest _:genid220 .
+
+_:genid220 a rdf:List ;
+	rdf:first ontohgis:settlement_unit198 ;
+	rdf:rest _:genid219 .
+
+_:genid219 a rdf:List ;
+	rdf:first ontohgis:settlement_unit199 ;
+	rdf:rest _:genid218 .
+
+_:genid218 a rdf:List ;
+	rdf:first ontohgis:settlement_unit200 ;
+	rdf:rest _:genid217 .
+
+_:genid217 a rdf:List ;
+	rdf:first ontohgis:settlement_unit201 ;
+	rdf:rest _:genid216 .
+
+_:genid216 a rdf:List ;
+	rdf:first ontohgis:settlement_unit204 ;
+	rdf:rest _:genid215 .
+
+_:genid215 a rdf:List ;
+	rdf:first ontohgis:settlement_unit206 ;
+	rdf:rest _:genid214 .
+
+_:genid214 a rdf:List ;
 	rdf:first ontohgis:settlement_unit208 ;
+	rdf:rest _:genid213 .
+
+_:genid213 a rdf:List ;
+	rdf:first ontohgis:settlement_unit61 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid255 a owl:AllDisjointClasses ;
-	owl:members _:genid280 .
-
-_:genid280 a rdf:List ;
-	rdf:first ontohgis:settlement_unit112 ;
-	rdf:rest _:genid279 .
-
-_:genid279 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
-	rdf:rest _:genid278 .
-
-_:genid278 a rdf:List ;
-	rdf:first ontohgis:settlement_unit116 ;
-	rdf:rest _:genid277 .
-
-_:genid277 a rdf:List ;
-	rdf:first ontohgis:settlement_unit117 ;
-	rdf:rest _:genid276 .
-
-_:genid276 a rdf:List ;
-	rdf:first ontohgis:settlement_unit118 ;
-	rdf:rest _:genid275 .
-
-_:genid275 a rdf:List ;
-	rdf:first ontohgis:settlement_unit119 ;
-	rdf:rest _:genid274 .
-
-_:genid274 a rdf:List ;
-	rdf:first ontohgis:settlement_unit120 ;
-	rdf:rest _:genid273 .
-
-_:genid273 a rdf:List ;
-	rdf:first ontohgis:settlement_unit123 ;
-	rdf:rest _:genid272 .
+_:genid246 a owl:AllDisjointClasses ;
+	owl:members _:genid272 .
 
 _:genid272 a rdf:List ;
-	rdf:first ontohgis:settlement_unit124 ;
+	rdf:first ontohgis:settlement_unit111 ;
 	rdf:rest _:genid271 .
 
 _:genid271 a rdf:List ;
-	rdf:first ontohgis:settlement_unit125 ;
+	rdf:first ontohgis:settlement_unit113 ;
 	rdf:rest _:genid270 .
 
 _:genid270 a rdf:List ;
-	rdf:first ontohgis:settlement_unit126 ;
+	rdf:first ontohgis:settlement_unit114 ;
 	rdf:rest _:genid269 .
 
 _:genid269 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
+	rdf:first ontohgis:settlement_unit115 ;
 	rdf:rest _:genid268 .
 
 _:genid268 a rdf:List ;
-	rdf:first ontohgis:settlement_unit128 ;
+	rdf:first ontohgis:settlement_unit116 ;
 	rdf:rest _:genid267 .
 
 _:genid267 a rdf:List ;
-	rdf:first ontohgis:settlement_unit129 ;
+	rdf:first ontohgis:settlement_unit117 ;
 	rdf:rest _:genid266 .
 
 _:genid266 a rdf:List ;
-	rdf:first ontohgis:settlement_unit133 ;
+	rdf:first ontohgis:settlement_unit118 ;
 	rdf:rest _:genid265 .
 
 _:genid265 a rdf:List ;
-	rdf:first ontohgis:settlement_unit192 ;
+	rdf:first ontohgis:settlement_unit119 ;
 	rdf:rest _:genid264 .
 
 _:genid264 a rdf:List ;
-	rdf:first ontohgis:settlement_unit193 ;
+	rdf:first ontohgis:settlement_unit120 ;
 	rdf:rest _:genid263 .
 
 _:genid263 a rdf:List ;
-	rdf:first ontohgis:settlement_unit194 ;
+	rdf:first ontohgis:settlement_unit123 ;
 	rdf:rest _:genid262 .
 
 _:genid262 a rdf:List ;
-	rdf:first ontohgis:settlement_unit195 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid261 .
 
 _:genid261 a rdf:List ;
-	rdf:first ontohgis:settlement_unit203 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid260 .
 
 _:genid260 a rdf:List ;
-	rdf:first ontohgis:settlement_unit204 ;
+	rdf:first ontohgis:settlement_unit133 ;
 	rdf:rest _:genid259 .
 
 _:genid259 a rdf:List ;
-	rdf:first ontohgis:settlement_unit206 ;
+	rdf:first ontohgis:settlement_unit136 ;
 	rdf:rest _:genid258 .
 
 _:genid258 a rdf:List ;
-	rdf:first ontohgis:settlement_unit207 ;
+	rdf:first ontohgis:settlement_unit141 ;
 	rdf:rest _:genid257 .
 
 _:genid257 a rdf:List ;
-	rdf:first ontohgis:settlement_unit208 ;
+	rdf:first ontohgis:settlement_unit147 ;
 	rdf:rest _:genid256 .
 
 _:genid256 a rdf:List ;
-	rdf:first ontohgis:settlement_unit71 ;
+	rdf:first ontohgis:settlement_unit189 ;
+	rdf:rest _:genid255 .
+
+_:genid255 a rdf:List ;
+	rdf:first ontohgis:settlement_unit191 ;
+	rdf:rest _:genid254 .
+
+_:genid254 a rdf:List ;
+	rdf:first ontohgis:settlement_unit194 ;
+	rdf:rest _:genid253 .
+
+_:genid253 a rdf:List ;
+	rdf:first ontohgis:settlement_unit195 ;
+	rdf:rest _:genid252 .
+
+_:genid252 a rdf:List ;
+	rdf:first ontohgis:settlement_unit197 ;
+	rdf:rest _:genid251 .
+
+_:genid251 a rdf:List ;
+	rdf:first ontohgis:settlement_unit199 ;
+	rdf:rest _:genid250 .
+
+_:genid250 a rdf:List ;
+	rdf:first ontohgis:settlement_unit200 ;
+	rdf:rest _:genid249 .
+
+_:genid249 a rdf:List ;
+	rdf:first ontohgis:settlement_unit201 ;
+	rdf:rest _:genid248 .
+
+_:genid248 a rdf:List ;
+	rdf:first ontohgis:settlement_unit206 ;
+	rdf:rest _:genid247 .
+
+_:genid247 a rdf:List ;
+	rdf:first ontohgis:settlement_unit208 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid281 a owl:AllDisjointClasses ;
-	owl:members _:genid287 .
+_:genid273 a owl:AllDisjointClasses ;
+	owl:members _:genid298 .
+
+_:genid298 a rdf:List ;
+	rdf:first ontohgis:settlement_unit112 ;
+	rdf:rest _:genid297 .
+
+_:genid297 a rdf:List ;
+	rdf:first ontohgis:settlement_unit115 ;
+	rdf:rest _:genid296 .
+
+_:genid296 a rdf:List ;
+	rdf:first ontohgis:settlement_unit116 ;
+	rdf:rest _:genid295 .
+
+_:genid295 a rdf:List ;
+	rdf:first ontohgis:settlement_unit117 ;
+	rdf:rest _:genid294 .
+
+_:genid294 a rdf:List ;
+	rdf:first ontohgis:settlement_unit118 ;
+	rdf:rest _:genid293 .
+
+_:genid293 a rdf:List ;
+	rdf:first ontohgis:settlement_unit119 ;
+	rdf:rest _:genid292 .
+
+_:genid292 a rdf:List ;
+	rdf:first ontohgis:settlement_unit120 ;
+	rdf:rest _:genid291 .
+
+_:genid291 a rdf:List ;
+	rdf:first ontohgis:settlement_unit123 ;
+	rdf:rest _:genid290 .
+
+_:genid290 a rdf:List ;
+	rdf:first ontohgis:settlement_unit124 ;
+	rdf:rest _:genid289 .
+
+_:genid289 a rdf:List ;
+	rdf:first ontohgis:settlement_unit125 ;
+	rdf:rest _:genid288 .
+
+_:genid288 a rdf:List ;
+	rdf:first ontohgis:settlement_unit126 ;
+	rdf:rest _:genid287 .
 
 _:genid287 a rdf:List ;
-	rdf:first ontohgis:settlement_unit115 ;
+	rdf:first ontohgis:settlement_unit127 ;
 	rdf:rest _:genid286 .
 
 _:genid286 a rdf:List ;
-	rdf:first ontohgis:settlement_unit118 ;
+	rdf:first ontohgis:settlement_unit128 ;
 	rdf:rest _:genid285 .
 
 _:genid285 a rdf:List ;
-	rdf:first ontohgis:settlement_unit127 ;
+	rdf:first ontohgis:settlement_unit129 ;
 	rdf:rest _:genid284 .
 
 _:genid284 a rdf:List ;
@@ -4745,722 +4827,1190 @@ _:genid284 a rdf:List ;
 	rdf:rest _:genid283 .
 
 _:genid283 a rdf:List ;
-	rdf:first ontohgis:settlement_unit134 ;
+	rdf:first ontohgis:settlement_unit192 ;
 	rdf:rest _:genid282 .
 
 _:genid282 a rdf:List ;
+	rdf:first ontohgis:settlement_unit193 ;
+	rdf:rest _:genid281 .
+
+_:genid281 a rdf:List ;
+	rdf:first ontohgis:settlement_unit194 ;
+	rdf:rest _:genid280 .
+
+_:genid280 a rdf:List ;
+	rdf:first ontohgis:settlement_unit195 ;
+	rdf:rest _:genid279 .
+
+_:genid279 a rdf:List ;
+	rdf:first ontohgis:settlement_unit203 ;
+	rdf:rest _:genid278 .
+
+_:genid278 a rdf:List ;
+	rdf:first ontohgis:settlement_unit204 ;
+	rdf:rest _:genid277 .
+
+_:genid277 a rdf:List ;
+	rdf:first ontohgis:settlement_unit206 ;
+	rdf:rest _:genid276 .
+
+_:genid276 a rdf:List ;
+	rdf:first ontohgis:settlement_unit207 ;
+	rdf:rest _:genid275 .
+
+_:genid275 a rdf:List ;
+	rdf:first ontohgis:settlement_unit208 ;
+	rdf:rest _:genid274 .
+
+_:genid274 a rdf:List ;
+	rdf:first ontohgis:settlement_unit71 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid299 a owl:AllDisjointClasses ;
+	owl:members _:genid305 .
+
+_:genid305 a rdf:List ;
+	rdf:first ontohgis:settlement_unit115 ;
+	rdf:rest _:genid304 .
+
+_:genid304 a rdf:List ;
+	rdf:first ontohgis:settlement_unit118 ;
+	rdf:rest _:genid303 .
+
+_:genid303 a rdf:List ;
+	rdf:first ontohgis:settlement_unit127 ;
+	rdf:rest _:genid302 .
+
+_:genid302 a rdf:List ;
+	rdf:first ontohgis:settlement_unit133 ;
+	rdf:rest _:genid301 .
+
+_:genid301 a rdf:List ;
+	rdf:first ontohgis:settlement_unit134 ;
+	rdf:rest _:genid300 .
+
+_:genid300 a rdf:List ;
 	rdf:first ontohgis:settlement_unit136 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid288 a owl:AllDisjointClasses ;
-	owl:members _:genid292 .
+_:genid306 a owl:AllDisjointClasses ;
+	owl:members _:genid310 .
 
-_:genid292 a rdf:List ;
+_:genid310 a rdf:List ;
 	rdf:first ontohgis:settlement_unit133 ;
-	rdf:rest _:genid291 .
+	rdf:rest _:genid309 .
 
-_:genid291 a rdf:List ;
+_:genid309 a rdf:List ;
 	rdf:first ontohgis:settlement_unit136 ;
-	rdf:rest _:genid290 .
+	rdf:rest _:genid308 .
 
-_:genid290 a rdf:List ;
+_:genid308 a rdf:List ;
 	rdf:first ontohgis:settlement_unit190 ;
-	rdf:rest _:genid289 .
+	rdf:rest _:genid307 .
 
-_:genid289 a rdf:List ;
+_:genid307 a rdf:List ;
 	rdf:first ontohgis:settlement_unit208 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid293 a owl:AllDisjointClasses ;
-	owl:members _:genid299 .
-
-_:genid299 a rdf:List ;
-	rdf:first ontohgis:settlement_unit15 ;
-	rdf:rest _:genid298 .
-
-_:genid298 a rdf:List ;
-	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid297 .
-
-_:genid297 a rdf:List ;
-	rdf:first ontohgis:settlement_unit226 ;
-	rdf:rest _:genid296 .
-
-_:genid296 a rdf:List ;
-	rdf:first ontohgis:settlement_unit228 ;
-	rdf:rest _:genid295 .
-
-_:genid295 a rdf:List ;
-	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid294 .
-
-_:genid294 a rdf:List ;
-	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid300 a owl:AllDisjointClasses ;
-	owl:members _:genid310 .
-
-_:genid310 a rdf:List ;
-	rdf:first ontohgis:settlement_unit19 ;
-	rdf:rest _:genid309 .
-
-_:genid309 a rdf:List ;
-	rdf:first ontohgis:settlement_unit20 ;
-	rdf:rest _:genid308 .
-
-_:genid308 a rdf:List ;
-	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid307 .
-
-_:genid307 a rdf:List ;
-	rdf:first ontohgis:settlement_unit222 ;
-	rdf:rest _:genid306 .
-
-_:genid306 a rdf:List ;
-	rdf:first ontohgis:settlement_unit225 ;
-	rdf:rest _:genid305 .
-
-_:genid305 a rdf:List ;
-	rdf:first ontohgis:settlement_unit226 ;
-	rdf:rest _:genid304 .
-
-_:genid304 a rdf:List ;
-	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid303 .
-
-_:genid303 a rdf:List ;
-	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest _:genid302 .
-
-_:genid302 a rdf:List ;
-	rdf:first ontohgis:settlement_unit248 ;
-	rdf:rest _:genid301 .
-
-_:genid301 a rdf:List ;
-	rdf:first ontohgis:settlement_unit251 ;
-	rdf:rest rdf:nil .
-# 
-
 _:genid311 a owl:AllDisjointClasses ;
-	owl:members _:genid323 .
-
-_:genid323 a rdf:List ;
-	rdf:first ontohgis:settlement_unit20 ;
-	rdf:rest _:genid322 .
-
-_:genid322 a rdf:List ;
-	rdf:first ontohgis:settlement_unit21 ;
-	rdf:rest _:genid321 .
-
-_:genid321 a rdf:List ;
-	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid320 .
-
-_:genid320 a rdf:List ;
-	rdf:first ontohgis:settlement_unit221 ;
-	rdf:rest _:genid319 .
-
-_:genid319 a rdf:List ;
-	rdf:first ontohgis:settlement_unit229 ;
-	rdf:rest _:genid318 .
-
-_:genid318 a rdf:List ;
-	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid317 .
+	owl:members _:genid317 .
 
 _:genid317 a rdf:List ;
-	rdf:first ontohgis:settlement_unit232 ;
+	rdf:first ontohgis:settlement_unit15 ;
 	rdf:rest _:genid316 .
 
 _:genid316 a rdf:List ;
-	rdf:first ontohgis:settlement_unit238 ;
+	rdf:first ontohgis:settlement_unit22 ;
 	rdf:rest _:genid315 .
 
 _:genid315 a rdf:List ;
-	rdf:first ontohgis:settlement_unit24 ;
+	rdf:first ontohgis:settlement_unit226 ;
 	rdf:rest _:genid314 .
 
 _:genid314 a rdf:List ;
-	rdf:first ontohgis:settlement_unit241 ;
+	rdf:first ontohgis:settlement_unit228 ;
 	rdf:rest _:genid313 .
 
 _:genid313 a rdf:List ;
-	rdf:first ontohgis:settlement_unit245 ;
+	rdf:first ontohgis:settlement_unit23 ;
 	rdf:rest _:genid312 .
 
 _:genid312 a rdf:List ;
+	rdf:first ontohgis:settlement_unit24 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid318 a owl:AllDisjointClasses ;
+	owl:members _:genid328 .
+
+_:genid328 a rdf:List ;
+	rdf:first ontohgis:settlement_unit19 ;
+	rdf:rest _:genid327 .
+
+_:genid327 a rdf:List ;
+	rdf:first ontohgis:settlement_unit20 ;
+	rdf:rest _:genid326 .
+
+_:genid326 a rdf:List ;
+	rdf:first ontohgis:settlement_unit22 ;
+	rdf:rest _:genid325 .
+
+_:genid325 a rdf:List ;
+	rdf:first ontohgis:settlement_unit222 ;
+	rdf:rest _:genid324 .
+
+_:genid324 a rdf:List ;
+	rdf:first ontohgis:settlement_unit225 ;
+	rdf:rest _:genid323 .
+
+_:genid323 a rdf:List ;
+	rdf:first ontohgis:settlement_unit226 ;
+	rdf:rest _:genid322 .
+
+_:genid322 a rdf:List ;
+	rdf:first ontohgis:settlement_unit23 ;
+	rdf:rest _:genid321 .
+
+_:genid321 a rdf:List ;
+	rdf:first ontohgis:settlement_unit24 ;
+	rdf:rest _:genid320 .
+
+_:genid320 a rdf:List ;
+	rdf:first ontohgis:settlement_unit248 ;
+	rdf:rest _:genid319 .
+
+_:genid319 a rdf:List ;
+	rdf:first ontohgis:settlement_unit251 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid329 a owl:AllDisjointClasses ;
+	owl:members _:genid341 .
+
+_:genid341 a rdf:List ;
+	rdf:first ontohgis:settlement_unit20 ;
+	rdf:rest _:genid340 .
+
+_:genid340 a rdf:List ;
+	rdf:first ontohgis:settlement_unit21 ;
+	rdf:rest _:genid339 .
+
+_:genid339 a rdf:List ;
+	rdf:first ontohgis:settlement_unit22 ;
+	rdf:rest _:genid338 .
+
+_:genid338 a rdf:List ;
+	rdf:first ontohgis:settlement_unit221 ;
+	rdf:rest _:genid337 .
+
+_:genid337 a rdf:List ;
+	rdf:first ontohgis:settlement_unit229 ;
+	rdf:rest _:genid336 .
+
+_:genid336 a rdf:List ;
+	rdf:first ontohgis:settlement_unit23 ;
+	rdf:rest _:genid335 .
+
+_:genid335 a rdf:List ;
+	rdf:first ontohgis:settlement_unit232 ;
+	rdf:rest _:genid334 .
+
+_:genid334 a rdf:List ;
+	rdf:first ontohgis:settlement_unit238 ;
+	rdf:rest _:genid333 .
+
+_:genid333 a rdf:List ;
+	rdf:first ontohgis:settlement_unit24 ;
+	rdf:rest _:genid332 .
+
+_:genid332 a rdf:List ;
+	rdf:first ontohgis:settlement_unit241 ;
+	rdf:rest _:genid331 .
+
+_:genid331 a rdf:List ;
+	rdf:first ontohgis:settlement_unit245 ;
+	rdf:rest _:genid330 .
+
+_:genid330 a rdf:List ;
 	rdf:first ontohgis:settlement_unit248 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid324 a owl:AllDisjointClasses ;
-	owl:members _:genid337 .
+_:genid342 a owl:AllDisjointClasses ;
+	owl:members _:genid355 .
 
-_:genid337 a rdf:List ;
+_:genid355 a rdf:List ;
 	rdf:first ontohgis:settlement_unit20 ;
-	rdf:rest _:genid336 .
+	rdf:rest _:genid354 .
 
-_:genid336 a rdf:List ;
+_:genid354 a rdf:List ;
 	rdf:first ontohgis:settlement_unit21 ;
-	rdf:rest _:genid335 .
+	rdf:rest _:genid353 .
 
-_:genid335 a rdf:List ;
+_:genid353 a rdf:List ;
 	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid334 .
+	rdf:rest _:genid352 .
 
-_:genid334 a rdf:List ;
+_:genid352 a rdf:List ;
 	rdf:first ontohgis:settlement_unit222 ;
-	rdf:rest _:genid333 .
+	rdf:rest _:genid351 .
 
-_:genid333 a rdf:List ;
+_:genid351 a rdf:List ;
 	rdf:first ontohgis:settlement_unit225 ;
-	rdf:rest _:genid332 .
+	rdf:rest _:genid350 .
 
-_:genid332 a rdf:List ;
+_:genid350 a rdf:List ;
 	rdf:first ontohgis:settlement_unit226 ;
-	rdf:rest _:genid331 .
+	rdf:rest _:genid349 .
 
-_:genid331 a rdf:List ;
+_:genid349 a rdf:List ;
 	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid330 .
+	rdf:rest _:genid348 .
 
-_:genid330 a rdf:List ;
+_:genid348 a rdf:List ;
 	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest _:genid329 .
+	rdf:rest _:genid347 .
 
-_:genid329 a rdf:List ;
+_:genid347 a rdf:List ;
 	rdf:first ontohgis:settlement_unit248 ;
-	rdf:rest _:genid328 .
+	rdf:rest _:genid346 .
 
-_:genid328 a rdf:List ;
+_:genid346 a rdf:List ;
 	rdf:first ontohgis:settlement_unit25 ;
-	rdf:rest _:genid327 .
+	rdf:rest _:genid345 .
 
-_:genid327 a rdf:List ;
+_:genid345 a rdf:List ;
 	rdf:first ontohgis:settlement_unit251 ;
-	rdf:rest _:genid326 .
+	rdf:rest _:genid344 .
 
-_:genid326 a rdf:List ;
+_:genid344 a rdf:List ;
 	rdf:first ontohgis:settlement_unit59 ;
-	rdf:rest _:genid325 .
+	rdf:rest _:genid343 .
 
-_:genid325 a rdf:List ;
+_:genid343 a rdf:List ;
 	rdf:first ontohgis:settlement_unit66 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid338 a owl:AllDisjointClasses ;
-	owl:members _:genid350 .
+_:genid356 a owl:AllDisjointClasses ;
+	owl:members _:genid368 .
 
-_:genid350 a rdf:List ;
+_:genid368 a rdf:List ;
 	rdf:first ontohgis:settlement_unit20 ;
-	rdf:rest _:genid349 .
+	rdf:rest _:genid367 .
 
-_:genid349 a rdf:List ;
+_:genid367 a rdf:List ;
 	rdf:first ontohgis:settlement_unit219 ;
-	rdf:rest _:genid348 .
+	rdf:rest _:genid366 .
 
-_:genid348 a rdf:List ;
+_:genid366 a rdf:List ;
 	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid347 .
+	rdf:rest _:genid365 .
 
-_:genid347 a rdf:List ;
+_:genid365 a rdf:List ;
 	rdf:first ontohgis:settlement_unit220 ;
-	rdf:rest _:genid346 .
+	rdf:rest _:genid364 .
 
-_:genid346 a rdf:List ;
+_:genid364 a rdf:List ;
 	rdf:first ontohgis:settlement_unit225 ;
-	rdf:rest _:genid345 .
+	rdf:rest _:genid363 .
 
-_:genid345 a rdf:List ;
+_:genid363 a rdf:List ;
 	rdf:first ontohgis:settlement_unit226 ;
-	rdf:rest _:genid344 .
+	rdf:rest _:genid362 .
 
-_:genid344 a rdf:List ;
+_:genid362 a rdf:List ;
 	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid343 .
+	rdf:rest _:genid361 .
 
-_:genid343 a rdf:List ;
+_:genid361 a rdf:List ;
 	rdf:first ontohgis:settlement_unit232 ;
-	rdf:rest _:genid342 .
+	rdf:rest _:genid360 .
 
-_:genid342 a rdf:List ;
+_:genid360 a rdf:List ;
 	rdf:first ontohgis:settlement_unit238 ;
-	rdf:rest _:genid341 .
+	rdf:rest _:genid359 .
 
-_:genid341 a rdf:List ;
+_:genid359 a rdf:List ;
 	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest _:genid340 .
+	rdf:rest _:genid358 .
 
-_:genid340 a rdf:List ;
+_:genid358 a rdf:List ;
 	rdf:first ontohgis:settlement_unit248 ;
-	rdf:rest _:genid339 .
+	rdf:rest _:genid357 .
 
-_:genid339 a rdf:List ;
+_:genid357 a rdf:List ;
 	rdf:first ontohgis:settlement_unit251 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid351 a owl:AllDisjointClasses ;
-	owl:members _:genid361 .
+_:genid369 a owl:AllDisjointClasses ;
+	owl:members _:genid379 .
 
-_:genid361 a rdf:List ;
+_:genid379 a rdf:List ;
 	rdf:first ontohgis:settlement_unit20 ;
-	rdf:rest _:genid360 .
+	rdf:rest _:genid378 .
 
-_:genid360 a rdf:List ;
+_:genid378 a rdf:List ;
 	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid359 .
+	rdf:rest _:genid377 .
 
-_:genid359 a rdf:List ;
+_:genid377 a rdf:List ;
 	rdf:first ontohgis:settlement_unit225 ;
-	rdf:rest _:genid358 .
+	rdf:rest _:genid376 .
 
-_:genid358 a rdf:List ;
+_:genid376 a rdf:List ;
 	rdf:first ontohgis:settlement_unit226 ;
-	rdf:rest _:genid357 .
+	rdf:rest _:genid375 .
 
-_:genid357 a rdf:List ;
+_:genid375 a rdf:List ;
 	rdf:first ontohgis:settlement_unit23 ;
-	rdf:rest _:genid356 .
+	rdf:rest _:genid374 .
 
-_:genid356 a rdf:List ;
+_:genid374 a rdf:List ;
 	rdf:first ontohgis:settlement_unit232 ;
-	rdf:rest _:genid355 .
+	rdf:rest _:genid373 .
 
-_:genid355 a rdf:List ;
+_:genid373 a rdf:List ;
 	rdf:first ontohgis:settlement_unit238 ;
-	rdf:rest _:genid354 .
+	rdf:rest _:genid372 .
 
-_:genid354 a rdf:List ;
+_:genid372 a rdf:List ;
 	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest _:genid353 .
+	rdf:rest _:genid371 .
 
-_:genid353 a rdf:List ;
+_:genid371 a rdf:List ;
 	rdf:first ontohgis:settlement_unit248 ;
-	rdf:rest _:genid352 .
+	rdf:rest _:genid370 .
 
-_:genid352 a rdf:List ;
+_:genid370 a rdf:List ;
 	rdf:first ontohgis:settlement_unit249 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid362 a owl:AllDisjointClasses ;
-	owl:members _:genid369 .
+_:genid380 a owl:AllDisjointClasses ;
+	owl:members _:genid387 .
 
-_:genid369 a rdf:List ;
+_:genid387 a rdf:List ;
 	rdf:first ontohgis:settlement_unit22 ;
-	rdf:rest _:genid368 .
+	rdf:rest _:genid386 .
 
-_:genid368 a rdf:List ;
+_:genid386 a rdf:List ;
 	rdf:first ontohgis:settlement_unit238 ;
-	rdf:rest _:genid367 .
+	rdf:rest _:genid385 .
 
-_:genid367 a rdf:List ;
+_:genid385 a rdf:List ;
 	rdf:first ontohgis:settlement_unit24 ;
-	rdf:rest _:genid366 .
+	rdf:rest _:genid384 .
 
-_:genid366 a rdf:List ;
+_:genid384 a rdf:List ;
 	rdf:first ontohgis:settlement_unit248 ;
-	rdf:rest _:genid365 .
+	rdf:rest _:genid383 .
 
-_:genid365 a rdf:List ;
+_:genid383 a rdf:List ;
 	rdf:first ontohgis:settlement_unit25 ;
-	rdf:rest _:genid364 .
+	rdf:rest _:genid382 .
 
-_:genid364 a rdf:List ;
+_:genid382 a rdf:List ;
 	rdf:first ontohgis:settlement_unit250 ;
-	rdf:rest _:genid363 .
+	rdf:rest _:genid381 .
 
-_:genid363 a rdf:List ;
+_:genid381 a rdf:List ;
 	rdf:first ontohgis:settlement_unit251 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid370 a owl:AllDisjointClasses ;
-	owl:members _:genid375 .
-
-_:genid375 a rdf:List ;
-	rdf:first ontohgis:settlement_unit227 ;
-	rdf:rest _:genid374 .
-
-_:genid374 a rdf:List ;
-	rdf:first ontohgis:settlement_unit233 ;
-	rdf:rest _:genid373 .
-
-_:genid373 a rdf:List ;
-	rdf:first ontohgis:settlement_unit234 ;
-	rdf:rest _:genid372 .
-
-_:genid372 a rdf:List ;
-	rdf:first ontohgis:settlement_unit246 ;
-	rdf:rest _:genid371 .
-
-_:genid371 a rdf:List ;
-	rdf:first ontohgis:settlement_unit247 ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid376 a owl:AllDisjointClasses ;
-	owl:members _:genid380 .
-
-_:genid380 a rdf:List ;
-	rdf:first ontohgis:settlement_unit230 ;
-	rdf:rest _:genid379 .
-
-_:genid379 a rdf:List ;
-	rdf:first ontohgis:settlement_unit231 ;
-	rdf:rest _:genid378 .
-
-_:genid378 a rdf:List ;
-	rdf:first ontohgis:settlement_unit233 ;
-	rdf:rest _:genid377 .
-
-_:genid377 a rdf:List ;
-	rdf:first ontohgis:settlement_unit237 ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid381 a owl:AllDisjointClasses ;
-	owl:members _:genid387 .
-
-_:genid387 a rdf:List ;
-	rdf:first ontohgis:settlement_unit230 ;
-	rdf:rest _:genid386 .
-
-_:genid386 a rdf:List ;
-	rdf:first ontohgis:settlement_unit237 ;
-	rdf:rest _:genid385 .
-
-_:genid385 a rdf:List ;
-	rdf:first ontohgis:settlement_unit239 ;
-	rdf:rest _:genid384 .
-
-_:genid384 a rdf:List ;
-	rdf:first ontohgis:settlement_unit242 ;
-	rdf:rest _:genid383 .
-
-_:genid383 a rdf:List ;
-	rdf:first ontohgis:settlement_unit246 ;
-	rdf:rest _:genid382 .
-
-_:genid382 a rdf:List ;
-	rdf:first ontohgis:settlement_unit247 ;
-	rdf:rest rdf:nil .
-# 
-
 _:genid388 a owl:AllDisjointClasses ;
-	owl:members _:genid391 .
+	owl:members _:genid393 .
+
+_:genid393 a rdf:List ;
+	rdf:first ontohgis:settlement_unit227 ;
+	rdf:rest _:genid392 .
+
+_:genid392 a rdf:List ;
+	rdf:first ontohgis:settlement_unit233 ;
+	rdf:rest _:genid391 .
 
 _:genid391 a rdf:List ;
 	rdf:first ontohgis:settlement_unit234 ;
 	rdf:rest _:genid390 .
 
 _:genid390 a rdf:List ;
-	rdf:first ontohgis:settlement_unit243 ;
+	rdf:first ontohgis:settlement_unit246 ;
 	rdf:rest _:genid389 .
 
 _:genid389 a rdf:List ;
+	rdf:first ontohgis:settlement_unit247 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid394 a owl:AllDisjointClasses ;
+	owl:members _:genid398 .
+
+_:genid398 a rdf:List ;
+	rdf:first ontohgis:settlement_unit230 ;
+	rdf:rest _:genid397 .
+
+_:genid397 a rdf:List ;
+	rdf:first ontohgis:settlement_unit231 ;
+	rdf:rest _:genid396 .
+
+_:genid396 a rdf:List ;
+	rdf:first ontohgis:settlement_unit233 ;
+	rdf:rest _:genid395 .
+
+_:genid395 a rdf:List ;
+	rdf:first ontohgis:settlement_unit237 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid399 a owl:AllDisjointClasses ;
+	owl:members _:genid405 .
+
+_:genid405 a rdf:List ;
+	rdf:first ontohgis:settlement_unit230 ;
+	rdf:rest _:genid404 .
+
+_:genid404 a rdf:List ;
+	rdf:first ontohgis:settlement_unit237 ;
+	rdf:rest _:genid403 .
+
+_:genid403 a rdf:List ;
+	rdf:first ontohgis:settlement_unit239 ;
+	rdf:rest _:genid402 .
+
+_:genid402 a rdf:List ;
+	rdf:first ontohgis:settlement_unit242 ;
+	rdf:rest _:genid401 .
+
+_:genid401 a rdf:List ;
+	rdf:first ontohgis:settlement_unit246 ;
+	rdf:rest _:genid400 .
+
+_:genid400 a rdf:List ;
+	rdf:first ontohgis:settlement_unit247 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid406 a owl:AllDisjointClasses ;
+	owl:members _:genid409 .
+
+_:genid409 a rdf:List ;
+	rdf:first ontohgis:settlement_unit234 ;
+	rdf:rest _:genid408 .
+
+_:genid408 a rdf:List ;
+	rdf:first ontohgis:settlement_unit243 ;
+	rdf:rest _:genid407 .
+
+_:genid407 a rdf:List ;
 	rdf:first ontohgis:settlement_unit253 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid392 a owl:AllDisjointClasses ;
-	owl:members _:genid395 .
+_:genid410 a owl:AllDisjointClasses ;
+	owl:members _:genid413 .
 
-_:genid395 a rdf:List ;
+_:genid413 a rdf:List ;
 	rdf:first ontohgis:settlement_unit240 ;
-	rdf:rest _:genid394 .
+	rdf:rest _:genid412 .
 
-_:genid394 a rdf:List ;
+_:genid412 a rdf:List ;
 	rdf:first ontohgis:settlement_unit243 ;
-	rdf:rest _:genid393 .
+	rdf:rest _:genid411 .
 
-_:genid393 a rdf:List ;
+_:genid411 a rdf:List ;
 	rdf:first ontohgis:settlement_unit252 ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid396 a owl:AllDifferent ;
-	owl:distinctMembers _:genid465 .
+_:genid414 a owl:AllDifferent ;
+	owl:distinctMembers _:genid515 .
+
+_:genid515 a rdf:List ;
+	rdf:first :area_1 ;
+	rdf:rest _:genid514 .
+
+_:genid514 a rdf:List ;
+	rdf:first :area_2 ;
+	rdf:rest _:genid513 .
+
+_:genid513 a rdf:List ;
+	rdf:first :area_3 ;
+	rdf:rest _:genid512 .
+
+_:genid512 a rdf:List ;
+	rdf:first :area_4 ;
+	rdf:rest _:genid511 .
+
+_:genid511 a rdf:List ;
+	rdf:first :area_5 ;
+	rdf:rest _:genid510 .
+
+_:genid510 a rdf:List ;
+	rdf:first :area_6 ;
+	rdf:rest _:genid509 .
+
+_:genid509 a rdf:List ;
+	rdf:first :area_7 ;
+	rdf:rest _:genid508 .
+
+_:genid508 a rdf:List ;
+	rdf:first :settlement_unit10000 ;
+	rdf:rest _:genid507 .
+
+_:genid507 a rdf:List ;
+	rdf:first :settlement_unit10001 ;
+	rdf:rest _:genid506 .
+
+_:genid506 a rdf:List ;
+	rdf:first :settlement_unit10002 ;
+	rdf:rest _:genid505 .
+
+_:genid505 a rdf:List ;
+	rdf:first :settlement_unit10003 ;
+	rdf:rest _:genid504 .
+
+_:genid504 a rdf:List ;
+	rdf:first :settlement_unit10004 ;
+	rdf:rest _:genid503 .
+
+_:genid503 a rdf:List ;
+	rdf:first :settlement_unit10005 ;
+	rdf:rest _:genid502 .
+
+_:genid502 a rdf:List ;
+	rdf:first :settlement_unit10006 ;
+	rdf:rest _:genid501 .
+
+_:genid501 a rdf:List ;
+	rdf:first :settlement_unit10007 ;
+	rdf:rest _:genid500 .
+
+_:genid500 a rdf:List ;
+	rdf:first :settlement_unit20000 ;
+	rdf:rest _:genid499 .
+
+_:genid499 a rdf:List ;
+	rdf:first :settlement_unit20001 ;
+	rdf:rest _:genid498 .
+
+_:genid498 a rdf:List ;
+	rdf:first :settlement_unit20002 ;
+	rdf:rest _:genid497 .
+
+_:genid497 a rdf:List ;
+	rdf:first :settlement_unit20003 ;
+	rdf:rest _:genid496 .
+
+_:genid496 a rdf:List ;
+	rdf:first :settlement_unit20004 ;
+	rdf:rest _:genid495 .
+
+_:genid495 a rdf:List ;
+	rdf:first :settlement_unit20005 ;
+	rdf:rest _:genid494 .
+
+_:genid494 a rdf:List ;
+	rdf:first :settlement_unit20006 ;
+	rdf:rest _:genid493 .
+
+_:genid493 a rdf:List ;
+	rdf:first :settlement_unit20007 ;
+	rdf:rest _:genid492 .
+
+_:genid492 a rdf:List ;
+	rdf:first :settlement_unit20008 ;
+	rdf:rest _:genid491 .
+
+_:genid491 a rdf:List ;
+	rdf:first :settlement_unit20009 ;
+	rdf:rest _:genid490 .
+
+_:genid490 a rdf:List ;
+	rdf:first :settlement_unit20010 ;
+	rdf:rest _:genid489 .
+
+_:genid489 a rdf:List ;
+	rdf:first :settlement_unit20011 ;
+	rdf:rest _:genid488 .
+
+_:genid488 a rdf:List ;
+	rdf:first :settlement_unit20012 ;
+	rdf:rest _:genid487 .
+
+_:genid487 a rdf:List ;
+	rdf:first :settlement_unit20013 ;
+	rdf:rest _:genid486 .
+
+_:genid486 a rdf:List ;
+	rdf:first :settlement_unit20014 ;
+	rdf:rest _:genid485 .
+
+_:genid485 a rdf:List ;
+	rdf:first :settlement_unit20015 ;
+	rdf:rest _:genid484 .
+
+_:genid484 a rdf:List ;
+	rdf:first :settlement_unit20016 ;
+	rdf:rest _:genid483 .
+
+_:genid483 a rdf:List ;
+	rdf:first ontohgis:Source_1 ;
+	rdf:rest _:genid482 .
+
+_:genid482 a rdf:List ;
+	rdf:first ontohgis:Source_10 ;
+	rdf:rest _:genid481 .
+
+_:genid481 a rdf:List ;
+	rdf:first ontohgis:Source_11 ;
+	rdf:rest _:genid480 .
+
+_:genid480 a rdf:List ;
+	rdf:first ontohgis:Source_12 ;
+	rdf:rest _:genid479 .
+
+_:genid479 a rdf:List ;
+	rdf:first ontohgis:Source_13 ;
+	rdf:rest _:genid478 .
+
+_:genid478 a rdf:List ;
+	rdf:first ontohgis:Source_14 ;
+	rdf:rest _:genid477 .
+
+_:genid477 a rdf:List ;
+	rdf:first ontohgis:Source_15 ;
+	rdf:rest _:genid476 .
+
+_:genid476 a rdf:List ;
+	rdf:first ontohgis:Source_16 ;
+	rdf:rest _:genid475 .
+
+_:genid475 a rdf:List ;
+	rdf:first ontohgis:Source_17 ;
+	rdf:rest _:genid474 .
+
+_:genid474 a rdf:List ;
+	rdf:first ontohgis:Source_18 ;
+	rdf:rest _:genid473 .
+
+_:genid473 a rdf:List ;
+	rdf:first ontohgis:Source_19 ;
+	rdf:rest _:genid472 .
+
+_:genid472 a rdf:List ;
+	rdf:first ontohgis:Source_2 ;
+	rdf:rest _:genid471 .
+
+_:genid471 a rdf:List ;
+	rdf:first ontohgis:Source_20 ;
+	rdf:rest _:genid470 .
+
+_:genid470 a rdf:List ;
+	rdf:first ontohgis:Source_21 ;
+	rdf:rest _:genid469 .
+
+_:genid469 a rdf:List ;
+	rdf:first ontohgis:Source_22 ;
+	rdf:rest _:genid468 .
+
+_:genid468 a rdf:List ;
+	rdf:first ontohgis:Source_23 ;
+	rdf:rest _:genid467 .
+
+_:genid467 a rdf:List ;
+	rdf:first ontohgis:Source_24 ;
+	rdf:rest _:genid466 .
+
+_:genid466 a rdf:List ;
+	rdf:first ontohgis:Source_25 ;
+	rdf:rest _:genid465 .
 
 _:genid465 a rdf:List ;
-	rdf:first ontohgis:Source_1 ;
+	rdf:first ontohgis:Source_26 ;
 	rdf:rest _:genid464 .
 
 _:genid464 a rdf:List ;
-	rdf:first ontohgis:Source_10 ;
+	rdf:first ontohgis:Source_27 ;
 	rdf:rest _:genid463 .
 
 _:genid463 a rdf:List ;
-	rdf:first ontohgis:Source_11 ;
+	rdf:first ontohgis:Source_28 ;
 	rdf:rest _:genid462 .
 
 _:genid462 a rdf:List ;
-	rdf:first ontohgis:Source_12 ;
+	rdf:first ontohgis:Source_29 ;
 	rdf:rest _:genid461 .
 
 _:genid461 a rdf:List ;
-	rdf:first ontohgis:Source_13 ;
+	rdf:first ontohgis:Source_3 ;
 	rdf:rest _:genid460 .
 
 _:genid460 a rdf:List ;
-	rdf:first ontohgis:Source_14 ;
+	rdf:first ontohgis:Source_30 ;
 	rdf:rest _:genid459 .
 
 _:genid459 a rdf:List ;
-	rdf:first ontohgis:Source_15 ;
+	rdf:first ontohgis:Source_31 ;
 	rdf:rest _:genid458 .
 
 _:genid458 a rdf:List ;
-	rdf:first ontohgis:Source_16 ;
+	rdf:first ontohgis:Source_32 ;
 	rdf:rest _:genid457 .
 
 _:genid457 a rdf:List ;
-	rdf:first ontohgis:Source_17 ;
+	rdf:first ontohgis:Source_33 ;
 	rdf:rest _:genid456 .
 
 _:genid456 a rdf:List ;
-	rdf:first ontohgis:Source_18 ;
+	rdf:first ontohgis:Source_34 ;
 	rdf:rest _:genid455 .
 
 _:genid455 a rdf:List ;
-	rdf:first ontohgis:Source_19 ;
+	rdf:first ontohgis:Source_35 ;
 	rdf:rest _:genid454 .
 
 _:genid454 a rdf:List ;
-	rdf:first ontohgis:Source_2 ;
+	rdf:first ontohgis:Source_36 ;
 	rdf:rest _:genid453 .
 
 _:genid453 a rdf:List ;
-	rdf:first ontohgis:Source_20 ;
+	rdf:first ontohgis:Source_37 ;
 	rdf:rest _:genid452 .
 
 _:genid452 a rdf:List ;
-	rdf:first ontohgis:Source_21 ;
+	rdf:first ontohgis:Source_38 ;
 	rdf:rest _:genid451 .
 
 _:genid451 a rdf:List ;
-	rdf:first ontohgis:Source_22 ;
+	rdf:first ontohgis:Source_39 ;
 	rdf:rest _:genid450 .
 
 _:genid450 a rdf:List ;
-	rdf:first ontohgis:Source_23 ;
+	rdf:first ontohgis:Source_4 ;
 	rdf:rest _:genid449 .
 
 _:genid449 a rdf:List ;
-	rdf:first ontohgis:Source_24 ;
+	rdf:first ontohgis:Source_40 ;
 	rdf:rest _:genid448 .
 
 _:genid448 a rdf:List ;
-	rdf:first ontohgis:Source_25 ;
+	rdf:first ontohgis:Source_41 ;
 	rdf:rest _:genid447 .
 
 _:genid447 a rdf:List ;
-	rdf:first ontohgis:Source_26 ;
+	rdf:first ontohgis:Source_42 ;
 	rdf:rest _:genid446 .
 
 _:genid446 a rdf:List ;
-	rdf:first ontohgis:Source_27 ;
+	rdf:first ontohgis:Source_43 ;
 	rdf:rest _:genid445 .
 
 _:genid445 a rdf:List ;
-	rdf:first ontohgis:Source_28 ;
+	rdf:first ontohgis:Source_44 ;
 	rdf:rest _:genid444 .
 
 _:genid444 a rdf:List ;
-	rdf:first ontohgis:Source_29 ;
+	rdf:first ontohgis:Source_45 ;
 	rdf:rest _:genid443 .
 
 _:genid443 a rdf:List ;
-	rdf:first ontohgis:Source_3 ;
+	rdf:first ontohgis:Source_46 ;
 	rdf:rest _:genid442 .
 
 _:genid442 a rdf:List ;
-	rdf:first ontohgis:Source_30 ;
+	rdf:first ontohgis:Source_47 ;
 	rdf:rest _:genid441 .
 
 _:genid441 a rdf:List ;
-	rdf:first ontohgis:Source_31 ;
+	rdf:first ontohgis:Source_48 ;
 	rdf:rest _:genid440 .
 
 _:genid440 a rdf:List ;
-	rdf:first ontohgis:Source_32 ;
+	rdf:first ontohgis:Source_49 ;
 	rdf:rest _:genid439 .
 
 _:genid439 a rdf:List ;
-	rdf:first ontohgis:Source_33 ;
+	rdf:first ontohgis:Source_5 ;
 	rdf:rest _:genid438 .
 
 _:genid438 a rdf:List ;
-	rdf:first ontohgis:Source_34 ;
+	rdf:first ontohgis:Source_50 ;
 	rdf:rest _:genid437 .
 
 _:genid437 a rdf:List ;
-	rdf:first ontohgis:Source_35 ;
+	rdf:first ontohgis:Source_51 ;
 	rdf:rest _:genid436 .
 
 _:genid436 a rdf:List ;
-	rdf:first ontohgis:Source_36 ;
+	rdf:first ontohgis:Source_52 ;
 	rdf:rest _:genid435 .
 
 _:genid435 a rdf:List ;
-	rdf:first ontohgis:Source_37 ;
+	rdf:first ontohgis:Source_53 ;
 	rdf:rest _:genid434 .
 
 _:genid434 a rdf:List ;
-	rdf:first ontohgis:Source_38 ;
+	rdf:first ontohgis:Source_54 ;
 	rdf:rest _:genid433 .
 
 _:genid433 a rdf:List ;
-	rdf:first ontohgis:Source_39 ;
+	rdf:first ontohgis:Source_55 ;
 	rdf:rest _:genid432 .
 
 _:genid432 a rdf:List ;
-	rdf:first ontohgis:Source_4 ;
+	rdf:first ontohgis:Source_56 ;
 	rdf:rest _:genid431 .
 
 _:genid431 a rdf:List ;
-	rdf:first ontohgis:Source_40 ;
+	rdf:first ontohgis:Source_57 ;
 	rdf:rest _:genid430 .
 
 _:genid430 a rdf:List ;
-	rdf:first ontohgis:Source_41 ;
+	rdf:first ontohgis:Source_58 ;
 	rdf:rest _:genid429 .
 
 _:genid429 a rdf:List ;
-	rdf:first ontohgis:Source_42 ;
+	rdf:first ontohgis:Source_59 ;
 	rdf:rest _:genid428 .
 
 _:genid428 a rdf:List ;
-	rdf:first ontohgis:Source_43 ;
+	rdf:first ontohgis:Source_6 ;
 	rdf:rest _:genid427 .
 
 _:genid427 a rdf:List ;
-	rdf:first ontohgis:Source_44 ;
+	rdf:first ontohgis:Source_60 ;
 	rdf:rest _:genid426 .
 
 _:genid426 a rdf:List ;
-	rdf:first ontohgis:Source_45 ;
+	rdf:first ontohgis:Source_61 ;
 	rdf:rest _:genid425 .
 
 _:genid425 a rdf:List ;
-	rdf:first ontohgis:Source_46 ;
+	rdf:first ontohgis:Source_62 ;
 	rdf:rest _:genid424 .
 
 _:genid424 a rdf:List ;
-	rdf:first ontohgis:Source_47 ;
+	rdf:first ontohgis:Source_63 ;
 	rdf:rest _:genid423 .
 
 _:genid423 a rdf:List ;
-	rdf:first ontohgis:Source_48 ;
+	rdf:first ontohgis:Source_64 ;
 	rdf:rest _:genid422 .
 
 _:genid422 a rdf:List ;
-	rdf:first ontohgis:Source_49 ;
+	rdf:first ontohgis:Source_65 ;
 	rdf:rest _:genid421 .
 
 _:genid421 a rdf:List ;
-	rdf:first ontohgis:Source_5 ;
+	rdf:first ontohgis:Source_66 ;
 	rdf:rest _:genid420 .
 
 _:genid420 a rdf:List ;
-	rdf:first ontohgis:Source_50 ;
+	rdf:first ontohgis:Source_67 ;
 	rdf:rest _:genid419 .
 
 _:genid419 a rdf:List ;
-	rdf:first ontohgis:Source_51 ;
+	rdf:first ontohgis:Source_68 ;
 	rdf:rest _:genid418 .
 
 _:genid418 a rdf:List ;
-	rdf:first ontohgis:Source_52 ;
+	rdf:first ontohgis:Source_69 ;
 	rdf:rest _:genid417 .
 
 _:genid417 a rdf:List ;
-	rdf:first ontohgis:Source_53 ;
+	rdf:first ontohgis:Source_7 ;
 	rdf:rest _:genid416 .
 
 _:genid416 a rdf:List ;
-	rdf:first ontohgis:Source_54 ;
+	rdf:first ontohgis:Source_8 ;
 	rdf:rest _:genid415 .
 
 _:genid415 a rdf:List ;
+	rdf:first ontohgis:Source_9 ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid516 a owl:AllDifferent ;
+	owl:distinctMembers _:genid585 .
+
+_:genid585 a rdf:List ;
+	rdf:first ontohgis:Source_1 ;
+	rdf:rest _:genid584 .
+
+_:genid584 a rdf:List ;
+	rdf:first ontohgis:Source_10 ;
+	rdf:rest _:genid583 .
+
+_:genid583 a rdf:List ;
+	rdf:first ontohgis:Source_11 ;
+	rdf:rest _:genid582 .
+
+_:genid582 a rdf:List ;
+	rdf:first ontohgis:Source_12 ;
+	rdf:rest _:genid581 .
+
+_:genid581 a rdf:List ;
+	rdf:first ontohgis:Source_13 ;
+	rdf:rest _:genid580 .
+
+_:genid580 a rdf:List ;
+	rdf:first ontohgis:Source_14 ;
+	rdf:rest _:genid579 .
+
+_:genid579 a rdf:List ;
+	rdf:first ontohgis:Source_15 ;
+	rdf:rest _:genid578 .
+
+_:genid578 a rdf:List ;
+	rdf:first ontohgis:Source_16 ;
+	rdf:rest _:genid577 .
+
+_:genid577 a rdf:List ;
+	rdf:first ontohgis:Source_17 ;
+	rdf:rest _:genid576 .
+
+_:genid576 a rdf:List ;
+	rdf:first ontohgis:Source_18 ;
+	rdf:rest _:genid575 .
+
+_:genid575 a rdf:List ;
+	rdf:first ontohgis:Source_19 ;
+	rdf:rest _:genid574 .
+
+_:genid574 a rdf:List ;
+	rdf:first ontohgis:Source_2 ;
+	rdf:rest _:genid573 .
+
+_:genid573 a rdf:List ;
+	rdf:first ontohgis:Source_20 ;
+	rdf:rest _:genid572 .
+
+_:genid572 a rdf:List ;
+	rdf:first ontohgis:Source_21 ;
+	rdf:rest _:genid571 .
+
+_:genid571 a rdf:List ;
+	rdf:first ontohgis:Source_22 ;
+	rdf:rest _:genid570 .
+
+_:genid570 a rdf:List ;
+	rdf:first ontohgis:Source_23 ;
+	rdf:rest _:genid569 .
+
+_:genid569 a rdf:List ;
+	rdf:first ontohgis:Source_24 ;
+	rdf:rest _:genid568 .
+
+_:genid568 a rdf:List ;
+	rdf:first ontohgis:Source_25 ;
+	rdf:rest _:genid567 .
+
+_:genid567 a rdf:List ;
+	rdf:first ontohgis:Source_26 ;
+	rdf:rest _:genid566 .
+
+_:genid566 a rdf:List ;
+	rdf:first ontohgis:Source_27 ;
+	rdf:rest _:genid565 .
+
+_:genid565 a rdf:List ;
+	rdf:first ontohgis:Source_28 ;
+	rdf:rest _:genid564 .
+
+_:genid564 a rdf:List ;
+	rdf:first ontohgis:Source_29 ;
+	rdf:rest _:genid563 .
+
+_:genid563 a rdf:List ;
+	rdf:first ontohgis:Source_3 ;
+	rdf:rest _:genid562 .
+
+_:genid562 a rdf:List ;
+	rdf:first ontohgis:Source_30 ;
+	rdf:rest _:genid561 .
+
+_:genid561 a rdf:List ;
+	rdf:first ontohgis:Source_31 ;
+	rdf:rest _:genid560 .
+
+_:genid560 a rdf:List ;
+	rdf:first ontohgis:Source_32 ;
+	rdf:rest _:genid559 .
+
+_:genid559 a rdf:List ;
+	rdf:first ontohgis:Source_33 ;
+	rdf:rest _:genid558 .
+
+_:genid558 a rdf:List ;
+	rdf:first ontohgis:Source_34 ;
+	rdf:rest _:genid557 .
+
+_:genid557 a rdf:List ;
+	rdf:first ontohgis:Source_35 ;
+	rdf:rest _:genid556 .
+
+_:genid556 a rdf:List ;
+	rdf:first ontohgis:Source_36 ;
+	rdf:rest _:genid555 .
+
+_:genid555 a rdf:List ;
+	rdf:first ontohgis:Source_37 ;
+	rdf:rest _:genid554 .
+
+_:genid554 a rdf:List ;
+	rdf:first ontohgis:Source_38 ;
+	rdf:rest _:genid553 .
+
+_:genid553 a rdf:List ;
+	rdf:first ontohgis:Source_39 ;
+	rdf:rest _:genid552 .
+
+_:genid552 a rdf:List ;
+	rdf:first ontohgis:Source_4 ;
+	rdf:rest _:genid551 .
+
+_:genid551 a rdf:List ;
+	rdf:first ontohgis:Source_40 ;
+	rdf:rest _:genid550 .
+
+_:genid550 a rdf:List ;
+	rdf:first ontohgis:Source_41 ;
+	rdf:rest _:genid549 .
+
+_:genid549 a rdf:List ;
+	rdf:first ontohgis:Source_42 ;
+	rdf:rest _:genid548 .
+
+_:genid548 a rdf:List ;
+	rdf:first ontohgis:Source_43 ;
+	rdf:rest _:genid547 .
+
+_:genid547 a rdf:List ;
+	rdf:first ontohgis:Source_44 ;
+	rdf:rest _:genid546 .
+
+_:genid546 a rdf:List ;
+	rdf:first ontohgis:Source_45 ;
+	rdf:rest _:genid545 .
+
+_:genid545 a rdf:List ;
+	rdf:first ontohgis:Source_46 ;
+	rdf:rest _:genid544 .
+
+_:genid544 a rdf:List ;
+	rdf:first ontohgis:Source_47 ;
+	rdf:rest _:genid543 .
+
+_:genid543 a rdf:List ;
+	rdf:first ontohgis:Source_48 ;
+	rdf:rest _:genid542 .
+
+_:genid542 a rdf:List ;
+	rdf:first ontohgis:Source_49 ;
+	rdf:rest _:genid541 .
+
+_:genid541 a rdf:List ;
+	rdf:first ontohgis:Source_5 ;
+	rdf:rest _:genid540 .
+
+_:genid540 a rdf:List ;
+	rdf:first ontohgis:Source_50 ;
+	rdf:rest _:genid539 .
+
+_:genid539 a rdf:List ;
+	rdf:first ontohgis:Source_51 ;
+	rdf:rest _:genid538 .
+
+_:genid538 a rdf:List ;
+	rdf:first ontohgis:Source_52 ;
+	rdf:rest _:genid537 .
+
+_:genid537 a rdf:List ;
+	rdf:first ontohgis:Source_53 ;
+	rdf:rest _:genid536 .
+
+_:genid536 a rdf:List ;
+	rdf:first ontohgis:Source_54 ;
+	rdf:rest _:genid535 .
+
+_:genid535 a rdf:List ;
 	rdf:first ontohgis:Source_55 ;
-	rdf:rest _:genid414 .
+	rdf:rest _:genid534 .
 
-_:genid414 a rdf:List ;
+_:genid534 a rdf:List ;
 	rdf:first ontohgis:Source_56 ;
-	rdf:rest _:genid413 .
+	rdf:rest _:genid533 .
 
-_:genid413 a rdf:List ;
+_:genid533 a rdf:List ;
 	rdf:first ontohgis:Source_57 ;
-	rdf:rest _:genid412 .
+	rdf:rest _:genid532 .
 
-_:genid412 a rdf:List ;
+_:genid532 a rdf:List ;
 	rdf:first ontohgis:Source_58 ;
-	rdf:rest _:genid411 .
+	rdf:rest _:genid531 .
 
-_:genid411 a rdf:List ;
+_:genid531 a rdf:List ;
 	rdf:first ontohgis:Source_59 ;
-	rdf:rest _:genid410 .
+	rdf:rest _:genid530 .
 
-_:genid410 a rdf:List ;
+_:genid530 a rdf:List ;
 	rdf:first ontohgis:Source_6 ;
-	rdf:rest _:genid409 .
+	rdf:rest _:genid529 .
 
-_:genid409 a rdf:List ;
+_:genid529 a rdf:List ;
 	rdf:first ontohgis:Source_60 ;
-	rdf:rest _:genid408 .
+	rdf:rest _:genid528 .
 
-_:genid408 a rdf:List ;
+_:genid528 a rdf:List ;
 	rdf:first ontohgis:Source_61 ;
-	rdf:rest _:genid407 .
+	rdf:rest _:genid527 .
 
-_:genid407 a rdf:List ;
+_:genid527 a rdf:List ;
 	rdf:first ontohgis:Source_62 ;
-	rdf:rest _:genid406 .
+	rdf:rest _:genid526 .
 
-_:genid406 a rdf:List ;
+_:genid526 a rdf:List ;
 	rdf:first ontohgis:Source_63 ;
-	rdf:rest _:genid405 .
+	rdf:rest _:genid525 .
 
-_:genid405 a rdf:List ;
+_:genid525 a rdf:List ;
 	rdf:first ontohgis:Source_64 ;
-	rdf:rest _:genid404 .
+	rdf:rest _:genid524 .
 
-_:genid404 a rdf:List ;
+_:genid524 a rdf:List ;
 	rdf:first ontohgis:Source_65 ;
-	rdf:rest _:genid403 .
+	rdf:rest _:genid523 .
 
-_:genid403 a rdf:List ;
+_:genid523 a rdf:List ;
 	rdf:first ontohgis:Source_66 ;
-	rdf:rest _:genid402 .
+	rdf:rest _:genid522 .
 
-_:genid402 a rdf:List ;
+_:genid522 a rdf:List ;
 	rdf:first ontohgis:Source_67 ;
-	rdf:rest _:genid401 .
+	rdf:rest _:genid521 .
 
-_:genid401 a rdf:List ;
+_:genid521 a rdf:List ;
 	rdf:first ontohgis:Source_68 ;
-	rdf:rest _:genid400 .
+	rdf:rest _:genid520 .
 
-_:genid400 a rdf:List ;
+_:genid520 a rdf:List ;
 	rdf:first ontohgis:Source_69 ;
-	rdf:rest _:genid399 .
+	rdf:rest _:genid519 .
 
-_:genid399 a rdf:List ;
+_:genid519 a rdf:List ;
 	rdf:first ontohgis:Source_7 ;
-	rdf:rest _:genid398 .
+	rdf:rest _:genid518 .
 
-_:genid398 a rdf:List ;
+_:genid518 a rdf:List ;
 	rdf:first ontohgis:Source_8 ;
-	rdf:rest _:genid397 .
+	rdf:rest _:genid517 .
 
-_:genid397 a rdf:List ;
+_:genid517 a rdf:List ;
 	rdf:first ontohgis:Source_9 ;
 	rdf:rest rdf:nil .
 # 
